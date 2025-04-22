@@ -7,5 +7,5 @@ Actions terminées :
 - Installation webpack + SASS + fontawesome
 - Création entité User
 - Installation security bundle + setup Route et création User avec FormSignUp
-- Création formulaire formSignUp (setup des champs + constraints pour mot de passe et username)
+- Création formulaire formSignUp (setup des champs + constraints pour mot de passe et username).
 
