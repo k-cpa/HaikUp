@@ -13,10 +13,12 @@ Actions terminées :
 
 
 Reste à faire :
-- Setup de l'adresse DSN mailer dans le .env
+- Setup de l'adresse DSN mailer dans le .env (d'abord avec le test dev puis plus tard avec Gmail)
 - Création des autres entités + connexion entre elles. 
-- Création du CRUD pour l'ajout des textes
-- 
+- Création des formulaires pour l'envoi des mots 
+- Création des formulaires pour la création des haïkus
+- Création du formulaire de contact
+- Création du récupérateur de mot de passe
 
 
 
