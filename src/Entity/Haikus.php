@@ -36,9 +36,23 @@ class Haikus
     #[ORM\OneToMany(targetEntity: UserWords::class, mappedBy: 'haiku')]
     private Collection $userWords;
 
+    /**
+     * @var Collection<int, Comments>
+     */
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'haiku', orphanRemoval: true)]
+    private Collection $comments;
+
+    /**
+     * @var Collection<int, Likes>
+     */
+    #[ORM\OneToMany(targetEntity: Likes::class, mappedBy: 'haiku', orphanRemoval: true)]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->userWords = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +132,66 @@ class Haikus
             // set the owning side to null (unless already changed)
             if ($userWord->getHaiku() === $this) {
                 $userWord->setHaiku(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setHaiku($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getHaiku() === $this) {
+                $comment->setHaiku(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Likes>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Likes $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setHaiku($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Likes $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getHaiku() === $this) {
+                $like->setHaiku(null);
             }
         }
 

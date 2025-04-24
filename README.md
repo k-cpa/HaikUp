@@ -18,6 +18,8 @@ CREATION ENTITES :
     - Création entité user_words 
     - Création entité haïkus
     - Création entité Collections
+    - Création entité comments
+    - Création entité likes
 
 
 ------------------------------------
@@ -25,8 +27,7 @@ CREATION ENTITES :
 Reste à faire :
 
 CREATION ENTITES
-    - Création entité comments
-    - Création entité likes
+
     - Création entité notifications
     - Création entité entity_type ?? Type de notif donc lié à likes /comments / follow VOIR SI VRAIMENT BESOIN AVANT
 
