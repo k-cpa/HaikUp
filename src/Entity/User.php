@@ -40,9 +40,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Follows::class, mappedBy: 'Sender', orphanRemoval: true)]
     private Collection $follows;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    /**
+     * @var Collection<int, Collections>
+     */
+    #[ORM\OneToMany(targetEntity: Collections::class, mappedBy: 'creator', orphanRemoval: true)]
+    private Collection $collections;
+
+    /**
+     * @var Collection<int, Haikus>
+     */
+    #[ORM\OneToMany(targetEntity: Haikus::class, mappedBy: 'creator', orphanRemoval: true)]
+    private Collection $haikus;
+
     public function __construct()
     {
         $this->follows = new ArrayCollection();
+        $this->collections = new ArrayCollection();
+        $this->haikus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +161,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($follow->getSender() === $this) {
                 $follow->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Collections>
+     */
+    public function getCollections(): Collection
+    {
+        return $this->collections;
+    }
+
+    public function addCollection(Collections $collection): static
+    {
+        if (!$this->collections->contains($collection)) {
+            $this->collections->add($collection);
+            $collection->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCollection(Collections $collection): static
+    {
+        if ($this->collections->removeElement($collection)) {
+            // set the owning side to null (unless already changed)
+            if ($collection->getCreator() === $this) {
+                $collection->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Haikus>
+     */
+    public function getHaikus(): Collection
+    {
+        return $this->haikus;
+    }
+
+    public function addHaiku(Haikus $haiku): static
+    {
+        if (!$this->haikus->contains($haiku)) {
+            $this->haikus->add($haiku);
+            $haiku->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHaiku(Haikus $haiku): static
+    {
+        if ($this->haikus->removeElement($haiku)) {
+            // set the owning side to null (unless already changed)
+            if ($haiku->getCreator() === $this) {
+                $haiku->setCreator(null);
             }
         }
 
