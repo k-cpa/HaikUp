@@ -20,16 +20,15 @@ CREATION ENTITES :
     - Création entité Collections
     - Création entité comments
     - Création entité likes
-
+    - Création entité notifications
+    - Création entité entity_type ?? 
 
 ------------------------------------
 
 Reste à faire :
 
-CREATION ENTITES
-
-    - Création entité notifications
-    - Création entité entity_type ?? Type de notif donc lié à likes /comments / follow VOIR SI VRAIMENT BESOIN AVANT
+ENTITIES : 
+    - S'occuper des liaisons polymorphes pour les notifications !! Gros sujet prévoir une bonne semaine ! IMPORTANCE +++
 
 
 - Setup de l'adresse DSN mailer dans le .env + test de fonctionnement

@@ -67,6 +67,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Likes::class, mappedBy: 'sender', orphanRemoval: true)]
     private Collection $likes;
 
+    /**
+     * @var Collection<int, Notifications>
+     */
+    #[ORM\OneToMany(targetEntity: Notifications::class, mappedBy: 'Receiver', orphanRemoval: true)]
+    private Collection $receivedNotif;
+
+    /**
+     * @var Collection<int, Notifications>
+     */
+    #[ORM\OneToMany(targetEntity: Notifications::class, mappedBy: 'Sender')]
+    private Collection $sentNotif;
+
     public function __construct()
     {
         $this->follows = new ArrayCollection();
@@ -74,6 +86,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->haikus = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->receivedNotif = new ArrayCollection();
+        $this->sentNotif = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -307,6 +321,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($like->getSender() === $this) {
                 $like->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notifications>
+     */
+    public function getReceivedNotif(): Collection
+    {
+        return $this->receivedNotif;
+    }
+
+    public function addReceivedNotif(Notifications $receivedNotif): static
+    {
+        if (!$this->receivedNotif->contains($receivedNotif)) {
+            $this->receivedNotif->add($receivedNotif);
+            $receivedNotif->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedNotif(Notifications $receivedNotif): static
+    {
+        if ($this->receivedNotif->removeElement($receivedNotif)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedNotif->getReceiver() === $this) {
+                $receivedNotif->setReceiver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notifications>
+     */
+    public function getSentNotif(): Collection
+    {
+        return $this->sentNotif;
+    }
+
+    public function addSentNotif(Notifications $sentNotif): static
+    {
+        if (!$this->sentNotif->contains($sentNotif)) {
+            $this->sentNotif->add($sentNotif);
+            $sentNotif->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentNotif(Notifications $sentNotif): static
+    {
+        if ($this->sentNotif->removeElement($sentNotif)) {
+            // set the owning side to null (unless already changed)
+            if ($sentNotif->getSender() === $this) {
+                $sentNotif->setSender(null);
             }
         }
 
