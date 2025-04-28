@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+<main class="login_signup">
+
+		{# formulaire d'inscription #}
+		{{form_start(formSignUp)}}
+			{{form_row(formSignUp.email)}}
+			{{form_row(formSignUp.password)}}
+			{{form_row(formSignUp.submit)}}
+		{{form_end(formSignUp)}}
+
+		{# Lien pour se connecter si compte existant #}
+		<div class="login_link">
+			<p>Vous avez déjà un compte ?</p>
+			<a href="{{ path('app_login') }}">Connectez-vous</a>
+		</div>
+	</div>
+</main>    
+{% endblock %}

@@ -24,7 +24,7 @@ class Follows
     private ?User $Receiver = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $Created_at = null;
+    private ?\DateTimeImmutable $created_at = null;
 
     public function getId(): ?int
     {
@@ -57,13 +57,18 @@ class Follows
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->Created_at;
+        return $this->created_at;
     }
 
     public function setCreatedAt(\DateTimeImmutable $Created_at): static
     {
-        $this->Created_at = $Created_at;
+        $this->created_at = $Created_at;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
     }
 }

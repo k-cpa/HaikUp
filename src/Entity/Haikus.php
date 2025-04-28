@@ -17,7 +17,7 @@ class Haikus
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'haikus')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?User $creator = null;
 
     #[ORM\ManyToOne(inversedBy: 'haikus')]
@@ -53,6 +53,7 @@ class Haikus
         $this->userWords = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

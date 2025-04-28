@@ -16,7 +16,7 @@ class Collections
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'collections')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?User $creator = null;
 
     #[ORM\Column(length: 255)]

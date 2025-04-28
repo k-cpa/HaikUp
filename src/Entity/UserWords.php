@@ -110,4 +110,9 @@ class UserWords
 
         return $this;
     }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
 }

@@ -29,6 +29,10 @@ class Notifications
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?EntityType $entity_type = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,5 +96,22 @@ class Notifications
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    public function getEntityType(): ?EntityType
+    {
+        return $this->entity_type;
+    }
+
+    public function setEntityType(?EntityType $entity_type): static
+    {
+        $this->entity_type = $entity_type;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
     }
 }

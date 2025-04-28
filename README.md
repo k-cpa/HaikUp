@@ -25,8 +25,6 @@ CREATION ENTITES :
 
 ------------------------------------
 
-Reste à faire :
-
 ENTITIES : 
     - S'occuper des liaisons polymorphes pour les notifications !! Gros sujet prévoir une bonne semaine ! IMPORTANCE +++
 

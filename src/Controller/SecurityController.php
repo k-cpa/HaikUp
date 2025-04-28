@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
 
 // Gestion Controller Création du compte
 
-    #[Route(path: '/signup', name: 'app_login')]
+    #[Route(path: '/signup', name: 'app_signup')]
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHash): Response
     {
        

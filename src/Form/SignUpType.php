@@ -21,15 +21,15 @@ class SignUpType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username', TextType::class, [
-                'label' => "Nom d'utilisateur",
-                'constraints' => [
-                    new Length([
-                        'min' => 3,
-                        'minMessage' => 'Votre nom doit contenir au moins 3 caractères',
-                    ])
-                ]
-            ])
+            // ->add('username', TextType::class, [
+            //     'label' => "Nom d'utilisateur",
+            //     'constraints' => [
+            //         new Length([
+            //             'min' => 3,
+            //             'minMessage' => 'Votre nom doit contenir au moins 3 caractères',
+            //         ])
+            //     ]
+            // ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Mot de passe'],
@@ -43,7 +43,7 @@ class SignUpType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
-                        'caracMessage' => 'Le mot de pases doit contenir au moins une majuscule, un chiffre et un symbole',
+                        'message' => 'Le mot de pases doit contenir au moins une majuscule, un chiffre et un symbole',
                     ]),
                 ],
             ])

@@ -18,7 +18,7 @@ class Likes
     private ?User $sender = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "haiku_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?Haikus $haiku = null;
 
     #[ORM\Column]
@@ -63,5 +63,10 @@ class Likes
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
     }
 }
