@@ -10,6 +10,7 @@ Actions terminées :
 - Installation security bundle + setup Route et création User avec FormSignUp
 - Création formulaire formSignUp (setup des champs + constraints pour mot de passe et username).
 - Installation Mailer
+- Notification Controller = Mise en place de la logique de redirection lorsque l'on clique sur la modale turbo stream 
 
 CREATION ENTITES : 
     - Création entité User
@@ -26,8 +27,9 @@ CREATION ENTITES :
 ------------------------------------
 
 ENTITIES : 
-    - S'occuper des liaisons polymorphes pour les notifications !! Gros sujet prévoir une bonne semaine ! IMPORTANCE +++
-
+- S'occuper de créer les controllers pour chaque action notifications !! Gros sujet prévoir une bonne semaine ! IMPORTANCE +++
+- Mise en place du template turbo stream 
+- Création de la div notification turbo dans le base.html pour créer la modale
 
 - Setup de l'adresse DSN mailer dans le .env + test de fonctionnement
 - Création des formulaires pour l'envoi des mots
