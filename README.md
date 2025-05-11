@@ -31,6 +31,8 @@ ENTITIES :
 - Mise en place du template turbo stream 
 - Création de la div notification turbo dans le base.html pour créer la modale
 
+ATTENTION ON VA PASSER SUR CDN google material icons pour récupérer le material symbols -> marche pas sinon et on veut pas fontawesome finalement
+
 - Setup de l'adresse DSN mailer dans le .env + test de fonctionnement
 - Création des formulaires pour l'envoi des mots
 - Création des formulaires pour la création des haïkus
