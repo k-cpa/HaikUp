@@ -28,6 +28,7 @@ class LikeController extends AbstractController
             throw $this->createNotFoundException('Haiku non trouvé');
         }
 
+        // Vérif si le user a déjà like 
         $existingLike = $entityManager->getRepository(Likes::class)->findOneBy([
             'user' => $user,
             'haiku' => $haiku,
@@ -35,6 +36,7 @@ class LikeController extends AbstractController
         if ($existingLike) {
             $entityManager->remove($existingLike);
 
+            // Recherche d'une notification liée au like -> Si on supprime un like on supprime sa notif
             $notification = $entityManager->getRepository(Notifications::class)->findOneBy([
                 'sender' => $user,
                 'receiver' => $haiku->getCreator(),
@@ -50,5 +52,24 @@ class LikeController extends AbstractController
 
             return $this->redirectToRoute('haiku_show', ['id' => $id]);
         }
+
+        // Si pas de like alors on va le créer 
+        $like = new Likes();
+        $like->setSender($user);
+        $like->setHaiku($haiku);
+
+        $entityManager->persist($like);
+
+        // Création de la notif -> appelle du service custom [/src/Service/]
+        $notificationService->createNotification(
+            $user, // le sender
+            $haiku->getCreator(), // le receiver = personne qui a fait le haiku
+            'like', // name de l'entityType
+            $haiku->getId() // l'id du haiku concerné
+        );
+        
+        $entityManager->flush();
+
+        return $this->redirectToRoute('haiku_show', ['id' => $id]);
     }
 }
