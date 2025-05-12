@@ -22,7 +22,7 @@ CREATION ENTITES :
     - Création entité comments
     - Création entité likes
     - Création entité notifications
-    - Création entité entity_type ?? 
+    - Création entité entity_type 
 
 ------------------------------------
 

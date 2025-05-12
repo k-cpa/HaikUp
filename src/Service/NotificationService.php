@@ -1,5 +1,12 @@
 <?php
 
+// Résumé
+// > On met la logique métier dans un service pour :
+// > - Garder les contrôleurs simples et lisibles
+// > - Réutiliser la logique partout dans l’application
+// > - Faciliter les tests
+// > - Rendre le code plus maintenable et évolutif
+
 namespace App\Service;
 
 use App\Entity\EntityType;
