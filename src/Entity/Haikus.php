@@ -187,6 +187,11 @@ class Haikus
         return $this;
     }
 
+    // Affichage du nombre de like
+    public function getLikesCount(): int {
+        return $this->likes->count();
+    }
+
     public function removeLike(Likes $like): static
     {
         if ($this->likes->removeElement($like)) {
