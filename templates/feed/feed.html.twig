@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FeedController!{% endblock %}
+
+{% block body %}
+<div class="haiku">
+    {% for haiku in haikus %}
+        <div class="haiku">
+            <div class="name">
+                {{haiku.content}}
+            </div>
+           <form action="{{ path('feed_haiku_like', {'id': haiku.id}) }}" method="post">
+                <button type="submit" class="like-button">
+                    <i class="material-icons like-icon 
+                        {{ haiku.id in likedHaikus ? 'liked' : '' }}" 
+                        data-haiku-id="{{ haiku.id }}" 
+                        data-liked="{{ haiku.id in likedHaikus ? 'true' : 'false' }}">
+                            {{ haiku.id in likedHaikus ? 'favorite' : 'favorite_border' }}
+                    </i>
+                </button>
+             </form>
+            <div class="creator">
+                <p>{{haiku.creator}}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
