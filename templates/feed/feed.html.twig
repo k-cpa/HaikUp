@@ -9,8 +9,9 @@
             <div class="name">
                 {{haiku.content}}
             </div>
-            <div class="like_container">
+            <div class="like-comments_container">
                 <div class="like">
+                {# Bouton d'envoi du like en BDD + display #}
                     <form action="{{ path('feed_haiku_like', {'id': haiku.id}) }}" method="post">
                         <button type="submit" class="like-button">
                             <i class="material-icons like-icon 
@@ -26,11 +27,30 @@
                 <div class="nbr_likes">
                     <p> {{ haiku.getLikesCount() }} J'aime</p>
                 </div>
+                {# Bouton affichage des commentaires #}
+                <div class="comments" data-haiku-id="{{ haiku.id }}"">
+                    <button class="comment-button" data-modal-id="modal-{{haiku.id}}">
+                        <i class="material-icons comment-icon"">chat</i>
+                    </button>
+                </div>
             </div>
             <div class="creator">
                 <p>{{haiku.creator}}</p>
             </div>
         </div>
+          {# Modale affichage haiku + commentaires #}
+    <div id="modal-{{haiku.id}}" class="comment-modal" style="display: none">
+        <div class="modal-content">
+            <span class="close_btn" data-modal-id="modal-{{haiku.id}}">&times;</span>
+            <div class="modal_content">
+                <p> Haiku : {{haiku.content}} </p>
+            </div>
+            <div class="comments_container">
+                {# Reprendre à l'affichage des commentaires ici -> récup BDD comments Controller #}
+            </div>
+        </div>
+    </div>
     {% endfor %}
+  
 </div>
 {% endblock %}

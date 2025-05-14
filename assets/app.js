@@ -1,4 +1,6 @@
 import './styles/app.scss';
+import './comment_modal.js'
+
 document.addEventListener('DOMContentLoaded', () => {
     const likeIcons = document.querySelectorAll('.like-button');
 
@@ -50,3 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+

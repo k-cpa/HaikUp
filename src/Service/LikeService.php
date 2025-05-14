@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\EntityType;
 use App\Entity\Haikus;
 use App\Entity\Likes;
 use App\Entity\Notifications;
@@ -37,20 +38,26 @@ class LikeService {
                 // Suppression du like et de la notification associée
                 $this->entityManager->remove($existingLike);
 
+                // Récupérer l'entity type du like 
+                $entityType = $this->entityManager->getRepository(EntityType::class)->findOneBy(['name' => 'like']); 
+                // Récupérer ensuite la notif du like
                 $notification = $this->entityManager->getRepository(Notifications::class)->findOneBy([
                     'Sender' => $user,
                     'Receiver' => $haiku->getCreator(),
-                    'entity_type' => 'like',
+                    'entity_type' => $entityType, 
                     'entity_id' => $haiku->getId(),
                 ]);
+                // Si on a une notif on supprime
                 if ($notification) {
                     $this->entityManager->remove($notification);
+                    $this->entityManager->flush();
                 }
-                $this->entityManager->flush();
+                // affichage dynamique du like
                 return false;
             } else {
                 // Création d'un nouveau like 
                 $this->addLike($haiku, $user);
+                // affichage dynamique du like
                 return true;
         }
     }
@@ -64,14 +71,14 @@ class LikeService {
                 $this->entityManager->persist($like);
 
                 // Création de la notification
-                $this->notificationService->createNotification(  // Utilisation de $this->notificationService
+                $this->notificationService->createNotification(  // Utilisation service custom notif
                     $user,
                     $haiku->getCreator(),
                     'like',
-                    $haiku->getId()
+                    $haiku->getId(),
                 );
 
-            $this->entityManager->flush();
+            $this->entityManager->flush(); 
     }
 
     public function isHaikuLikedByUser(Haikus $haiku, $user): bool {

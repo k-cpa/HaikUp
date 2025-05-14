@@ -11,6 +11,8 @@ Actions terminées :
 - Création formulaire formSignUp (setup des champs + constraints pour mot de passe et username).
 - Installation Mailer
 - Notification Controller = Mise en place de la logique de redirection lorsque l'on clique sur la modale turbo stream 
+- Service custom Likes
+- Affichage des haikus sur le feed + modale
 
 CREATION ENTITES : 
     - Création entité User
@@ -25,13 +27,14 @@ CREATION ENTITES :
     - Création entité entity_type 
 
 ------------------------------------
+Actions à faire : 
+- Faire apparaître les commentaires sur la modale du haiku dans le feed 
 
 ENTITIES : 
-- S'occuper de créer les controllers pour chaque action notifications !! Gros sujet prévoir une bonne semaine ! IMPORTANCE +++
+- Service custom commentaires 
+- Service custom follow
 - Mise en place du template turbo stream 
 - Création de la div notification turbo dans le base.html pour créer la modale
-
-ATTENTION ON VA PASSER SUR CDN google material icons pour récupérer le material symbols -> marche pas sinon et on veut pas fontawesome finalement
 
 - Setup de l'adresse DSN mailer dans le .env + test de fonctionnement
 - Création des formulaires pour l'envoi des mots

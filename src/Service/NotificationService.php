@@ -56,7 +56,7 @@ class NotificationService
         $notification->setStatus(false); // Notification marquée comme non lue par défault
 
         $this->entityManager->persist($notification);
-        $this->entityManager->flush();
+        // $this->entityManager->flush(); on va flush plutôt dans les services de chaque élément concerné par la notif pour éviter le doublon
     }
 }
 
