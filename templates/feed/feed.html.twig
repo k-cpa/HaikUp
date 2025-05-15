@@ -46,7 +46,30 @@
                 <p> Haiku : {{haiku.content}} </p>
             </div>
             <div class="comments_container">
-                {# Reprendre à l'affichage des commentaires ici -> récup BDD comments Controller #}
+                {% if haiku.comments|length > 0 %}
+                    {% for comments in haiku.comments %}
+                        <div class="comment">
+                            <p>{{comments.sender}}</p>
+                            <p>{{comments.content}}</p>
+                            {# Form caché pour suppression #}
+                        <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
+                            <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
+                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
+                            <input id="delete" type="submit" value="Supprimer">
+                        </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Aucun commentaire</p>
+                {% endif %}
+            </div>
+            <div class="add_comments">
+            {# Form lié à l'id de chaque haiku pour en avoir 1 pour chaque  #}
+                <form action="{{ path('app_comment_add', {id: haiku.id}) }}" method="post">
+                    {{ form_start(commentForms[haiku.id]) }}
+                        {{ form_row(commentForms[haiku.id].content) }}
+                    {{ form_end(commentForms[haiku.id]) }}
+                </form>
             </div>
         </div>
     </div>
