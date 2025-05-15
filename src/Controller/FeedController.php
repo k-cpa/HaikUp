@@ -86,27 +86,7 @@ final class FeedController extends AbstractController
                 ]);
             }
         }
-    
-    #[Route('/feed/{id}/comment', name: 'app_comment_add', methods: ['POST'])]
-        public function addComment(Request $request, Haikus $haiku, EntityManagerInterface $entityManager): Response 
-        {
-            $comment = new Comments();
-            $comment->setHaiku($haiku);
-            $comment->setSender($this->getUser());
-            $comment->setCreatedAt(new \DateTimeImmutable());
 
-            $form = $this->createForm(CommentType::class, $comment);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager->persist($comment);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('app_feed');
-            }
-
-            return new Response ('Formulaire invalide', 400);
-        }
 }
 
 
