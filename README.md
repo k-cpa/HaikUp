@@ -28,7 +28,8 @@ CREATION ENTITES :
 
 ------------------------------------
 Actions à faire : 
-- Faire apparaître les commentaires sur la modale du haiku dans le feed 
+- Faire apparaître les commentaires sur la modale du haiku dans le feed (je crois que c'est bon ça). 
+- Header et Footer présents dans base.html -> Les terminer
 
 ENTITIES : 
 - Service custom commentaires 

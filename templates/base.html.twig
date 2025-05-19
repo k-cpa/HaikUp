@@ -14,6 +14,26 @@
         {% endblock %}
 
     </head>
+    {% block header %}
+        <header>
+            <div class="logo_container">
+                {# logo abs -> use the abs_img #}
+            </div>
+            <nav>
+                <ul>
+                {# We need to define them properly #}
+                    <li><a href="">Create</a></li> 
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">About us</a></li>
+                </ul>
+            </nav>
+        </header>
+    {% endblock %}
+    {% block footer %}
+        <footer>
+            {# TO DO #}
+        </footer>
+    {% endblock %}
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
