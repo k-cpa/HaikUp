@@ -18,7 +18,7 @@ class UserWords
     private ?User $sender = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn]
     private ?User $Receiver = null;
 
     #[ORM\ManyToOne]

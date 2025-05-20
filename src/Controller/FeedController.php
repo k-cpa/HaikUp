@@ -62,6 +62,7 @@ final class FeedController extends AbstractController
             'haikus' => $haikus,
             'likedHaikus' => $likedHaikus,
             'commentForms' => $commentForms,
+            ''
         ]);
     }
 
