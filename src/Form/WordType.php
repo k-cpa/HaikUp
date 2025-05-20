@@ -16,11 +16,15 @@ class WordType extends AbstractType
         $builder
             ->add('word', CollectionType::class, [
                 'entry_type' => TextType::class,
+                'label' => 'Entrez les 3 mots',
                 'entry_options' => ['label' => false],
                 'allow_add' => false,
                 'allow_delete' => false,
                 'mapped' => false,
-                'label' => 'Entrez les 3 mots',
+                'required' => true,
+                
+                // Pour forcer la création de 3 éléments on fait un tableau vide de 3 éléments.
+                'data' => ["", "", ""],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',

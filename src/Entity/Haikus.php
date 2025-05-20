@@ -21,7 +21,7 @@ class Haikus
     private ?User $creator = null;
 
     #[ORM\ManyToOne(inversedBy: 'haikus')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn]
     private ?Collections $Collection = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -203,4 +203,9 @@ class Haikus
 
         return $this;
     }
+
+     public function __toString(): string
+        {
+            return $this->Content; 
+        }
 }

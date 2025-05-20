@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer le haïku{% endblock %}
+
+{% block body %}
+<section class="haiku_creation_container">
+    <div class="words_container">
+        {% for userWord in userWordsList %}
+            <div class="word">
+                <p>{{userWord.words.word}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="haiku_form">
+        {{form_start(formHaiku)}}
+            {{form_row(formHaiku.content)}}
+        {{form_end(formHaiku)}}
+    </div>
+</section>
+{% endblock %}

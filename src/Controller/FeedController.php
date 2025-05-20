@@ -57,12 +57,10 @@ final class FeedController extends AbstractController
             }
         }
 
-
         return $this->render('feed/feed.html.twig', [
             'haikus' => $haikus,
             'likedHaikus' => $likedHaikus,
             'commentForms' => $commentForms,
-            ''
         ]);
     }
 

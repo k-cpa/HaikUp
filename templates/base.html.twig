@@ -21,10 +21,13 @@
             </div>
             <nav>
                 <ul>
-                {# We need to define them properly #}
-                    <li><a href="">Create</a></li> 
-                    <li><a href="">Contact</a></li>
-                    <li><a href="">About us</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="">mots</a></li>
+                    <li><a href="">haiku</a></li>
+                    <li><a href="">Profil</a></li>
+                {% endif %}
+                
+                
                 </ul>
             </nav>
         </header>

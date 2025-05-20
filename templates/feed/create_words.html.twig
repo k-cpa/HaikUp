@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer le haïku{% endblock %}
+
+{% block body %}
+<section class="words_creation_container">
+    <div class="words_form">
+        {{form_start(formWords)}}
+            {% for singleWordField in formWords.word %}
+                {{ form_row(singleWordField) }}
+            {% endfor %}
+                {{ form_row(formWords.submit) }}
+        {{form_end(formWords)}}
+    </div>
+</section>
+{% endblock %}

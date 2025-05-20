@@ -17,14 +17,14 @@ final class WordSentController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $form = $this->createForm(WordType::class);
-        $form->handleRequest($request);
+        $formWords = $this->createForm(WordType::class);
+        $formWords->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formWords->isSubmitted() && $formWords->isValid()) {
             $currentUser = $this->getUser();
 
             // On récupère le tableau des 3 mots du formulaire
-            $wordsTexts = $form->get('words')->getData();
+            $wordsTexts = $formWords->get('word')->getData();
 
             foreach($wordsTexts as $text) {
                 $word = new Words();
@@ -43,9 +43,8 @@ final class WordSentController extends AbstractController
             return $this->redirectToRoute('app_feed');
         }
 
-        // Voir si utile ici ? 
-        // return $this->render('/* trouver la route */', [
-        //     'form' => $form->createView(),
-        // ]);
+        return $this->render('feed/create_words.html.twig', [
+            'formWords' => $formWords->createView(),
+        ]);
     }
 }

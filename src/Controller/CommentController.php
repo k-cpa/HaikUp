@@ -40,6 +40,7 @@ final class CommentController extends AbstractController
                     'comment',
                     $haiku->getId()
                 );
+                
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_feed');
