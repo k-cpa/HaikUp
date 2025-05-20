@@ -35,6 +35,12 @@ final class WriteHaikuController extends AbstractController
             $haiku->setCreator($currentUser);
             // $haiku->setUserWords() voir après comment intégrer ça 
             $entityManager->persist($haiku);
+
+            foreach ($userWords as $userWord) {
+                $userWord->setReceiver($currentUser);
+                $userWord->setStatus('paired');
+                
+            }
         }
 
 
