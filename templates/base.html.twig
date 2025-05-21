@@ -21,10 +21,18 @@
             </div>
             <nav>
                 <ul>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="">Admin</a></li>
+                {% endif %}
+                
                 {% if is_granted('ROLE_USER') %}
-                    <li><a href="">mots</a></li>
-                    <li><a href="">haiku</a></li>
-                    <li><a href="">Profil</a></li>
+                    <li><a href="{{ path('app_word_sent') }}">mots</a></li>
+                    <li><a href="{{ path('app_create_haiku') }}">haiku</a></li>
+                    <li><a href="{{ path('app_user_profile') }}">Profil</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    <li><a href="{{ path('app_signup') }}">Inscription</a></li>
+                        
                 {% endif %}
                 
                 

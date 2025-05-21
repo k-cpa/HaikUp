@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer le haïku{% endblock %}
+
+{% block body %}
+<section class="collection_creation_container">
+    <div class="collection_form">
+        {{form_start(collectionForm)}}
+            {{form_row(collectionForm.name)}}
+        {{form_end(collectionForm)}}
+    </div>
+</section>
+{% endblock %}

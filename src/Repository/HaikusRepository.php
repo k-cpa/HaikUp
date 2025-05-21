@@ -40,4 +40,23 @@ class HaikusRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    // Affichage de tous les haikus sauf ceux de la personne connectée pour le feed. 
+    public function findAllExceptByUser($user) 
+    {
+        return $this->createQueryBuilder('h')
+            ->where('h.creator != :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByUser($user)
+    {
+        return $this->createQueryBuilder('h')
+        ->where('h.creator = :user')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getResult();
+    }
 }

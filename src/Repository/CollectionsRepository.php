@@ -40,4 +40,13 @@ class CollectionsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findOneByUser($user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.creator = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }
