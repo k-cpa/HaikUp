@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AddHaikuToCollectionType;
 use App\Repository\CollectionsRepository;
 use App\Repository\HaikusRepository;
 use App\Service\HaikuViewService;
@@ -27,11 +28,24 @@ final class UserProfileController extends AbstractController
         $user = $this->getUser();
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
+
+        if($user) {
+            foreach($data as $haiku) {
+                $form = $this->createForm(AddHaikuToCollectionType::class, null, [
+                    'action' => $this->generateUrl('collection_add_haiku', ['haikuId' => $haiku->getId()]),
+                    'method' => 'POST',
+                ]);
+
+                $addHaikuToCollectionForms[$haiku->getId()] = $form->createView();
+            }
+
+        }
         
 
         return $this->render('user_pages/profile.html.twig', [
-            ...$data,
+            'haikus' => $data,
             'collections' => $collections,
+            'addCollectionToHaikuForms' => $addHaikuToCollectionForms,
         ]);
     }
 

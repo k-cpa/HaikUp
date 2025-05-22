@@ -6,8 +6,21 @@
 <div class="collections_creation">
     <a href="{{path('app_collection_add')}}">Créer une nouvelle collection</a>
 </div>
+
+{% for collection in collections %}
+    <a href="">
+        <div class="collection_container">
+            <p>{{ collection.name }}</p>
+        </div>
+    </a>
+{% endfor %}
 <div class="haiku">
     {% for haiku in haikus %}
+    {# <div class="collection_form">
+        {{form_start(addCollectionToHaikuForms[haiku.id])}}
+            {{form_row(addCollectionToHaikuForms[haiku.id].collection)}}
+        {{form_end(addCollectionToHaikuForms[haiku.id])}}
+    </div> #}
         <div class="haiku">
             <div class="name">
                 {{haiku.content}}

@@ -25,7 +25,6 @@ final class CommentController extends AbstractController
             $comment = new Comments();
             $comment->setHaiku($haiku);
             $comment->setSender($this->getUser());
-            $comment->setCreatedAt(new \DateTimeImmutable());
 
             $form = $this->createForm(CommentType::class, $comment);
             $form->handleRequest($request);
