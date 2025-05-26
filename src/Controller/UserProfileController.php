@@ -29,10 +29,17 @@ final class UserProfileController extends AbstractController
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
 
+        
+
         if($user) {
-            foreach($data as $haiku) {
+
+            $addHaikuToCollectionForms = [];
+            $haikus = $data['haikus'];
+            // dump($haikus); die;
+
+            foreach($haikus as $haiku) {
                 $form = $this->createForm(AddHaikuToCollectionType::class, null, [
-                    'action' => $this->generateUrl('collection_add_haiku', ['haikuId' => $haiku->getId()]),
+                    'action' => $this->generateUrl('collection_add_haiku', ['HaikuId' => $haiku->getId()]),
                     'method' => 'POST',
                 ]);
 
@@ -40,10 +47,14 @@ final class UserProfileController extends AbstractController
             }
 
         }
-        
+        // J'utilise un tableau d'objet récupérés via le service donc on récupère un tableau d'ID 
+        // Chaque commentForm est indexé par l'ID du haïku
+        // addCollection -> comme commentForm on indexe via l'ID du haïku
 
         return $this->render('user_pages/profile.html.twig', [
-            'haikus' => $data,
+            'haikus' => $data['haikus'],
+            'likedHaikus'=>$data['likedHaikus'],
+            'commentForms' => $data['commentForms'],
             'collections' => $collections,
             'addCollectionToHaikuForms' => $addHaikuToCollectionForms,
         ]);

@@ -27,6 +27,11 @@ class NotificationService
     // Méthode pour créer une notif
     public function createNotification(User $sender, User $receiver, string $entityType, int $entityId): void {
 
+        // pas de création de notification si le user like son propre texte ou répond à un commentaire sur son haïku
+        if ($sender->getId() === $receiver->getId()) {
+            return;
+        }
+
         // Vérification si les users existent 
         if(!$sender->getId()) {
             throw new InvalidArgumentException("Créateur de notification sans ID");

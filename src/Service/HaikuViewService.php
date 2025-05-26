@@ -58,6 +58,7 @@ public function getHaikusFor(string $mode, ?User $currentUser = null): array
         $likedHaikus = [];
         // Tableau pour stocker un formulaire par haiku
         $commentForms = [];
+        
 
         if($currentUser) {
             foreach($haikus as $haiku) {
