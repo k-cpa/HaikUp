@@ -111,6 +111,14 @@ final class HaikuController extends AbstractController
         }
         // On vérifie si le token est valide et on suppr
         if($this->isCsrfTokenValid('SUP' . $haiku->getId(), $request->get('_token'))) {
+
+            // userWords = delete on cascade mais pour supprimer les mots on va le faire manuellement ici. Si on supprime le haiku on boucle sur chaque mot pour remove
+            foreach ($haiku->getUserWords() as $userWord) {
+                $word = $userWord->getWords();
+
+                $entityManager->remove($word);
+            }
+
             if($notification) {
                 $entityManager->remove($notification);
             }

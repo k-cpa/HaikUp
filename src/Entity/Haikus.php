@@ -33,7 +33,7 @@ class Haikus
     /**
      * @var Collection<int, UserWords>
      */
-    #[ORM\OneToMany(targetEntity: UserWords::class, mappedBy: 'haiku')]
+    #[ORM\OneToMany(targetEntity: UserWords::class, mappedBy: 'haiku', cascade:['remove'], orphanRemoval: true)]
     private Collection $userWords;
 
     /**
