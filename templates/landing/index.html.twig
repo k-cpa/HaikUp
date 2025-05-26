@@ -2,35 +2,53 @@
 
 {% block title %}Haikup{% endblock %}
 
-{% block body %}
-{# what's the bg ? #}
-<section class="hero">
-    <div class="title_container">
-        <h1></h1>
-        <h3></h3> 
-    </div>
-</section>
-<section class="presentation">
-    <div class="title_container">
-        <h2></h2>
-        {# subtitle - text #}
-        <h4></h4>
-    </div>
-    <div class="inline_container">
-        <div class="image_text">
-            <div class="img_wrapper">
-                {# img abs ->  #}
-            </div>
-            <div class="text_presentation text">
-                <p></p>
+{% block header %}
+    <header>
+        <div class="logo_wrapper">
+            <a href="{{path('app_landing')}}">
+                <img src="{{asset('img/logo.svg')}}" alt="Logo de Haikup">            
+            </a>
+        </div>
+  
+        <div class="off_screen_menu">
+            <nav>
+                <ul>
+                    {% if is_granted('ROLE_USER') %}
+                    <div class="nav_links">
+                        <li><a href="{{path('app_feed')}}">Mon Feed</a></li>                        
+                    </div>
+                    {% endif %}
+                    <div class="log_links">
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{path('app_logout')}}">Déconnexion</a></li>
+                        {% else %}
+                            <li><a href="path{{('app_signin')}}">Inscription</a></li>
+                            <li><a href="{{path('app_login')}}">Connexion</a></li>
+                        {% endif %}
+                        
+                    </div>
+                </ul>
+            </nav>
+        </div>     
+        <div class="ham_wrapper">
+            <div class="ham_burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </div>
-    <div class="outline_text">
-        <p></p>
-    </div>
-    <div class="cta">
-        {# cta btn -> assets #}
+    </header>
+{% endblock %}
+
+{% block body %}
+<section class="hero_container max-w-site">
+    <div class="hero">
+        <div class="title">
+            <h1>Haikup,</h1>
+        </div>
+        <div class="subtitle">
+            <h3>slogan tartine confiture</h3>
+        </div>
     </div>
 </section>
 {% endblock %}

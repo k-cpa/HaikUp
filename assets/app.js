@@ -51,5 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+        // Gestion burger menu header
+    const hamMenu = document.querySelector('.ham_burger');
+    const offScreeMenu = document.querySelector('.off_screen_menu');
+
+    hamMenu.addEventListener('click', () => {
+        hamMenu.classList.toggle('active');
+        offScreeMenu.classList.toggle('active');
+    })
+});

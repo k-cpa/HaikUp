@@ -1,0 +1,111 @@
+@use "../abstract/mixin";
+@use "../abstract/variables" as var;
+
+// pour la landing header légèrement différent que pour le reste du site
+header {
+    @include mixin.flex($justify: space-between);
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .logo_wrapper {
+        padding-left: 30px;
+        @include mixin.flex;
+
+        img {
+            width: 80px;
+            object-fit: cover;
+        }
+    }
+
+
+     //////// BURGER MENU////////////
+     
+     .ham_wrapper {
+        padding-right: 30px;
+
+        .ham_burger {
+            height: 50px;
+            cursor: pointer;
+            background-color: transparent;
+            width: 50px;
+            margin-left: auto;
+            position: relative;
+
+            span {
+                height: 2px;
+                width: 70%;
+                background-color: black;
+                border-radius: 25px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            // transition sauf pour le 2eme qui disparait directement au clic
+            span:not(:nth-child(2)) {
+                transition: .3s ease;
+            }
+
+            span:nth-child(1) {
+                top: 25%;
+            }
+
+            span:nth-child(3) {
+                top: 75%;
+            }
+
+            &.active {
+                span:nth-child(1) {
+                    top: 50%;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                }
+
+                span:nth-child(2) {
+                    opacity: 0;
+                }
+
+                span:nth-child(3) {
+                    top: 50%;
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                }
+            } 
+        }
+     }
+
+    .off_screen_menu {
+        background-color: var.$secondaryDark;
+        height: 100vh;
+        width: 100%;
+        max-width: 450px;
+        position: fixed;
+        top: 0;
+        right: -450px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
+        justify-content: center;
+        text-align: center;
+        font-size: 2rem;
+        transition: .3s ease;
+
+        &.active {
+            right: 0;
+        }
+
+        nav {
+            background-color: var.$secondaryDark;
+
+            ul {
+                @include mixin.flex(column, center, center);
+                gap: 1rem;
+                background-color: var.$secondaryDark;
+            }
+
+            // whyyyyyyy ?
+            a {
+                background-color: var.$secondaryDark;
+            }
+        }
+    }
+}

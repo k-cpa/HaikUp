@@ -1,3 +1,9 @@
+@use "layout/header";
+@use "abstract/setup";
+@use "layout/footer";
+@use "pages/landing";
+
+
 
 .like-button, .comment-button {
     all: unset;

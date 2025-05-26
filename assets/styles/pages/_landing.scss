@@ -1,0 +1,33 @@
+@use "../abstract/mixin";
+@use "../abstract/font";
+@use "../abstract/variables" as var;
+
+.hero_container {
+    @include mixin.flex;
+    width: 100%;
+    padding-top: 50px;
+
+    .hero {
+        @include mixin.flex(column, center, flex-start);
+
+        .title {
+            @include mixin.flex;
+            font-family: var.$tiempos-medium;
+
+            
+            h1 {
+                font-size: var.$mobile-h1;
+            }
+        }
+
+        .subtitle {
+            @include mixin.flex;
+            font-family: var.$dm-regular;
+
+
+            h3 {
+                font-size: var.$mobile-h3;
+            }
+        }
+    }
+}

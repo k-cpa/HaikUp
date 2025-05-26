@@ -1,0 +1,14 @@
+@use "../abstract/mixin";
+@use "../abstract/variables" as var;
+// général setup
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    background-color: var.$secondaryLight;
+}
+
+max-w-site {
+    max-width: 1440px;
+}

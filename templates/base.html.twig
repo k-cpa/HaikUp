@@ -16,28 +16,29 @@
     </head>
     {% block header %}
         <header>
-            <div class="logo_container">
-                {# logo abs -> use the abs_img #}
+            <div class="top_header">
+                <div class="logo_wrapper">
+                    <a href="{{path('app_landing')}}">
+                        <img src="{{asset('img/logo.svg')}}" alt="logo de Haikup">            
+                    </a>
+                </div>
             </div>
-            <nav>
-                <ul>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="">Admin</a></li>
-                {% endif %}
-                
-                {% if is_granted('ROLE_USER') %}
-                    <li><a href="{{ path('app_word_sent') }}">mots</a></li>
-                    <li><a href="{{ path('app_create_haiku') }}">haiku</a></li>
-                    <li><a href="{{ path('app_user_profile') }}">Profil</a></li>
-                {% else %}
-                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                    <li><a href="{{ path('app_signup') }}">Inscription</a></li>
-                        
-                {% endif %}
-                
-                
-                </ul>
-            </nav>
+            <div class="bottom_header">
+                <nav>
+                    <ul>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="">Admin</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('app_feed') }}">feed</a></li>
+                        <li><a href="{{ path('app_word_sent') }}">mots</a></li>
+                        <li><a href="{{ path('app_create_haiku') }}">haiku</a></li>
+                        <li><a href="{{ path('app_user_profile') }}">Profil</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>                            
+                    {% endif %}
+                    </ul>
+                </nav>
+            </div>
         </header>
     {% endblock %}
     {% block footer %}
