@@ -38,6 +38,20 @@
             margin-bottom: 2rem;
         }
 
+        // alignement du "mot de passe oublié"
+        a {
+            align-self: flex-end;
+            padding-top: 3px;
+            color: var.$grayDarkText;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: .3s ease;
+
+                &:hover {
+                    background-color: var.$secondaryDark;
+                }
+        }
+
         div {
             @include mixin.flex(column, flex-start, center);
             width: 280px;
@@ -88,7 +102,7 @@
             padding-bottom: 0px;
             height: 30px;
             background-color: var.$secondaryLight;
-            border: 1px solid black;
+            border: 1px solid var.$grayText;
             transition: .3s ease;
 
             &:hover {
@@ -105,10 +119,12 @@
         @include mixin.flex;
         margin-top: 40px;
         gap: 5px;
+        color: var.$grayDarkText;
 
         a {
-            color: var.$grayText;
+            color: var.$grayDarkText;
             text-decoration: underline;
+            text-underline-offset: 2px;
             transition: .3s ease;
 
             &:hover {
@@ -116,4 +132,14 @@
             }
         }
     }
+}
+
+// Spécialement pour le reset du password car visuel différent : 
+// Un peu patch -> 
+.first_recup_password {
+    padding-bottom: 0px !important;
+}
+
+.second_recup_password {
+    padding-bottom: 34px !important;
 }
