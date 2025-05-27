@@ -65,6 +65,7 @@
             margin-top: 6px;
             text-underline-offset: 2px;
             transition: .3s ease;
+            cursor: pointer;
 
                 &:hover {
                     background-color: var.$secondaryDark;
@@ -125,6 +126,7 @@
             background-color: var.$secondaryLight;
             border: 1px solid var.$grayText;
             transition: .3s ease;
+            cursor: pointer;
 
             &:hover {
                 background-color: var.$secondaryDark;
@@ -147,6 +149,7 @@
             color: var.$grayDarkText;
             text-decoration: underline;
             text-underline-offset: 2px;
+            cursor: pointer;
             transition: .3s ease;
 
             &:hover {
