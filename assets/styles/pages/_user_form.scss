@@ -3,29 +3,46 @@
 @use "../abstract/variables" as var;
 
 .login_signup {
-    @include mixin.flex(column);
+    @include mixin.flex(column, flex-start, center);
     width: 100%;
     height: 100vh;
     background: var.$primary;
 
+    .close_btn {
+        @include mixin.flex($justify: flex-start);
+        width: 100%;
+        margin-top: 50px;
+
+        a {
+            padding-left: 43px;
+        }
+    }
+
     .element_container {
         @include mixin.flex(column, center, center);
         width: 100%;
-        padding-bottom: 60px;
+        margin-bottom: 58px;
+        margin-top: 43px;
         gap: 3px;
 
         .title_form {
             @include mixin.flex;
-            font-family: var.$tiempos-regular;
-            font-size: var.$mobile-h3;
-            text-align: center
+            font-family: var.$dm-regular;
+            text-align: center;
+
+            h2 {
+                font-size: 24px;
+            }
         }
 
         .subtitle_form {
             @include mixin.flex;
             font-family: var.$dm-regular;
-            font-size: var.$mobile-h4;
             width: 100%;
+
+            p {
+                font-size: var.$mobile-h4;
+            }
         }
     }
 
@@ -44,6 +61,8 @@
             padding-top: 3px;
             color: var.$grayDarkText;
             text-decoration: underline;
+            font-size: var.$mobile-body3;
+            margin-top: 6px;
             text-underline-offset: 2px;
             transition: .3s ease;
 
@@ -64,6 +83,7 @@
                 all: unset;
                 margin-top: 4px;
                 border: 1px solid black;
+                border-radius: 2px;
                 width: 100%;
                 padding-left: 5px;
                 height: 32px;
@@ -82,7 +102,8 @@
                 font-family: var.$tiempos-regular;
                 font-size: var.$mobile-body2;
                 display: block; // fix le mouvement du changement de border sur l'input quand on hover
-                margin-bottom: 4px;
+                margin-bottom: 2px;
+
             }
 
             p {
@@ -120,6 +141,7 @@
         margin-top: 40px;
         gap: 5px;
         color: var.$grayDarkText;
+        font-size: var.$mobile-body3;
 
         a {
             color: var.$grayDarkText;
@@ -142,4 +164,12 @@
 
 .second_recup_password {
     padding-bottom: 34px !important;
+}
+.explication_form {
+    @include mixin.flex;
+    width: 80%;
+    text-align: center;
+    font-family: var.$dm-regular;
+    font-size: var.$mobile-body3;
+    margin-bottom: 8px;
 }

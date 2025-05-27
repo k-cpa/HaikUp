@@ -17,8 +17,7 @@
             @include mixin.flex($justify: flex-start);
             padding-left: 45px;
             font-family: var.$tiempos-medium;
-
-            
+ 
             h1 {
                 font-size: var.$mobile-h1;
             }
