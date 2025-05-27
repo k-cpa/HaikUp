@@ -18,6 +18,7 @@
             @include mixin.flex;
             font-family: var.$tiempos-regular;
             font-size: var.$mobile-h3;
+            text-align: center
         }
 
         .subtitle_form {
