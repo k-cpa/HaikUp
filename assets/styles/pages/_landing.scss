@@ -2,16 +2,20 @@
 @use "../abstract/font";
 @use "../abstract/variables" as var;
 
+// HERO
+
 .hero_container {
-    @include mixin.flex;
+    @include mixin.flex($justify: flex-start);
     width: 100%;
     padding-top: 50px;
 
     .hero {
         @include mixin.flex(column, center, flex-start);
+        width: 100%;
 
         .title {
-            @include mixin.flex;
+            @include mixin.flex($justify: flex-start);
+            padding-left: 45px;
             font-family: var.$tiempos-medium;
 
             
@@ -22,12 +26,50 @@
 
         .subtitle {
             @include mixin.flex;
+            width: 100%;
             font-family: var.$dm-regular;
+            padding-bottom: 55px;
 
 
             h3 {
-                font-size: var.$mobile-h3;
+                font-size: var.$mobile-h4;
             }
         }
+    }
+}
+
+// CONCEPT
+.concept {
+    @include mixin.flex(column, flex-start, flex-start);
+    padding-top: 30px;
+    background: var.$linearGradient;
+    padding-left: 13px;
+    padding-right: 13px;
+
+    .title_concept {
+        // pour iso maquette: padding du titre - padding sur la section
+        padding-left: calc(25px - 13px);
+    }
+
+    .card {
+        @include mixin.flex(column, flex-start, center);
+        height: 415px;
+        background-color: var.$secondaryLight;
+        border-radius: 5px;
+        padding: 20px;
+        gap: 20px;
+
+
+        .img_wrapper {
+            @include mixin.flex; // temporaire juste pour afficher image
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        }
+    }
+
+    .cta {
+        margin-top: 45px;
+        align-self: center;
     }
 }

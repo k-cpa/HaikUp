@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Inclure le token CSRF dans le meta tag pour l'utiliser dans le JavaScript -->
         <meta name="csrf-token" content="{{ csrf_token('ajax') }}">
         
@@ -14,33 +15,76 @@
         {% endblock %}
 
     </head>
-    {% block header %}
-        <header>
-            <div class="top_header">
-                <div class="logo_wrapper">
-                    <a href="{{path('app_landing')}}">
-                        <img src="{{asset('img/logo.svg')}}" alt="logo de Haikup">            
-                    </a>
-                </div>
-            </div>
-            <div class="bottom_header">
-                <nav>
-                    <ul>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="">Admin</a></li>
-                    {% endif %}
-                    {% if is_granted('ROLE_USER') %}
-                        <li><a href="{{ path('app_feed') }}">feed</a></li>
-                        <li><a href="{{ path('app_word_sent') }}">mots</a></li>
-                        <li><a href="{{ path('app_create_haiku') }}">haiku</a></li>
-                        <li><a href="{{ path('app_user_profile') }}">Profil</a></li>
-                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>                            
-                    {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    {% endblock %}
+        {% block header %}
+            {% if is_granted('ROLE_USER') %}
+
+                <header>
+                    <div class="logo_wrapper">
+                        <a href="{{path('app_landing')}}">
+                            <img src="{{asset('img/logo.svg')}}" alt="Logo de Haikup">            
+                        </a>
+                    </div>
+            
+                    <div class="off_screen_menu">
+                        <nav>
+                            <ul>
+                                {% if is_granted('ROLE_USER') %}
+                                <div class="nav_links">
+                                    <li><a href="{{path('app_feed')}}">Mon Feed</a></li>                        
+                                </div>
+                                {% endif %}
+                                <div class="log_links">
+                                    {% if is_granted('ROLE_USER') %}
+                                        <li><a href="{{path('app_logout')}}">Déconnexion</a></li>
+                                    {% else %}
+                                        <li><a href="path{{('app_signin')}}">Inscription</a></li>
+                                        <li><a href="{{path('app_login')}}">Connexion</a></li>
+                                    {% endif %}
+                                    
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>     
+                    <div class="ham_wrapper">
+                        <div class="ham_burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </header>
+            {% else %}
+                <header>
+                    <div class="top_header">
+                        <div class="logo_wrapper">
+                            <a href="{{path('app_landing')}}">
+                                <img src="{{asset('img/logo.svg')}}" alt="logo de Haikup">            
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bottom_header">
+                        <nav>
+                            <ul>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="">Admin</a></li>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('app_feed') }}">feed</a></li>
+                                <li><a href="{{ path('app_word_sent') }}">mots</a></li>
+                                <li><a href="{{ path('app_create_haiku') }}">haiku</a></li>
+                                <li><a href="{{ path('app_user_profile') }}">Profil</a></li>
+                                <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>                            
+                            {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            {% endif %}
+        {% endblock %}
+    
+
+    
+    
     {% block footer %}
         <footer>
             {# TO DO #}

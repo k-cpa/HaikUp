@@ -6,9 +6,29 @@
     padding: 0;
     text-decoration: none;
     list-style: none;
+}
+
+body {
     background-color: var.$secondaryLight;
 }
 
 max-w-site {
     max-width: 1440px;
+}
+
+.cta {
+    @include mixin.flex;
+    width: 140px;
+    height: 30px;
+    background-color: var.$secondaryLight;
+    border: 1px solid black;
+    transition: .3s ease;
+
+    &:hover {
+        background-color: var.$secondaryDark;
+    }
+    
+    a {
+        color: black;
+    }
 }

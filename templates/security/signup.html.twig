@@ -1,23 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
-{% block header %}{% endblock %}
+
 {% block body %}
+
 <main class="login_signup">
-
-		{# formulaire d'inscription #}
-		{{form_start(formSignUp)}}
-			{{form_row(formSignUp.email)}}
-			{{form_row(formSignUp.username)}}
-			{{form_row(formSignUp.password)}}
-			{{form_row(formSignUp.submit)}}
-		{{form_end(formSignUp)}}
-
-		{# Lien pour se connecter si compte existant #}
-		<div class="login_link">
-			<p>Vous avez déjà un compte ?</p>
-			<a href="{{ path('app_login') }}">Connectez-vous</a>
+	{# Voir après pour le back btn #}
+	{# <div class="back_btn">
+		<span></span>
+		<span></span>
+	</div> #}
+	<div class="element_container">
+		<div class="title_form">
+			<h2>Inscription</h2>
 		</div>
+		<div class="subtitle_form">
+			<p>Rejoignez ceux qui disent plus avec moins</p>		
+		</div>
+	</div>
+	{{form_start(formSignUp)}}
+		{{form_row(formSignUp.email)}}
+		{{form_row(formSignUp.username)}}
+		<div class="form_group">
+			{{form_label(formSignUp.password.first)}}
+			{{form_widget(formSignUp.password.first)}}
+			{{form_errors(formSignUp.password.first)}}
+		</div>
+		<div class="password_rules">
+			<p>Le mot de passe doit contenir au moins :</p>
+			<ul>
+				<li><p>8 caractères</p></li>
+				<li><p>1 majuscule</p></li>
+				<li><p>1 chiffre</p></li>
+				<li><p>1 caractère spécial (&@!?*...)</p></li>
+			</ul>
+		</div>
+		<div class="form_group">
+			{{form_label(formSignUp.password.second)}}
+			{{form_widget(formSignUp.password.second)}}
+			{{form_errors(formSignUp.password.second)}}
+		</div>
+		
+		
+	{{form_end(formSignUp)}}
+	{# Lien pour se connecter si compte existant #}
+	<div class="login_link">
+		<p>Vous avez déjà un compte ?</p>
+		<a href="{{ path('app_login') }}">Connectez-vous</a>
 	</div>
 </main>    
 {% endblock %}
