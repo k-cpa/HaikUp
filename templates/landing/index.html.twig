@@ -17,57 +17,68 @@
     <div class="title_concept">
         <h2>Le concept</h2>
     </div>
-    <div class="card_container">
-        <div class="card">
-            <div class="title_card">
-                <h3>Envoyer des mots</h3>
+    <div class="swiper-parent">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="title_card">
+                        <h3>Envoyer des mots</h3>
+                    </div>
+                    <div class="text_concept">
+                        <p>Choisissez trois mots qui capturent un fragment de votre réalité, à l’instant même. 
+                        Transmettez-les à quelqu’un qui les utilisera pour 
+                        écrire un haïku. À travers ces mots, chacun projette, devine, interprète. 
+                        Ce qui se joue, c’est une écoute et une construction partagée. 
+                        Une réalité se façonne, à la croisée de deux regards.</p>
+                    </div>
+                    <div class="img_wrapper">
+                        <img src="" alt="">
+                        {# temporaire juste en attendant l'image #}
+                        <p>image</p> 
+                    </div>       
+                </div>
+                <div class="swiper-slide">
+                    <div class="title_card">
+                        <h3>Recevoir des mots</h3>
+                    </div>
+                    <div class="text_concept">
+                        <p>Vous recevez trois mots choisis par quelqu’un d’autre. Ces mots sont la clé d’une 
+                        réalité que vous ne connaissez pas. Ils deviennent votre contrainte créative, votre 
+                        invitation à ressentir et reconstruire un univers à partir de fragments. C’est un exercice 
+                        d’écoute intérieure et d’ouverture : partir d’un regard extérieur pour faire 
+                        émerger votre propre vision.</p>
+                    </div>
+                    <div class="img_wrapper">
+                        <img src="" alt="">
+                        {# temporaire juste en attendant l'image #}
+                        <p>image</p> 
+                    </div> 
+                </div> 
+                <div class="swiper-slide">
+                    <div class="title_card">
+                        <h3>Ecrire un haiku</h3>
+                    </div>
+                    <div class="text_concept">
+                        <p>Le haïku est une forme poétique très brève, composée de trois vers. Chaque mot y est choisi 
+                        avec soin pour exprimer l’essentiel. Il cherche un équilibre entre clarté et intensité, 
+                        capturant un instant avec précision. Plutôt que d’expliquer, il laisse place à la résonance et au silence, 
+                        invitant à ressentir plus qu’à comprendre.</p>
+                    </div>
+                    <div class="img_wrapper">
+                        <img src="" alt="">
+                        {# temporaire juste en attendant l'image #}
+                        <p>image</p> 
+                    </div>       
+                </div>     
             </div>
-            <div class="text_concept">
-                <p>Choisissez trois mots qui capturent un fragment de votre réalité, à l’instant même. 
-                Transmettez-les à quelqu’un qui les utilisera pour 
-                écrire un haïku. À travers ces mots, chacun projette, devine, interprète. 
-                Ce qui se joue, c’est une écoute et une construction partagée. 
-                Une réalité se façonne, à la croisée de deux regards.</p>
-            </div>
-            <div class="img_wrapper">
-                <img src="" alt="">
-                {# temporaire juste en attendant l'image #}
-                <p>image</p> 
-            </div>       
+            {# Navigation slider #}
+            <div class="swiper-button-prev">P</div>
+            <div class="swiper-button-next">N</div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div class="card">
-            <div class="title_card">
-                <h3>Recevoir des mots</h3>
-            </div>
-            <div class="text_concept">
-                <p>Vous recevez trois mots choisis par quelqu’un d’autre. Ces mots sont la clé d’une 
-                réalité que vous ne connaissez pas. Ils deviennent votre contrainte créative, votre 
-                invitation à ressentir et reconstruire un univers à partir de fragments. C’est un exercice 
-                d’écoute intérieure et d’ouverture : partir d’un regard extérieur pour faire 
-                émerger votre propre vision.</p>
-            </div>
-            <div class="img_wrapper">
-                <img src="" alt="">
-                {# temporaire juste en attendant l'image #}
-                <p>image</p> 
-            </div>       
-        </div>
-        <div class="card">
-            <div class="title_card">
-                <h3>Ecrire un haiku</h3>
-            </div>
-            <div class="text_concept">
-                <p>Le haïku est une forme poétique très brève, composée de trois vers. Chaque mot y est choisi 
-                avec soin pour exprimer l’essentiel. Il cherche un équilibre entre clarté et intensité, 
-                capturant un instant avec précision. Plutôt que d’expliquer, il laisse place à la résonance et au silence, 
-                invitant à ressentir plus qu’à comprendre.</p>
-            </div>
-            <div class="img_wrapper">
-                <img src="" alt="">
-                {# temporaire juste en attendant l'image #}
-                <p>image</p> 
-            </div>       
-        </div>
+    </div>
+
+        
     </div>
     <div class="cta">
         <a href="{{path('app_signup')}}">Rejoignez-nous</a>

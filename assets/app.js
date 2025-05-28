@@ -1,5 +1,6 @@
 import './styles/app.scss';
-import './comment_modal.js'
+import './js/comment_modal.js'
+import Slider from './js/slider';
 
 document.addEventListener('DOMContentLoaded', () => {
     const likeIcons = document.querySelectorAll('.like-button');
@@ -64,3 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
         offScreeMenu.classList.toggle('active');
     })
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.swiper-parent')
+
+    sliders.forEach((sliderElement) => {
+        new Slider(sliderElement);
+    });
+})
