@@ -11,7 +11,6 @@ export default class Slider {
         this.wrapper = element.querySelector('.swiper-wrapper');
         this.maxSlides = this.wrapper ? parseInt(this.wrapper.dataset.maxSlide) || 3 : 3;
 
-
         // Vérifier si l'élément existe
         if (!this.mainContainer) {
             console.error('Slider container not found');
@@ -27,9 +26,10 @@ export default class Slider {
         const swiperConfig = {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
+            initialSlide: 0,
             spaceBetween: 20,
-            loop: true,
-            watchOverflow: true,
+            loop: false,
+            watchOverflow: false,
 
             // Navigation arrows
             navigation: {
@@ -59,9 +59,8 @@ export default class Slider {
 
             // Events
             on: {
-                init: (swiper) => {
+                init: () => {
                     console.log('Swiper initialized');
-                    swiper.slideToLoop(0);
                 },
                 slideChange: () => {
                     console.log('Slide changed');

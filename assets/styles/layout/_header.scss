@@ -33,6 +33,7 @@ header {
 
             span {
                 height: 2px;
+                z-index: 9999;
                 width: 70%;
                 background-color: black;
                 border-radius: 25px;
@@ -80,6 +81,7 @@ header {
         width: 100%;
         max-width: 450px;
         position: fixed;
+        z-index: 9998;
         top: 0;
         right: -450px;
         text-align: center;

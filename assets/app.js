@@ -53,10 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-});
+    // SLIDER
+    const sliders = document.querySelectorAll('.swiper-parent')
 
-document.addEventListener('DOMContentLoaded', () => {
-        // Gestion burger menu header
+    sliders.forEach((sliderElement) => {
+        new Slider(sliderElement);
+    });
+
+
+    // Gestion burger menu header
     const hamMenu = document.querySelector('.ham_burger');
     const offScreeMenu = document.querySelector('.off_screen_menu');
 
@@ -66,10 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const sliders = document.querySelectorAll('.swiper-parent')
 
-    sliders.forEach((sliderElement) => {
-        new Slider(sliderElement);
-    });
-})
+

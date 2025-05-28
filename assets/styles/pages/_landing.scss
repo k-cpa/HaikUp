@@ -40,22 +40,25 @@
 // CONCEPT
 .concept {
     @include mixin.flex(column, flex-start, flex-start);
-    padding-top: 30px;
     background: var.$linearGradient;
-    padding-left: 13px;
-    padding-right: 13px;
+
+
 
     .title_concept {
         // pour iso maquette: padding du titre - padding sur la section
         padding-left: calc(25px - 13px);
+        font-family: var.$tiempos-regular;
+
+        h2 {
+            font-size: var.$mobile-h2
+        }
     }
 
     .swiper-parent {
-        width: 100%;
+        width: 100vw;
 
         .swiper-container {
             width: 100%;
-            height: 415px;
             position: relative;
 
             .swiper-button-prev {
@@ -75,20 +78,44 @@
     }
 
     .swiper-wrapper {
-        @include mixin.flex;
+        display: flex;
+        width: fit-content;
     }
 
     .swiper-slide {
-        @include mixin.flex(column, flex-start, center);
-        height: 415px;
+        width: full;
+    }
+
+    .swiper-slide-content {
+        @include mixin.flex(column, space-between, center);
+        text-align: justify;
+        padding: 20px;
+        margin-left: 25px;
+        height: 500px;
+        margin-right: 25px;
         background-color: var.$secondaryLight;
         border-radius: 5px;
         box-sizing: border-box;
+        gap: 1em;
+
+        .title_content {
+            @include mixin.flex(column, flex-start, center);
+            gap: 20px;
+        }
+
+        .title_card {
+            font-family: var.$dm-regular;
+            
+            h3 {
+                font-size: var.$mobile-h4;
+            }
+        }
 
         .img_wrapper {
             @include mixin.flex; // temporaire juste pour afficher image
-            width: 100%;
-            height: 100%;
+            width: 250px;
+            height: 200px;
+            margin-bottom: 15px;
             border: 1px solid black;
         }
     }
