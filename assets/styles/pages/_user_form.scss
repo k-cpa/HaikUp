@@ -15,6 +15,12 @@
 
         a {
             padding-left: 43px;
+            color: var.$closeBtn;
+            transition: transform .3s ease;
+
+            &:hover {
+                transform: translateX(-4px);
+            }
         }
     }
 
@@ -91,7 +97,7 @@
                 transition: .3s ease;
 
                 &:focus {
-                    border-color: var.$grayText;
+                    background-color: var.$secondaryLight;
                 }
             }
 

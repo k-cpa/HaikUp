@@ -74,6 +74,7 @@ header {
      }
 
     .off_screen_menu {
+        @include mixin.flex(column, center, center);
         background-color: var.$secondaryDark;
         height: 100vh;
         width: 100%;
@@ -81,10 +82,6 @@ header {
         position: fixed;
         top: 0;
         right: -450px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;    
-        justify-content: center;
         text-align: center;
         font-size: 2rem;
         transition: .3s ease;
@@ -97,14 +94,48 @@ header {
             background-color: var.$secondaryDark;
 
             ul {
-                @include mixin.flex(column, center, center);
-                gap: 1rem;
+                @include mixin.flex(column, space-between, center);
                 background-color: var.$secondaryDark;
+                font-family: var.$dm-regular;
+                font-size: var.$mobile-h3;
             }
 
-            // whyyyyyyy ?
-            a {
-                background-color: var.$secondaryDark;
+            // Affichage des liens de la navigation
+            .nav_links {
+                a {
+                    background-color: var.$secondaryDark;
+                    color: var.$grayDarkText;
+                }
+            }
+
+            // Affichage des liens de connexion
+            .log_links {
+                @include mixin.flex($direction: column);
+                margin-top: 5rem;
+                gap: 1.5rem;
+
+                a {
+                    color: var.$grayDarkText;
+                    padding: 5px 15px;
+                    border-radius: 5px;
+                    border: 1px solid var.$grayDarkText;
+                }
+
+                a.logout {
+                    background-color: var.$logoutBtn;
+                }
+
+                a.signup {
+                    background-color: var.$complementary;
+
+                    // &:hover {
+                    //     background-color: var.$;
+                    // }
+                }
+
+                a.login {
+                    background-color: var.$primary;
+                }
             }
         }
     }

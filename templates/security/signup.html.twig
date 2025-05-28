@@ -5,11 +5,10 @@
 {% block body %}
 
 <main class="login_signup">
-	{# Voir après pour le back btn #}
-	{# <div class="back_btn">
-		<span></span>
-		<span></span>
-	</div> #}
+	{# Icone retour en arrière #}
+	<div class="close_btn">
+		<a href="{{ path(is_granted('ROLE_USER') ? 'app_feed' : 'app_landing') }}" class="material-icons">arrow_back</a>
+	</div>
 	<div class="element_container">
 		<div class="title_form">
 			<h2>Inscription</h2>

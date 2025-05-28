@@ -50,6 +50,9 @@
         padding-left: calc(25px - 13px);
     }
 
+    .card_container {
+        @include mixin.flex;
+    }
     .card {
         @include mixin.flex(column, flex-start, center);
         height: 415px;
