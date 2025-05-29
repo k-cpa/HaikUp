@@ -1,4 +1,6 @@
 import Swiper from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 
 // Import Swiper styles
@@ -29,7 +31,7 @@ export default class Slider {
             initialSlide: 0,
             spaceBetween: 20,
             loop: false,
-            watchOverflow: false,
+            watchOverflow: true,
 
             // Navigation arrows
             navigation: {
