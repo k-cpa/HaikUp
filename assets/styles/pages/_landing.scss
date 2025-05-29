@@ -41,7 +41,7 @@
 
 //////////////////////////////////// CONCEPT
 section {
-    @include mixin.flex(column, flex-start, center);
+    @include mixin.flex(column, flex-start, flex-start);
     width: 100%;
     padding-bottom: 40px; // changer plus tard
     padding-top: 28px;
@@ -85,15 +85,17 @@ section {
     }
 
     .swiper-slide {
+        @include mixin.flex;
         width: full;
     }
 
     .swiper-slide-content {
-        @include mixin.flex(column, space-between, center);
+        @include mixin.flex(column, center, center);
         text-align: justify;
         padding: 20px;
         margin-left: 13px;
         height: 500px;
+        max-width: 350px;
         margin-right: 13px;
         background-color: var.$secondaryDark;
         border-radius: 5px;
@@ -150,6 +152,17 @@ section {
 }
 
 //////////////////////////////////// HAIKUP_DETAIL
+.haiku_details {
+    background-color: var.$secondaryLight;
+
+    .cta {
+        background-color: var.$secondaryDark;
+
+        &:hover {
+            background-color: var.$primary;
+        }
+    }
+}
 .details_child {
     @include mixin.flex(column, center, center);
     padding-right: 18px;
@@ -169,13 +182,10 @@ section {
 
 .haiku_description {
     align-items: flex-start;
-    justify-items: space-between;
-    .description {
-        padding-right: 35px;
-    }
+    // width: 100%;
 
     .text_image {
-        @include mixin.flex(row, space-between, flex-start);
+        @include mixin.flex(row, center, flex-start);
         gap: 20px;
         width: 100%;
 
@@ -190,43 +200,37 @@ section {
 
         .img_wrapper {
             height: 150px;
+            width: 50%;
             border: 1px solid black;
         }
     }
 }
 
 .history {
-    align-items: flex-end; 
+    align-items: flex-end;
 
     .text_image {
         @include mixin.flex(column, center, center);
+        width: 100%;
         gap: 12px;
 
+        .text:first-of-type {
+            align-self: flex-end;
+        }
+
         .img_wrapper {
-            width: 150px;
-            height: 100px;
+            width: 50%;
+            height: 150px;
             border: 1px solid black;
         }
-        .text:nth-child(1) {
-            align-self: flex-end;
-            width: 50%;
-            text-align: right;
-        }
 
-        .text:last-of-type {
-            align-self: flex-start;
-            width: 50%;
-            text-align: left;
-
-            span:last-of-type {
-                display: block;
-            }
-        }
     }
 }
 
 .wordwide {
-    text-align: left;
+    .subtitle {
+        align-self: flex-start;
+    }
 
     p:last-of-type span {
         display: block;
@@ -240,5 +244,4 @@ section {
 
     margin-bottom: 0px; // Pour gérer l'espacement du bouton
 }
-
 
