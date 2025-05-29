@@ -9,12 +9,12 @@
             <h1>Haikup,</h1>
         </div>
         <div class="subtitle">
-            <h3>Dire plus avec moins.</h3>
+            <h3>dire plus avec moins.</h3>
         </div>
     </div>
 </section>
-<section class="concept">
-    <div class="title_concept">
+<section class="concept max-w-site">
+    <div class="title">
         <h2>Le concept</h2>
     </div>
     <div class="swiper-parent">
@@ -27,8 +27,8 @@
                             <h3>Envoyer des mots</h3>
                         </div>
                         <div class="text_concept">
-                            <p>Choisissez trois mots qui capturent un fragment de votre réalité, à l’instant même. 
-                            Transmettez-les à quelqu’un qui les utilisera pour 
+                            <p><span>Choisissez trois mots</span> qui capturent un fragment de votre réalité, à l’instant même. 
+                            <span>Transmettez-les à quelqu’un</span> qui les utilisera pour 
                             écrire un haïku. À travers ces mots, chacun projette, devine, interprète. 
                             Ce qui se joue, c’est une écoute et une construction partagée. 
                             Une réalité se façonne, à la croisée de deux regards.</p>
@@ -46,7 +46,7 @@
                                 <h3>Recevoir des mots</h3>
                             </div>
                             <div class="text_concept">
-                                <p>Vous recevez trois mots choisis par quelqu’un d’autre. Ces mots sont la clé d’une 
+                                <p>Vous <span>recevez trois mots</span> choisis par quelqu’un d’autre. Ces mots sont la clé d’une 
                                 réalité que vous ne connaissez pas. Ils deviennent votre contrainte créative, votre 
                                 invitation à ressentir et reconstruire un univers à partir de fragments. C’est un exercice 
                                 d’écoute intérieure et d’ouverture : partir d’un regard extérieur pour faire 
@@ -79,9 +79,90 @@
                 </div>     
             </div>
             {# Navigation slider #}
-            <div class="nav_slider">
-                <div class="swiper-pagination"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="cta">
+        <a href="{{path('app_signup')}}">Rejoignez-nous</a>
+    </div>
+</section>
+<section class="haiku_details max-w-site">
+    <div class="title">
+        <h2>Le Haïku</h2>
+    </div>
+    <div class="details_child haiku_description">
+        <div class="subtitle">
+            <h3>Un monde en trois lignes</h3>
+        </div>
+        <div class="description">
+            <p>Un haïku, c’est un poème bref, venu du Japon.</p>
+            <p>Trois vers, dix-sept syllabes en tout :</p>
+            <p>5 syllabes, puis 7, puis encore 5.</p> 
+            <p>Pas plus. Mais dans ce peu, tout peut tenir : 
+            une saison, une émotion, un instant suspendu.</p>
+        </div>
+        <div class="text_image">
+            <div class="text">
+                <p>Le haïku ne raconte pas. Il montre.</p> <p>Il capte une image du monde, 
+                sans fioritures.
+            <span>le vol d’un oiseau,</span>
+            <span>Un bruit de pluie sur le toit,</span>
+            <span>lumière du matin.</span></p>
             </div>
+            <div class="img_wrapper">
+                <img src="" alt="">
+                image
+            </div>
+        </div>
+    </div>
+    <div class="details_child history">
+        <div class="subtitle">
+            <h3>Un peu d'histoire</h3>
+        </div>
+        <div class="text_image">
+            <div class="text">
+                <p>Le haïku est né au Japon au XVIIe siècle.</p> 
+                <p>Il vient d’une forme plus longue, le
+                <span>renga,</span></p> 
+                <p>un poème à plusieurs mains.</p>
+            </div>
+            <div class="img_wrapper">
+                <img src="" alt="">
+            </div>
+            <div class="text">
+                <p>Le début de ce poème — appelé <span>hokku</span> — était confié au poète le plus expérimenté.
+                C’est ce hokku, autonome, qui deviendra <span>le haïku.</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="details_child wordwide">
+        <div class="subtitle">
+            <h3>Une poésie qui traverse les frontières</h3>
+        </div>
+        <div class="text">
+            <p>Au XXe siècle, le haïku voyage. Il inspire les poètes européens, puis les écrivains du monde entier.</p>
+            <p>Certains gardent les 17 syllabes, <span>d'autres s’en libèrent.</span></p>
+            <p>Mais l’esprit reste : 
+            {# ce span en display block #}
+            <span class="block">regarder le monde avec attention,</span> 
+            <span>s’émerveiller de l’instant,</span> 
+            <span>dire beaucoup avec presque rien.</span></p>
+        </div>
+    </div>
+    <div class="details_child haikup">
+        <div class="subtitle">
+            <h3>Et ici ?</h3>
+        </div>
+        <div class="text">
+            <p>Avec Haikup, on s’inspire les uns les autres.</p> 
+            <p>Vous envoyez trois mots.</p> 
+            <p>Quelqu’un, quelque part, les reçoit,
+            les ressent, et les transforme en haïku.</p> 
+            <p>Puis c’est à votre tour.
+            {# Ce span en display block #}
+            <span>Une poésie à deux voix,</span> 
+            faite de fragments partagés,</p> 
+            <p>de silence, de lien, et d’imagination.</p>
         </div>
     </div>
     <div class="cta">

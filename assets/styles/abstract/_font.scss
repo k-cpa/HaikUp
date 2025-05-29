@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'TiemposRegular';
     src: url('../../font/TiemposFine-Regular.woff2');
-    font-weight: 800;
+    font-weight: 200;
     font-style: normal;
 }
 
@@ -12,9 +12,15 @@
     font-style: normal;
 }
 
+// @font-face {
+//     font-family: 'DmRegular';
+//     src: url('../../font/DMSans_18pt-Regular.woff2');
+//     font-weight: 400;
+//     font-style: normal;
+// }
+
 @font-face {
-    font-family: 'DmRegular';
-    src: url('../../font/DMSans_18pt-Regular.woff2');
-    font-weight: 400;
+    font-family: 'DmSans';
+    src: url('../../font/DMSans-VariableFont_opsz\,wght.ttf');
     font-style: normal;
 }

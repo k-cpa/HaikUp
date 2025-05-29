@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamMenu.addEventListener('click', () => {
         hamMenu.classList.toggle('active');
         offScreeMenu.classList.toggle('active');
+        document.body.classList.toggle('no_scroll');
     })
 });
 

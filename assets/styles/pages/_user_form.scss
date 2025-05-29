@@ -37,19 +37,20 @@
             text-align: center;
 
             h2 {
-                font-size: 24px;
+                font-size: var.$mobile-h3;
             }
         }
 
-        .subtitle_form {
-            @include mixin.flex;
-            font-family: var.$dm-regular;
-            width: 100%;
+        // Pour l'instant supprimé voir si on y revient
+        // .subtitle_form {
+        //     @include mixin.flex;
+        //     font-family: var.$dm-regular;
+        //     width: 100%;
 
-            p {
-                font-size: var.$mobile-h4;
-            }
-        }
+        //     p {
+        //         font-size: var.$mobile-h4;
+        //     }
+        // }
     }
 
     // FORMULAIRE
@@ -81,16 +82,18 @@
         div {
             @include mixin.flex(column, flex-start, center);
             width: 280px;
+            margin-bottom: 30px;
 
-            &:not(:nth-child(3)) {
-                padding-bottom: 34px;
+            &:nth-child(3) {
+                margin-bottom: 10px;
             }
 
             input {
                 all: unset;
                 margin-top: 4px;
-                border: 1px solid black;
+                border: 1px solid var.$grayText;
                 border-radius: 2px;
+                box-shadow: inset 0px 2px 5px rgba(var.$grayText, 35%);
                 width: 100%;
                 padding-left: 5px;
                 height: 32px;
@@ -106,8 +109,9 @@
             }
 
             label {
+                color: var.$grayDarkText;
                 font-family: var.$tiempos-regular;
-                font-size: var.$mobile-body2;
+                font-size: var.$caption;
                 display: block; // fix le mouvement du changement de border sur l'input quand on hover
                 margin-bottom: 2px;
 
@@ -116,30 +120,38 @@
             p {
                 font-family: var.$dm-regular;
                 font-size: var.$mobile-body3;
+                color: var.$grayDarkText;
             }
 
             li {
                     list-style-type: disc;
                     margin-left: 1rem;
+                    color: var.$grayDarkText;
+                    font-size: var.$mobile-body3;
                 }
         }
 
         div:last-of-type {
             @include mixin.flex;
-            width: 85px;
-            padding-bottom: 0px;
+            width: 106px;
             height: 30px;
             background-color: var.$secondaryLight;
+            border-radius: 3px;
+            box-shadow: -0.5px 1px 5px rgba(0, 0, 0, 0.20);
             border: 1px solid var.$grayText;
             transition: .3s ease;
             cursor: pointer;
 
             &:hover {
                 background-color: var.$secondaryDark;
+                box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.20);
             }
 
             button {
                 all: unset;
+                color: var.$grayDarkText;
+                font-family: var.$dm-regular;
+                font-size: var.$button;
             }
         }
     }

@@ -7,14 +7,15 @@ $accent: #F8C8C8;
 $linearGradient: linear-gradient(180deg,rgba(240, 238, 230, 1) 0%, rgba(227, 218, 204, 1) 25%);
 
 $grayText: #BABABA;
-$grayDarkText: #3A3A3A;
+$grayDarkText: #3B3B3B;
 $closeBtn: #1C1B1F;
 $logoutBtn: #E6A9A4;
 
 // Fonts families
 $tiempos-regular: 'TiemposRegular';
 $tiempos-medium: 'TiemposMedium';
-$dm-regular: 'DmRegular';
+$dm-regular: 'DmSans';
+
 
 // Font sizes (mobile)
 $mobile-h1: 36px;
@@ -24,6 +25,8 @@ $mobile-h4: 20px;
 $mobile-h5: 28px;
 $mobile-body2: 18px;
 $mobile-body3: 11px;
+$button: 14px;
+$caption: 12px
 
 // Font sizes (desktop) -> à définir
 // $desktop-h1: 36px;
