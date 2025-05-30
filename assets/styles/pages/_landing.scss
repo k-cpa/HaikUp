@@ -14,40 +14,34 @@
         height: 250px;
 
         .title {
-            @include mixin.flex($justify: flex-start);
-            padding-left: 45px;
-            margin-bottom: 25px;
-            font-family: var.$tiempos-medium;
- 
-            h1 {
-                font-size: var.$mobile-h1;
-            }
-        }
-
-        .subtitle {
-            @include mixin.flex;
+            @include mixin.flex(column, center, center);
             width: 100%;
-            font-family: var.$dm-regular;
-            padding-bottom: 55px;
 
-
+            h1 {
+                // padding-left: 45px;
+                transform: translateX(-55%);
+                margin-bottom: -15px;
+            }
+ 
             h3 {
-                font-size: var.$mobile-h4;
+                padding-left: 100px;
+                font-size: var.$desktop-h4;
                 font-weight: 300;
             }
         }
+
     }
 }
 
 //////////////////////////////////// CONCEPT
 section {
-    @include mixin.flex(column, flex-start, flex-start);
+    @include mixin.flex(column, center, center);
     width: 100%;
-    padding-bottom: 40px; // changer plus tard
-    padding-top: 28px;
 
     .title {
         // pour iso maquette: padding du titre - padding sur la section
+        padding-top: 30px;
+        align-self: flex-start;
         padding-left: 18px;
         margin-bottom: 22px;
         font-family: var.$dm-regular;
@@ -58,12 +52,12 @@ section {
 
         p {
             font-family: var.$dm-regular;
-            font-size: var.$mobile-body2;
+            font-size: var.$desktop-body2;
             font-weight: 300;
             
             span {
                 font-family: var.$tiempos-regular;
-                font-size: var.$mobile-body2;
+                font-size: var.$desktop-body2;
             }
         }
     }
@@ -81,22 +75,20 @@ section {
 
     .swiper-wrapper {
         display: flex;
-        width: fit-content;
+        width: full;
     }
 
     .swiper-slide {
         @include mixin.flex;
-        width: full;
     }
 
     .swiper-slide-content {
         @include mixin.flex(column, center, center);
         text-align: justify;
         padding: 20px;
-        margin-left: 13px;
+        margin-left: 10px;
         height: 500px;
-        max-width: 350px;
-        margin-right: 13px;
+        max-width: 400px;
         background-color: var.$secondaryDark;
         border-radius: 5px;
         box-sizing: border-box;
@@ -113,7 +105,7 @@ section {
             font-weight: 700;
             
             h3 {
-                font-size: var.$mobile-h4;
+                font-size: var.$desktop-h4;
             }
         }
 
@@ -152,8 +144,13 @@ section {
 }
 
 //////////////////////////////////// HAIKUP_DETAIL
-.haiku_details {
+.background {
+    @include mixin.flex(column, center, center);
     background-color: var.$secondaryLight;
+    width: 100%;
+    margin-top: 50px;
+}
+.haiku_details {
 
     .cta {
         background-color: var.$secondaryDark;
@@ -167,8 +164,9 @@ section {
     @include mixin.flex(column, center, center);
     padding-right: 18px;
     padding-left: 18px;
+    width: 90%;
     font-family: var.$dm-regular;
-    font-size: var.$mobile-body2;
+    font-size: var.$desktop-body2;
     font-weight: 300;
     color: var.$grayDarkText;
     gap: 22px; 
@@ -181,67 +179,175 @@ section {
 }
 
 .haiku_description {
-    align-items: flex-start;
-    // width: 100%;
+    @include mixin.flex(column, center,center);
+    margin-top: 20px;
 
-    .text_image {
-        @include mixin.flex(row, center, flex-start);
-        gap: 20px;
-        width: 100%;
+    .subtitle {
+        align-self: flex-start;
+        padding-bottom: 50px;
 
         .text {
-            width: 50%;
+            padding-top: 50px;
+        }
+    }
 
+
+    .description {
+        @include mixin.flex($justify: space-between);
+        width: 100%;
+        gap: 50px;
+    }
+    .text {
+        @include mixin.flex(column, center, flex-start);
+        align-self: flex-start;
+        padding-top: 20px;
+        gap: 20px;
+
+        .text_haiku {
+            @include mixin.flex(column, center, flex-start);
+            padding-top: 20px;
+            gap: 15px;
             span {
                 display: block;
             }
-
         }
+    }
 
-        .img_wrapper {
-            height: 150px;
-            width: 50%;
-            border: 1px solid black;
+    .img_wrapper {
+        width: 60%;
+        height: 500px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
         }
     }
 }
 
 .history {
-    align-items: flex-end;
+    @include mixin.flex(column, center, center);
 
-    .text_image {
-        @include mixin.flex(column, center, center);
+    .subtitle {
+        align-self: flex-end;
+        padding-bottom: 50px;
+    }
+
+    .description {
+        @include mixin.flex($direction: row-reverse);
         width: 100%;
-        gap: 12px;
+        gap: 50px;
 
-        .text:first-of-type {
-            align-self: flex-end;
+        .text {
+            @include mixin.flex(column, center, flex-end);
+            text-align: right;
+            align-self: flex-start;
+            padding-top: 20px;
+            gap: 15px;
+
+            .text_haiku {
+                @include mixin.flex(column, center, flex-end);
+                padding-top: 20px;
+                gap: 20px;
+                span {
+                    display: block;
+                }
+            }
         }
 
         .img_wrapper {
             width: 50%;
-            height: 150px;
-            border: 1px solid black;
-        }
+            height: 500px;
 
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
     }
 }
 
 .wordwide {
+    @include mixin.flex(column, center, center);
+
     .subtitle {
         align-self: flex-start;
     }
 
-    p:last-of-type span {
-        display: block;
+    .description {
+        @include mixin.flex;
+        width: 100%;
+        gap: 50px;
+        .text {
+            @include mixin.flex(column, center, flex-end);
+            text-align: right;
+            align-self: flex-start;
+            padding-top: 20px;
+            gap: 15px;
+            .text_haiku {
+                @include mixin.flex(column, center, flex-end);
+                padding-top: 20px;
+                gap: 20px;
+                span {
+                    display: block;
+                }
+            }
+        }
+        .img_wrapper {
+            width: 50%;
+            height: 500px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
     }
 }
 
 .haikup {
-    span {
-        display: block;
+    @include mixin.flex(column, center, center);
+
+    .subtitle {
+        align-self: flex-end;
     }
 
-    margin-bottom: 0px; // Pour gérer l'espacement du bouton
-}
+    .description {
+        @include mixin.flex($direction: row-reverse);
+        width: 100%;
+        gap: 50px;
 
+        .text {
+            @include mixin.flex(column, center, flex-end);
+            text-align: right;
+            align-self: flex-start;
+            padding-top: 20px;
+            gap: 15px;
+
+            .text_haiku {
+                @include mixin.flex(column, center, flex-end);
+                padding-top: 20px;
+                gap: 20px;
+                span {
+                    display: block;
+                }
+            }
+        }
+
+        .img_wrapper {
+            width: 50%;
+            height: 500px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
+    }
+}

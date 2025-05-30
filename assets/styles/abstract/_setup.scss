@@ -10,9 +10,14 @@
 
 body {
     background-color: var.$primary;
+
+    h1 {
+        font-family: var.$tiempos-medium;
+        font-size: var.$desktop-h1;
+    }
     
     h2 {
-        font-size: var.$mobile-h3;
+        font-size: var.$desktop-h3;
         font-weight: 300;
     }
 
@@ -25,9 +30,9 @@ body {
     height: 100vh;
 }
 
-// .max-w-site {
-//     max-width: 1440px;
-// }
+.max-w-site {
+    max-width: 1440px;
+}
 
 .cta {
     @include mixin.flex;
@@ -49,6 +54,6 @@ body {
     a {
         color: var.$grayDarkText;
         font-family: var.$dm-regular;
-        font-size: var.$button;
+        font-size: var.$desktop-button;
     }
 }

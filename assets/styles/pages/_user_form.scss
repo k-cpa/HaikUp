@@ -37,7 +37,7 @@
             text-align: center;
 
             h2 {
-                font-size: var.$mobile-h3;
+                font-size: var.$desktop-h3;
             }
         }
 
@@ -68,7 +68,7 @@
             padding-top: 3px;
             color: var.$grayDarkText;
             text-decoration: underline;
-            font-size: var.$mobile-body3;
+            font-size: var.$desktop-body3;
             margin-top: 6px;
             text-underline-offset: 2px;
             transition: .3s ease;
@@ -111,7 +111,7 @@
             label {
                 color: var.$grayDarkText;
                 font-family: var.$tiempos-regular;
-                font-size: var.$caption;
+                font-size: var.$desktop-caption;
                 display: block; // fix le mouvement du changement de border sur l'input quand on hover
                 margin-bottom: 2px;
 
@@ -119,7 +119,7 @@
 
             p {
                 font-family: var.$dm-regular;
-                font-size: var.$mobile-body3;
+                font-size: var.$desktop-body3;
                 color: var.$grayDarkText;
             }
 
@@ -127,7 +127,7 @@
                     list-style-type: disc;
                     margin-left: 1rem;
                     color: var.$grayDarkText;
-                    font-size: var.$mobile-body3;
+                    font-size: var.$desktop-body3;
                 }
         }
 
@@ -151,7 +151,7 @@
                 all: unset;
                 color: var.$grayDarkText;
                 font-family: var.$dm-regular;
-                font-size: var.$button;
+                font-size: var.$desktop-button;
             }
         }
     }
@@ -161,7 +161,7 @@
         margin-top: 40px;
         gap: 5px;
         color: var.$grayDarkText;
-        font-size: var.$mobile-body3;
+        font-size: var.$desktop-body3;
 
         a {
             color: var.$grayDarkText;
@@ -191,6 +191,6 @@
     width: 80%;
     text-align: center;
     font-family: var.$dm-regular;
-    font-size: var.$mobile-body3;
+    font-size: var.$desktop-body3;
     margin-bottom: 8px;
 }

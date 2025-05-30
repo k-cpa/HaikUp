@@ -4,6 +4,8 @@
 // pour la landing header légèrement différent que pour le reste du site
 header {
     @include mixin.flex($justify: space-between);
+    // position: fixed;
+    width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
 
@@ -12,7 +14,7 @@ header {
         @include mixin.flex;
 
         img {
-            width: 40px;
+            width: 50px;
             object-fit: cover;
         }
     }
@@ -24,10 +26,10 @@ header {
         padding-right: 30px;
 
         .ham_burger {
-            height: 30px;
+            height: 50px;
             cursor: pointer;
             background-color: transparent;
-            width: 30px;
+            width: 50px;
             margin-left: auto;
             position: relative;
 
@@ -78,12 +80,11 @@ header {
         @include mixin.flex(column, center, center);
         background-color: var.$secondaryDark;
         height: 100%;
-        width: 100%;
-        max-width: 450px;
+        width: 50%;
         position: fixed;
         z-index: 9998;
         top: 0;
-        right: -450px;
+        right: -50%;
         text-align: center;
         font-size: 2rem;
         transition: .3s ease;
@@ -99,7 +100,7 @@ header {
                 @include mixin.flex(column, space-between, center);
                 background-color: var.$secondaryDark;
                 font-family: var.$dm-regular;
-                font-size: var.$mobile-h3;
+                font-size: var.$desktop-h3;
             }
 
             // Affichage des liens de la navigation
