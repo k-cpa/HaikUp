@@ -62,12 +62,14 @@ body {
 .haiku {
     width: 783px;
     background-color: var.$secondaryDark;
+    border-radius: 3px;
     margin-bottom: 20px;
     padding: 10px;
     position: relative;
 
     span {
         position: absolute;
+        cursor: pointer;
         top: 12px;
         right: 12px;
         color: var.$grayDarkText;
@@ -100,7 +102,17 @@ body {
         margin-top: 20px;
 
         .comments {
-            padding-right: 10px;
+            padding-right: 15px;
+        }
+        .like {
+            padding-right: 2px;
+        }
+        .nbr_likes {
+            font-family: var.$dm-regular;
+
+            p {
+                font-size: var.$desktop-body3;
+            }
         }
     }
 }
