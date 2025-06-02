@@ -4,7 +4,6 @@
 // pour la landing header légèrement différent que pour le reste du site
 header {
     @include mixin.flex($justify: space-between);
-    // position: fixed;
     width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;

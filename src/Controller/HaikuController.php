@@ -20,7 +20,7 @@ final class HaikuController extends AbstractController
     public function write(Request $request, EntityManagerInterface $entityManager, UserWordsRepository $userWords, NotificationService $notificationService): Response
     {
         $packs = $userWords->findPendingPacksForUser();
-
+        // DIFFERENT USER MOTHERFUCKER
 
         if (!empty($packs)) {
             $pack = $packs[array_rand($packs)];

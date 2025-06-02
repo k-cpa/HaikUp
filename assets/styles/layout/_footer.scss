@@ -1,2 +1,45 @@
 @use "../abstract/mixin";
 @use "../abstract/variables" as var;
+
+footer {
+    @include mixin.flex($justify: flex-start);
+    background-color: var.$secondaryDark;
+
+    .container {
+        @include mixin.flex($justify: flex-start);
+        margin-top: 50px;
+        margin-bottom: 50px;
+        gap: 174px;
+    }
+
+    .logo_wrapper {
+        width: 113px;
+        padding-left: 60px;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+
+    .footer_nav {
+        @include mixin.flex;
+        
+        nav {
+            @include mixin.flex(column, center, flex-start);
+            gap: 20px;
+            font-family: var.$dm-regular;
+
+            a {
+                color: var.$grayDarkText;
+                font-size: var.$desktop-body3;
+                transition: .3s ease;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+}

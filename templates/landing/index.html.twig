@@ -134,9 +134,6 @@
                                 <span>le haïku demeure.</span></p>
                             </div>
                         </div>
-                        <div class="img_wrapper">
-                            <img src="{{asset('img/glasses_image.png')}}" alt="">
-                        </div>
                     </div>
                 </div>
                 <div class="details_child wordwide max-w-site">
@@ -165,25 +162,28 @@
                     </div>
                     <div class="description">
                         <div class="text">
-                            <p>Avec Haikup, on s’inspire les uns les autres.</p> 
-                            <p>Vous envoyez trois mots.</p> 
-                            <p>Quelqu’un, quelque part, les reçoit,
-                            les ressent, et les transforme en haïku.</p> 
-                            <p>Puis c’est à votre tour.
-                            {# Ce span en display block #}
-                            <span>Une poésie à deux voix,</span> 
-                            faite de fragments partagés,</p> 
-                            <p>de silence, de lien, et d’imagination.</p>
+                            <h5>Avec Haikup, on s’inspire les uns les autres.</h5>
+                            <div class="first_verse">
+                                <p>Vous envoyez trois mots.</p> 
+                                <p>Quelqu’un, quelque part,</p>
+                                <p>les reçoit, les ressent,</p> 
+                                <p>et les transforme en haïku.</p> 
+                            </div> 
+                            <div class="your_turn">
+                                <p>Puis c’est à votre tour.</p>                            
+                            </div>
+                            <div class="haiku_text">
+                                <span>Une poésie à deux voix,</span> 
+                                <span>faite de fragments partagés,</span> 
+                                <span>de silence, de lien, et d’imagination.</span>
+                            </div>
                         </div>
-                        <div class="img_wrapper">
-                            <img src="{{asset('img/glasses_image.png')}}" alt="">
-                        </div 
                     </div>
-
+                    <div class="cta">
+                        <a href="{{path('app_signup')}}">Rejoignez-nous</a>
+                    </div>
                 </div>
-                <div class="cta">
-                    <a href="{{path('app_signup')}}">Rejoignez-nous</a>
-                </div>
+            </div>
         </div>
     </section>
 </main>

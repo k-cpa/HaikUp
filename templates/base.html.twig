@@ -55,19 +55,32 @@
                 </div>
             </header>
         {% endblock %}
-    
-
-    
-    
-    {% block footer %}
-        <footer>
-            {# TO DO #}
-        </footer>
-    {% endblock %}
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
+     {% block footer %}
+        <footer>
+            <div class="container">
+                <div class="logo_wrapper">
+                    <img src="{{asset('img/logo-big.svg')}}" alt="Logo haikup">
+                </div>
+                <div class="footer_nav">
+                    <nav>
+                        <ul>
+                            <li><a href="">Politiques de confidentialité</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">Mentions légales</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">Whatever I need ?</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
 </html>
