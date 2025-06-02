@@ -22,16 +22,38 @@ final class UserProfileController extends AbstractController
         $this->collections = $collections;
     }
 
-    // Page de profil de l'utilisateur connecté
-    #[Route('/profile', name: 'app_user_profile')]
-    public function userPage(HaikuViewService $haikuViewService, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
+    // Page accueil du profil utilisateur avec preview de ses haikus et des haikus likés
+     #[Route('/profile', name: 'app_user_profile')]  
+    public function userPage(FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
+    {
+        $user = $this->getUser();
+
+        $followersCount = $followRepository->countFollowers($user);
+        $followsCount = $followRepository->countFollows($user);
+        $totalHaikus = $haikusRepository->numberOfUserHaiku($user);
+
+        $haikus = $haikusRepository->findBy(
+            ['creator' => $user],
+            null, // Pas de tri (confirmer ?)
+            3, // Limite à 3 haikus pour preview
+        );
+
+        return $this->render('user_pages/profile.html.twig', [
+            'haikus' => $haikus,
+            'followersCount' => $followersCount,
+            'followsCount' => $followsCount,
+            'totalHaikus' => $totalHaikus
+        ]);
+    }
+
+    // Page où l'utilisateur peut voir tous ses haikus et les ranger dans des collections
+    #[Route('/profile/haikus', name: 'app_user_haikus')]
+    public function userHaikus(HaikuViewService $haikuViewService, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
     {
         $user = $this->getUser();
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
-        $followersCount = $followRepository->countFollowers($user);
-        $followsCount = $followRepository->countFollows($user);
-        $totalHaikus = $haikusRepository->numberOfUserHaiku($user);
+
         
 
         if($user) {
@@ -59,15 +81,11 @@ final class UserProfileController extends AbstractController
             'likedHaikus'=>$data['likedHaikus'],
             'commentForms' => $data['commentForms'],
             'collections' => $collections,
-            'addCollectionToHaikuForms' => $addHaikuToCollectionForms,
-            'followersCount' => $followersCount,
-            'followsCount' => $followsCount,
-            'totalHaikus' => $totalHaikus
+            'addCollectionToHaikuForms' => $addHaikuToCollectionForms
         ]);
     }
 
-
-
+    
     // Page de profile des autres utilisateurs
     #[Route('/users/{id}', name: 'app_user_show')]
     public function otherUserPages(User $user, HaikuViewService $haikuViewService): Response
