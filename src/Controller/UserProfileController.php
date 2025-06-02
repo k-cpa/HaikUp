@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AddHaikuToCollectionType;
 use App\Repository\CollectionsRepository;
+use App\Repository\FollowsRepository;
 use App\Repository\HaikusRepository;
 use App\Service\HaikuViewService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +24,14 @@ final class UserProfileController extends AbstractController
 
     // Page de profil de l'utilisateur connecté
     #[Route('/profile', name: 'app_user_profile')]
-    public function userPage(HaikuViewService $haikuViewService): Response
+    public function userPage(HaikuViewService $haikuViewService, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
     {
         $user = $this->getUser();
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
-
+        $followersCount = $followRepository->countFollowers($user);
+        $followsCount = $followRepository->countFollows($user);
+        $totalHaikus = $haikusRepository->numberOfUserHaiku($user);
         
 
         if($user) {
@@ -57,6 +60,9 @@ final class UserProfileController extends AbstractController
             'commentForms' => $data['commentForms'],
             'collections' => $collections,
             'addCollectionToHaikuForms' => $addHaikuToCollectionForms,
+            'followersCount' => $followersCount,
+            'followsCount' => $followsCount,
+            'totalHaikus' => $totalHaikus
         ]);
     }
 

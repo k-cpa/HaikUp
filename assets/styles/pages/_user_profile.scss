@@ -1,0 +1,36 @@
+@use "../abstract/mixin";
+@use "../abstract/font";
+@use "../abstract/variables" as var;
+
+.user_profile {
+    @include mixin.flex(column, center, center);
+
+    .profile_hero {
+        @include mixin.flex(column, center, flex-start);
+        align-self: flex-start;
+
+        .follow {
+            align-self: flex-end;
+            font-family: var.$dm-regular;
+            padding-top: 30px;
+
+            p {
+                font-size: var.$desktop-body3;
+                color: var.$grayText;
+            }
+        }
+    }
+
+    .user_haiku {
+
+        .title {
+            @include mixin.flex($justify: space-between);
+            font-family: var.$dm-regular;
+
+            p {
+                font-size: var.$desktop-body3;
+                color: var.$grayDarkText;
+            }
+        }
+    } 
+}

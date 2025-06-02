@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Follows;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,4 +41,24 @@ class FollowsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+        public function countFollowers(User $user): int
+        {
+            return $this->createQueryBuilder('f')
+                ->select('COUNT(f.id)')
+                ->where('f.Receiver = :user')
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getSingleScalarResult(); // Utile pour récupérer une valeur scale (ici un nombre)
+        }
+
+        public function countFollows(User $user): int
+        {
+            return $this->createQueryBuilder('f')
+                ->select('COUNT(f.id)')
+                ->where('f.Sender = :user')
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getSingleScalarResult(); // Utile pour récupérer une valeur scale (ici un nombre)
+        }
 }

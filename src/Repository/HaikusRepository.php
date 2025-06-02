@@ -51,12 +51,13 @@ class HaikusRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findAllByUser($user)
+    public function numberOfUserHaiku($user)
     {
         return $this->createQueryBuilder('h')
+        ->select('COUNT(h.id)')
         ->where('h.creator = :user')
         ->setParameter('user', $user)
         ->getQuery()
-        ->getResult();
+        ->getSingleScalarResult();
     }
 }
