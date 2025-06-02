@@ -8,6 +8,7 @@
     .profile_hero {
         @include mixin.flex(column, center, flex-start);
         align-self: flex-start;
+        margin-bottom: 30px;
 
         .follow {
             align-self: flex-end;
@@ -26,12 +27,16 @@
         position: relative;
         border-radius: 3px;
         padding: 20px;
-        width: 90vw;
+        margin-bottom: 20px;
 
-        .title_haiku {
+        .title {
             @include mixin.flex($justify: space-between);
             font-family: var.$dm-regular;
             margin-bottom: 20px;
+
+            h2 {
+                font-size: var.$desktop-h3;
+            }
 
             p {
                 font-size: var.$desktop-body3;
@@ -43,13 +48,9 @@
             justify-self: center;
         }
 
-        .haiku:nth-child(4) {
+        .haiku:nth-child(3) {
             position: relative;
             z-index: 1;
-
-            .content {
-                height: 150px;
-            }
 
             &::before {
                 position: absolute;
@@ -62,5 +63,36 @@
             }
 
         }
+
+        .haiku:nth-child(4) {
+            position: relative;
+            z-index: 1;
+
+            &::before {
+                position: absolute;
+                pointer-events: none;
+                content: "";
+                inset: 10px;
+                border-radius: inherit;
+                z-index: 2;
+                background: linear-gradient(to bottom, rgba(240, 238, 230,0.5) 0%, rgba(240, 238, 230,1) 100%);
+            }
+
+        }
     } 
+
+    .user_likes {
+        background-color: var.$secondaryDark;
+        border-radius: 3px;
+        margin-bottom: 20px;
+        padding: 20px;
+
+        .title {
+            font-family: var.$dm-regular;
+
+            h2 {
+                font-size: var.$desktop-h3;
+            }
+        }
+    }
 }

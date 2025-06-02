@@ -11,7 +11,7 @@
             </div>
             <div class="title">
                 <h2>{{app.user.username}}</h2>        
-                <p>Description de la cave à faire (gérer controller)</p>
+                <p>Description de sa page à faire (gérer controller)</p>
             </div>
         </div>
         {# {% for collection in collections %}
@@ -22,7 +22,7 @@
             </a>
         {% endfor %} #}
         <div class="user_haiku">
-            <div class="title_haiku">
+            <div class="title">
                 <h2>Mes Haïkus</h2>
                 <p>{{totalHaikus}} haïkus</p>
             </div>
@@ -33,6 +33,11 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="user_likes">
+            <div class="title">
+                <h2>Mes likes</h2>
+            </div>
         </div>
     </div>
 </section>    

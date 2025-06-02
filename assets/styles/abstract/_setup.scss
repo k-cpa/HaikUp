@@ -87,6 +87,7 @@ body {
     .content {
         @include mixin.flex(column, center, flex-start);
         background-color: var.$primary;
+        height: 100px;
         padding: 15px 0px 15px 20px;
         font-family: var.$tiempos-regular;
         border-radius: 3px;
