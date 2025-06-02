@@ -3,49 +3,6 @@
 @use "layout/footer";
 @use "pages/landing";
 @use "pages/user_form";
+@use "pages/feed";
 
 
-
-.like-button, .comment-button {
-    all: unset;
-}
-
-.like-icon {
-    cursor: pointer;
-    color: pink;
-}
-
-.comment-icon {
-    cursor: pointer;
-}
-
-.comment-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-}
-
-.close-button {
-    cursor: pointer;
-    float: right;
-    font-size: 1.5rem;
-}
-
-.comments_container {
-    background-color: red;
-}

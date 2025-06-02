@@ -1,5 +1,6 @@
 @use "../abstract/mixin";
 @use "../abstract/variables" as var;
+
 // général setup
 * {
     margin: 0;
@@ -56,4 +57,98 @@ body {
         font-family: var.$dm-regular;
         font-size: var.$desktop-button;
     }
+}
+
+.haiku {
+    width: 783px;
+    background-color: var.$secondaryDark;
+    margin-bottom: 20px;
+    padding: 10px;
+    position: relative;
+
+    span {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        color: var.$grayDarkText;
+    }
+
+    .creator {
+        padding-bottom: 12px;
+        font-family: var.$dm-regular;
+
+        p {
+            font-size: var.$desktop-body2;
+        }
+    }
+
+    .content {
+        @include mixin.flex(column, center, flex-start);
+        background-color: var.$primary;
+        padding: 15px 0px 15px 20px;
+        font-family: var.$tiempos-regular;
+        border-radius: 3px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+
+        p {
+            font-size: var.$desktop-body2;
+        }
+    }
+
+    .like-comments_container {
+        @include mixin.flex($justify: flex-end);
+        margin-top: 20px;
+
+        .comments {
+            padding-right: 10px;
+        }
+    }
+}
+
+
+// GESTION DES BOUTONS COMMENTAIRES + LIKES ET MODAL COMMENTAIRES
+
+.like-button, .comment-button {
+    all: unset;
+}
+
+.like-icon {
+    cursor: pointer;
+    color: var.$grayDarkText;
+}
+
+.comment-icon {
+    cursor: pointer;
+}
+
+
+.comment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.close-button {
+    cursor: pointer;
+    float: right;
+    font-size: 1.5rem;
+}
+
+.comments_container {
+    background-color: red;
 }

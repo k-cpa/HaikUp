@@ -4,7 +4,10 @@
 // pour la landing header légèrement différent que pour le reste du site
 header {
     @include mixin.flex($justify: space-between);
+    position: sticky;
+    top: 0;
     width: 100%;
+    z-index: 9999;
     padding-top: 20px;
     padding-bottom: 20px;
 
@@ -104,9 +107,12 @@ header {
 
             // Affichage des liens de la navigation
             .nav_links {
-                a {
+                @include mixin.flex(column, center,center);
+
+                .material-icons {
                     background-color: var.$secondaryDark;
                     color: var.$grayDarkText;
+                    font-size: 35px;
                 }
             }
 
