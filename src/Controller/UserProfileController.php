@@ -31,7 +31,7 @@ final class UserProfileController extends AbstractController
 
     // Page accueil du profil utilisateur avec preview de ses haikus et des haikus likés
      #[Route('/mon-profil', name: 'app_user_profile')]  
-    public function userPage(Request $request, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
+    public function userPage(FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
     {
         $user = $this->getUser();
 
@@ -132,14 +132,19 @@ final class UserProfileController extends AbstractController
     
     // Page de profile des autres utilisateurs
     #[Route('/profil/{id}', name: 'app_user_show')]
-    public function otherUserPages(?User $user, HaikuViewService $haikuViewService, FollowsRepository $followRepository): Response
+    public function otherUserPages(?User $user, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
     {
         if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
         }
 
-        $data = $haikuViewService->getHaikusFor('user', $user);
-        $collections = $this->collections->findOneByUser($user);
+        // Pour afficher un preview des haikus de l'utilisateur
+        $haikus = $haikusRepository->findBy(
+            ['creator' => $user],
+            null, // Pas de tri (confirmer ?)
+            3, // Limite à 3 haikus pour preview
+        );
+        $totalHaikus = $haikusRepository->numberOfUserHaiku($user);
 
         $followersCount = $followRepository->countFollowers($user);
         $followsCount = $followRepository->countFollows($user);
@@ -158,8 +163,8 @@ final class UserProfileController extends AbstractController
         return $this->render('user_pages/other_profile.html.twig', [
             // Unpacking de tableau associatif -> Ca permet de décomposer le tableau et fusionner les paires clé/valeur direct 
             'user' => $user,
-            'haikus' => $data['haikus'],
-            'collections' => $collections,
+            'haikus' => $haikus,
+            'totalHaikus' => $totalHaikus,
             'followersCount' => $followersCount,
             'followsCount' => $followsCount,
             'isSubscribed' => $isSubscribed,
@@ -168,7 +173,7 @@ final class UserProfileController extends AbstractController
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #[Route('/profil/{id}/subscription', name: 'user_follow', methods: ['POST'])] 
-    public function followUser(Request $request, User $user, SubscriptionService $subscriptionService): Response
+    public function followUser(Request $request, User $user, SubscriptionService $subscriptionService, FollowsRepository $followRepository): Response
     {
         $sender = $this->getUser();
 
@@ -183,12 +188,24 @@ final class UserProfileController extends AbstractController
         if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(['success' => false, 'message' => 'Requête non autorisée'], 400);
         }
+         // Vérifie si le token est valide
+        if (!$this->isCsrfTokenValid('ajax', $request->headers->get('X-CSRF-Token'))) {
+            return new JsonResponse(['success' => false, 'message' => 'Invalid CSRF token'], 403);
+        }
 
-        $subscribed = $subscriptionService->toggleSubscription($sender, $user);
-        
-        return new JsonResponse([
-            'success' => true,
-            'subscribed' => $subscribed,
-        ]);
+        try {
+            $subscribed = $subscriptionService->toggleSubscription($sender, $user);
+            return new JsonResponse([
+                'success' => true,
+                'subscribed' => $subscribed, 
+                'followersCount' => $followRepository->count(['Receiver' => $user]),
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'success' => false, 
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(), // temporairement
+            ]);
+        }
     }
 }

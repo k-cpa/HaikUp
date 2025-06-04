@@ -18,7 +18,11 @@
 
                     </div>
                     <div class="creator">
-                        <p>{{haiku.creator}}</p>
+                        <p>
+                            <a href="{{ path('app_user_show', {id: haiku.creator.id}) }}">
+                                {{haiku.creator}}
+                            </a>
+                        </p>
                     </div>
                     <div class="content">
                         <p>{{haiku.content}}</p>

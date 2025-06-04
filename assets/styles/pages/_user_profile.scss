@@ -5,21 +5,65 @@
 .user_profile {
     @include mixin.flex(column, center, center);
 
+        .cta_description {
+            padding-left: 10px;
+            padding-right: 10px;
+            line-height: 30px;
+            height: 30px;
+            background-color: var.$secondaryLight;
+            border-radius: 3px;
+            box-shadow: -0.5px 1px 5px rgba(0, 0, 0, 0.20);
+            border: 1px solid var.$grayText;
+            transition: .3s ease;
+            cursor: pointer;
+            &:hover {
+                background-color: var.$secondaryDark;
+                box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.20);
+            }
+            
+            a {
+                color: var.$grayDarkText;
+                font-family: var.$dm-regular;
+                font-size: var.$desktop-button;
+            }
+        }
+
+    .background_size {
+        @include mixin.flex(column, center, center);
+    }
+
     .profile_hero {
         @include mixin.flex(column, center, flex-start);
-        align-self: flex-start;
+        // align-self: flex-start;
         margin-bottom: 30px;
+        width: 100%;
         padding-top: 80px;
 
         .follow {
+            @include mixin.flex(column, center, flex-end);
+            gap: 20px;
             align-self: flex-end;
+            padding-right: 20px;
             font-family: var.$dm-regular;
             padding-top: 30px;
+
+            button {
+                all: unset;
+                border: 1px solid var.$grayText;
+                border-radius: 3px;
+                padding: 5px 10px;
+                color: var.$grayDarkText;
+            }
 
             p {
                 font-size: var.$desktop-body3;
                 color: var.$grayText;
             }
+        }
+
+        .title_profile {
+            @include mixin.flex(column, center, flex-start);
+            padding-left: 20px;
         }
 
         .description {
@@ -28,6 +72,7 @@
             margin-top: 15px;
             margin-bottom: 10px;
             width: 60%;
+            font-family: var.$dm-regular;
 
             a {
                 align-self: flex-start;
@@ -41,6 +86,7 @@
     .user_haiku {
         @include mixin.flex(column, center, center);
         background-color: var.$secondaryDark;
+        min-width: 850px;
         position: relative;
         border-radius: 3px;
         margin-bottom: 50px;

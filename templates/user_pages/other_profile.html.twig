@@ -8,15 +8,15 @@
         <div class="profile_hero">
             <div class="follow">
                 <p>{{followersCount}} abonné.es | {{followsCount}} abonnements</p>
-                <div class="follow_btn">
-                    <button class="subscribe-button" data-user-id="{{ user.id }}" data-subscribed="{{ isSubscribed ? 'true' : 'false' }}">
-                        {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
-                    </button>
-                </div>
+                <button class="subscribe-button" data-user-id="{{ user.id }}" data-subscribed="{{ isSubscribed ? 'true' : 'false' }}">
+                    {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
+                </button>
             </div>
             <div class="title">
-                <h2>{{user.username}}</h2>        
-                <p>Description de sa page à faire (gérer controller)</p>
+                <h2>{{user.username}}</h2>       
+                {% if user.description is not empty %}
+                    <p>{{user.description|nl2br}}</p>
+                {% endif %}                 
             </div>
         </div>
         {# {% for collection in collections %}
@@ -28,8 +28,8 @@
         {% endfor %} #}
         <div class="user_haiku">
             <div class="title">
-                <h2>Mes Haïkus</h2>
-                <p>{{haikus|length}} haïkus</p>
+                <h2>Les Haïkus de {{user.username}}</h2>
+                <p>{{totalHaikus}} haïkus</p>
             </div>
             {% if haikus is not empty %}            
                 {% for haiku in haikus %}
@@ -44,7 +44,7 @@
             {% endif %}
                 
             <div class="cta">
-                <a href="">Lire mon recueil</a>
+                <a href="">Lire le recueil</a>
             </div>
         </div>
     </div>

@@ -78,6 +78,11 @@ body {
 
         p {
             font-size: var.$desktop-body2;
+
+            a {
+                color: var.$grayDarkText;
+                text-decoration: underline;
+            }
         }
     }
 

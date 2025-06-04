@@ -9,16 +9,22 @@
             <div class="follow">
                 <p>{{followersCount}} abonné.es | {{followsCount}} abonnements</p>
             </div>
-            <div class="title">
+            <div class="title_profile">
                 <h2>{{app.user.username}}</h2>   
-                <div class="description">     
-                    <p>{{app.user.description|nl2br}}</p>
-                    <a href="{{path('app_add_description')}}">
-                        <span class="material-icons">edit</span>
-                    </a>
-                </div
-            </div>
+                <div class="description">  
+                    {% if app.user.description is not empty %}
+                        <p>{{app.user.description|nl2br}}</p>
+                        <a href="{{path('app_add_description')}}">
+                            <span class="material-icons">edit</span>
+                        </a>
+                    {% else %}
+                    <div class="cta_description">
+                        <a href="{{path('app_add_description')}}">Ajouter une description</a>                    
+                    </div>
+                    {% endif %}                       
 
+                </div>
+            </div>
         </div>
         {# {% for collection in collections %}
             <a href="">
@@ -32,6 +38,7 @@
                 <h2>Mes Haïkus</h2>
                 <p>{{totalHaikus}} haïkus</p>
             </div>
+        {% if haikus is not empty %}        
             {% for haiku in haikus %}
                 <div class="haiku">
                     <div class="content">
@@ -42,6 +49,11 @@
             <div class="cta">
                 <a href="">Lire mon recueil</a>
             </div>
+        {% else %}
+            <div class="cta_description">
+                <a href="">Ecrivez votre premier Haïku</a>
+            </div>
+        {% endif %}
         </div>        
         {% if haikuLikedByUser is not empty %}
             <div class="user_likes">
@@ -55,7 +67,11 @@
                         <div class="control_panel">
                         </div>
                         <div class="creator">
-                            <p>{{haikuLikedByUser.creator}}</p>
+                            <p>
+                                <a href="{{ path('app_user_show', {id: haikuLikedByUser.creator.id}) }}">
+                                    {{haikuLikedByUser.creator}}
+                                </a>
+                            </p>
                         </div>
                         <div class="content">
                             <p>{{haikuLikedByUser.content}}</p>

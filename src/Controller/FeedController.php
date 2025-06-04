@@ -42,6 +42,11 @@ final class FeedController extends AbstractController
             // Protection de route si pas AJAX -> peut être overkill avec CSRF + POST mais tant pis
             if (!$request->isXmlHttpRequest()) {
                 return new JsonResponse(['success' => false, 'message' => 'Requête non autorisée'], 400);
+            } 
+            
+            // Vérifie si le token est valide
+            if (!$this->isCsrfTokenValid('ajax', $request->headers->get('X-CSRF-Token'))) {
+                return new JsonResponse(['success' => false, 'message' => 'Invalid CSRF token'], 403);
             }
 
             $haiku = $this->haikusRepository->find($id);
@@ -62,7 +67,6 @@ final class FeedController extends AbstractController
                 ]);
             }
         }
-
 }
 
 

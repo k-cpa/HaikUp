@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     subscribeButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
             event.preventDefault();
-            
+
             const userId = event.target.dataset.userId;
 
             fetch(`/profil/${userId}/subscription`, {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (!data.success) {
-                    console.log('Erreur avec l\'appel AJAX');
+                    console.log('Erreur avec l\'appel AJAX', data.message);
                     return;
                 }
                 const isSubscribed = data.subscribed; // true = abonné, false = désabonné
@@ -34,7 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.target.classList.remove('subscribed');
                     event.target.setAttribute('data-subscribed', 'false');
                 }
-                console.log('Data :', data)
+                // Mise à jour du nombre d’abonnés uniquement
+                const followText = document.querySelector('.follow p');
+                if (followText && typeof data.followersCount !== 'undefined') {
+                    let parts = followText.textContent.split('|');
+                    let abonnementsPart = parts[1] ? parts[1].trim() : '';
+                    followText.textContent = `${data.followersCount} abonné.es | ${abonnementsPart}`;
+                }
             })
             .catch(error => {
                 console.error('Erreur AJAX:', error);

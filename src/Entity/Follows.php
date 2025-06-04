@@ -4,10 +4,10 @@ namespace App\Entity;
 
 use App\Repository\FollowsRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
+// use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: FollowsRepository::class)]
-#[Broadcast]
+// #[Broadcast(false)]
 class Follows
 {
     #[ORM\Id]
