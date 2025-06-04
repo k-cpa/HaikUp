@@ -45,9 +45,6 @@ final class HaikuController extends AbstractController
 
         if ($formHaiku->isSubmitted() && $formHaiku->isValid()) {
             
-            $haikuContent = $formHaiku->getData();
-            
-            $haiku->setContent($haikuContent);
             $haiku->setCreator($currentUser);
             $entityManager->persist($haiku);
 

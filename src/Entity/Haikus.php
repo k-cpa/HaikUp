@@ -25,7 +25,13 @@ class Haikus
     private ?Collections $Collection = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Content = null;
+    private ?string $line1 = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $line2 = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $line3 = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -85,17 +91,30 @@ class Haikus
         return $this;
     }
 
-    public function getContent(): ?string
-    {
-        return $this->Content;
+    public function getLine1(): ?string {
+        return $this->line1;
     }
 
-    public function setContent(string $Content): static
-    {
-        $this->Content = $Content;
-
-        return $this;
+    public function setLine1(string $line1): static { 
+        $this->line1 = $line1; return $this; 
     }
+    
+    public function getLine2(): ?string { 
+        return $this->line2; 
+    }
+
+    public function setLine2(string $line2): static { 
+        $this->line2 = $line2; return $this; 
+    }
+
+    public function getLine3(): ?string { 
+        return $this->line3; 
+    }
+
+    public function setLine3(string $line3): static { 
+        $this->line3 = $line3; return $this; 
+    }
+
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -204,8 +223,8 @@ class Haikus
         return $this;
     }
 
-     public function __toString(): string
-        {
-            return $this->Content; 
-        }
+    //  public function __toString(): string
+    //     {
+    //         return "{$this->line1}\n{$this->line2}\n{$this->line3}";
+    //     }
 }

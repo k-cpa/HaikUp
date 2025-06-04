@@ -8,15 +8,33 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class WriteHaikuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content', TextType::class, [
-                'label' => 'Créer le haiku', // Voir pour changement label
+            ->add('line1', TextType::class, [
+                'label' => 'Introduction', // Voir pour changement label
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Les 3 champs sont obligatoires'])
+                ],
+             ])
+            ->add('line2', TextType::class, [
+                'label' => 'Développement', // Voir pour changement label
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Les 3 champs sont obligatoires'])
+                ],
+             ])
+            ->add('line3', TextType::class, [
+                'label' => 'Conclusion', // Voir pour changement label
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Les 3 champs sont obligatoires'])
+                ],
              ])
              ->add('submit', SubmitType::class)
         ;

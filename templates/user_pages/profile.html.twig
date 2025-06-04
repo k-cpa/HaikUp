@@ -42,7 +42,9 @@
             {% for haiku in haikus %}
                 <div class="haiku">
                     <div class="content">
-                        <p>{{haiku.content}}</p>
+                        <p>{{haiku.line1}}</p>
+                        <p>{{haiku.line2}}</p>
+                        <p>{{haiku.line3}}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -74,7 +76,9 @@
                             </p>
                         </div>
                         <div class="content">
-                            <p>{{haikuLikedByUser.content}}</p>
+                            <p>{{haikuLikedByUser.line1}}</p>
+                            <p>{{haikuLikedByUser.line2}}</p>
+                            <p>{{haikuLikedByUser.line3}}</p>
                         </div>
                     </div>
                 {% endfor %}
