@@ -12,15 +12,20 @@ class SubscriptionService {
     private EntityManagerInterface $entityManager;
     private FollowsRepository $followsRepository;
 
+    public function __construct(FollowsRepository $followsRepository, EntityManagerInterface $entityManager) {
+        $this->followsRepository = $followsRepository;
+        $this->entityManager = $entityManager;
+    }
+
     public function toggleSubscription(User $sender, User $receiver): bool
     {
-        if ($sender === $receiver) {
+        if ($sender->getId() === $receiver->getId()) {
             return false;
         }
 
         $existing = $this->followsRepository->findOneBy([
-            'sender' => $sender,
-            'target' => $receiver
+            'Sender' => $sender,
+            'Receiver' => $receiver
         ]);
 
         if ($existing) {

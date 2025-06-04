@@ -1,6 +1,7 @@
 import './styles/app.scss';
-import './js/comment_modal.js';
 import Slider from './js/slider';
+import './js/comment_modal.js';
+import './js/ajax_subscription.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const likeIcons = document.querySelectorAll('.like-button');
@@ -27,16 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log('Erreur avec l\'appel AJAX');
                     } else {
                         // Si la réponse indique que le like a été effectué, mettre à jour l'interface
-                        const isLiked = data.liked; // true si le like a été ajouté, false sinon
+                        const isLiked = data.liked; 
 
                         if (isLiked) {
                             // Mettre à jour visuellement que l'élément est liké
-                            event.target.textContent = 'favorite';  // Icône "likée"
+                            event.target.textContent = 'favorite';  
                             event.target.classList.add('liked');
                             event.target.setAttribute('data-liked', 'true');
                         } else {
                             // Mettre à jour visuellement que l'élément n'est plus liké
-                            event.target.textContent = 'favorite_border';  // Icône "non likée"
+                            event.target.textContent = 'favorite_border';  
                             event.target.classList.remove('liked');
                             event.target.setAttribute('data-liked', 'false');
                         }
@@ -50,48 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 });
             }
-        });
-    });
-
-    // GESTION AJAX DE L'ABONNEMENT 
-    const subscribeButtons = document.querySelectorAll('.subscribe-button');
-    subscribeButtons.forEach(button => {
-        button.addEventListener('click', async (event) => {
-            event.preventDefault();
-            
-            const btn = event.currentTarget;  // Toujours utiliser currentTarget pour éviter les erreurs
-            const userId = btn.dataset.userId;
-
-            fetch(`/profil/${userId}/subscription`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                },
-                body: JSON.stringify({ id: userId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    console.log('Erreur avec l\'appel AJAX');
-                    return;
-                }
-                const isSubscribed = data.subscribed; // true = abonné, false = désabonné
-                if (isSubscribed) {
-                    btn.textContent = 'Se désabonner';
-                    btn.classList.add('subscribed');
-                    btn.setAttribute('data-subscribed', 'true');
-                } else {
-                    btn.textContent = 'S’abonner';
-                    btn.classList.remove('subscribed');
-                    btn.setAttribute('data-subscribed', 'false');
-                }
-                console.log(data)
-            })
-            .catch(error => {
-                console.error('Erreur AJAX:', error);
-            });
         });
     });
 

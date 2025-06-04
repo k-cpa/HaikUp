@@ -144,6 +144,17 @@ final class UserProfileController extends AbstractController
         $followersCount = $followRepository->countFollowers($user);
         $followsCount = $followRepository->countFollows($user);
 
+        // Gestion du bouton d'abonnement
+        $viewer = $this->getUser();
+        $isSubscribed = false;
+
+        if ($viewer && $viewer !== $user) {
+            $isSubscribed = $followRepository->findOneBy([
+                'Sender' => $viewer,
+                'Receiver' => $user,
+            ]) !== null;
+        }
+
         return $this->render('user_pages/other_profile.html.twig', [
             // Unpacking de tableau associatif -> Ca permet de décomposer le tableau et fusionner les paires clé/valeur direct 
             'user' => $user,
@@ -151,6 +162,7 @@ final class UserProfileController extends AbstractController
             'collections' => $collections,
             'followersCount' => $followersCount,
             'followsCount' => $followsCount,
+            'isSubscribed' => $isSubscribed,
         ]);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,13 +172,20 @@ final class UserProfileController extends AbstractController
     {
         $sender = $this->getUser();
 
+        if (!$sender) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => 'Utilisateur non connecté'
+            ], 403);
+        }
+
         // Protection de route si pas AJAX -> peut être overkill avec CSRF + POST mais tant pis
         if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(['success' => false, 'message' => 'Requête non autorisée'], 400);
         }
 
         $subscribed = $subscriptionService->toggleSubscription($sender, $user);
-
+        
         return new JsonResponse([
             'success' => true,
             'subscribed' => $subscribed,
