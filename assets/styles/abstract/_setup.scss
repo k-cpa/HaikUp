@@ -81,7 +81,11 @@ body {
 
             a {
                 color: var.$grayDarkText;
-                text-decoration: underline;
+                transition: .3s ease;
+
+                &:hover {
+                    color: var.$grayText;
+                }
             }
         }
     }

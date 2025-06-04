@@ -29,6 +29,7 @@ class UserWords
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'userWords')]
+    #[ORM\JoinColumn(onDelete: "SET NULL")] // On remet les mots disponibles pour la création de haikus si le haiku est supprimé. Permet une réutilisation des mots. 
     private ?Haikus $haiku = null;
 
     #[ORM\Column]

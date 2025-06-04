@@ -19,7 +19,7 @@ class Comments
     private ?User $sender = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Haikus $haiku = null;
 
     #[ORM\Column(type: Types::TEXT)]

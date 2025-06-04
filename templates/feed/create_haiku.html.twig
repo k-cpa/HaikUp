@@ -3,8 +3,19 @@
 {% block title %}Créer le haïku{% endblock %}
 
 {% block body %}
-<section class="haiku_creation_container">
+<main class="login_signup">
+    <div class="close_btn max-w-site">
+		<a href="{{ path('app_user_profile') }}" class="material-icons">arrow_back</a>
+	</div>
+    <div class="element_container">
+		<div class="title_form">
+			<h2>Ecrire un haïku</h2>
+		</div>
+	</div>
     <div class="words_container">
+        <div class="words_title">
+            <p>Votre inspiration</p>
+        </div>
         {% for userWord in userWordsList %}
             <div class="word">
                 <p>{{userWord.words.word}}</p>
@@ -16,5 +27,5 @@
             {{form_row(formHaiku.content)}}
         {{form_end(formHaiku)}}
     </div>
-</section>
+</main>
 {% endblock %}

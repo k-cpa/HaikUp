@@ -220,6 +220,31 @@
     margin-bottom: 8px;
 }
 
+// Pour l'envoi du haiku
+.words_container {
+    @include mixin.flex(column, center, center);
+    border: 1px solid var.$grayText;
+    padding: 15px;
+    border-radius: 3px;
+    gap: 5px;
+    margin-bottom: 30px;
+    color: var.$grayDarkText;
+
+    .words_title {
+        font-family: var.$dm-regular;
+        margin-bottom: 20px;
+    }
+
+    .word{
+        @include mixin.flex(column, center, center);
+        width: 100%;
+        gap: 10px;
+        p {
+            font-family: var.$tiempos-medium;
+        }
+    } 
+}
+
 
 
 }
