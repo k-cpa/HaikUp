@@ -4,11 +4,16 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AddHaikuToCollectionType;
+use App\Form\AddProfilDescriptionType;
 use App\Repository\CollectionsRepository;
 use App\Repository\FollowsRepository;
 use App\Repository\HaikusRepository;
 use App\Service\HaikuViewService;
+use App\Service\SubscriptionService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -16,15 +21,17 @@ final class UserProfileController extends AbstractController
 {
 
     private CollectionsRepository $collections;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(CollectionsRepository $collections)
+    public function __construct(CollectionsRepository $collections, EntityManagerInterface $entityManager)
     {
         $this->collections = $collections;
+        $this->entityManager = $entityManager;
     }
 
     // Page accueil du profil utilisateur avec preview de ses haikus et des haikus likés
-     #[Route('/profile', name: 'app_user_profile')]  
-    public function userPage(FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
+     #[Route('/mon-profil', name: 'app_user_profile')]  
+    public function userPage(Request $request, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
     {
         $user = $this->getUser();
 
@@ -32,23 +39,58 @@ final class UserProfileController extends AbstractController
         $followsCount = $followRepository->countFollows($user);
         $totalHaikus = $haikusRepository->numberOfUserHaiku($user);
 
+        // Pour afficher un preview des haikus de l'utilisateur
         $haikus = $haikusRepository->findBy(
             ['creator' => $user],
             null, // Pas de tri (confirmer ?)
             3, // Limite à 3 haikus pour preview
         );
 
+        $haikuLikedByUser = $haikusRepository->findAllHaikusLikedByUser($user);
+
         return $this->render('user_pages/profile.html.twig', [
             'haikus' => $haikus,
+            'haikuLikedByUser' => $haikuLikedByUser,
             'followersCount' => $followersCount,
             'followsCount' => $followsCount,
             'totalHaikus' => $totalHaikus
         ]);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    // Page d'ajout de la description au profil
+    #[Route('/mon-profil/description', name: 'app_add_description')]
+    public function addProfilDescription(Request $request): Response
+    {
+        $user = $this->getUser();
+
+        // GESTION DU FORMULAIRE D'AJOUT DE LA DESCRIPTION DU PROFIL
+        $formAddDescription = $this->createForm(AddProfilDescriptionType::class, $user);
+        $formAddDescription->handleRequest($request);
+
+        if ($formAddDescription->isSubmitted() && $formAddDescription->isValid()) {
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_user_profile');
+
+        }
+
+        return $this->render('user_pages/add_description.html.twig', [
+            'formAddDescription' => $formAddDescription,
+        ]);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Page où l'utilisateur peut voir tous ses haikus et les ranger dans des collections
     #[Route('/profile/haikus', name: 'app_user_haikus')]
-    public function userHaikus(HaikuViewService $haikuViewService, FollowsRepository $followRepository, HaikusRepository $haikusRepository): Response
+    public function userHaikus(HaikuViewService $haikuViewService): Response
     {
         $user = $this->getUser();
         $data = $haikuViewService->getHaikusFor('user', $user);
@@ -85,18 +127,49 @@ final class UserProfileController extends AbstractController
         ]);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
     
     // Page de profile des autres utilisateurs
-    #[Route('/users/{id}', name: 'app_user_show')]
-    public function otherUserPages(User $user, HaikuViewService $haikuViewService): Response
+    #[Route('/profil/{id}', name: 'app_user_show')]
+    public function otherUserPages(?User $user, HaikuViewService $haikuViewService, FollowsRepository $followRepository): Response
     {
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé');
+        }
+
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
 
+        $followersCount = $followRepository->countFollowers($user);
+        $followsCount = $followRepository->countFollows($user);
+
         return $this->render('user_pages/other_profile.html.twig', [
             // Unpacking de tableau associatif -> Ca permet de décomposer le tableau et fusionner les paires clé/valeur direct 
-            ...$data,
+            'user' => $user,
+            'haikus' => $data['haikus'],
             'collections' => $collections,
+            'followersCount' => $followersCount,
+            'followsCount' => $followsCount,
+        ]);
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/profil/{id}/subscription', name: 'user_follow', methods: ['POST'])] 
+    public function followUser(Request $request, User $user, SubscriptionService $subscriptionService): Response
+    {
+        $sender = $this->getUser();
+
+        // Protection de route si pas AJAX -> peut être overkill avec CSRF + POST mais tant pis
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['success' => false, 'message' => 'Requête non autorisée'], 400);
+        }
+
+        $subscribed = $subscriptionService->toggleSubscription($sender, $user);
+
+        return new JsonResponse([
+            'success' => true,
+            'subscribed' => $subscribed,
         ]);
     }
 }

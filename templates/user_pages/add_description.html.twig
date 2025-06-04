@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<main class="login_signup">
+	<div class="close_btn max-w-site">
+		<a href="{{ path('app_user_profile') }}" class="material-icons">arrow_back</a>
+	</div>
+    <div class="element_container">
+		<div class="title_form">
+			<h2>Description de profil</h2>
+		</div>
+	</div>
+    {{form_start(formAddDescription)}}
+        {{form_row(formAddDescription.description)}}        
+        {{form_row(formAddDescription.submit)}}
+    {{form_end(formAddDescription)}}
+</main>
+
+{% endblock %}
+{% block footer %}{% endblock %}

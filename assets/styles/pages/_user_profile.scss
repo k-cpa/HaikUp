@@ -9,6 +9,7 @@
         @include mixin.flex(column, center, flex-start);
         align-self: flex-start;
         margin-bottom: 30px;
+        padding-top: 80px;
 
         .follow {
             align-self: flex-end;
@@ -20,6 +21,21 @@
                 color: var.$grayText;
             }
         }
+
+        .description {
+            @include mixin.flex($justify: flex-start);
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            width: 60%;
+
+            a {
+                align-self: flex-start;
+                margin-top: -20px;
+                color: var.$grayDarkText;
+                cursor: pointer;
+            }
+        }
     }
 
     .user_haiku {
@@ -27,8 +43,7 @@
         background-color: var.$secondaryDark;
         position: relative;
         border-radius: 3px;
-        padding: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 50px;
 
         .title {
             @include mixin.flex($justify: space-between);
@@ -37,16 +52,19 @@
 
             h2 {
                 font-size: var.$desktop-h3;
+                padding-left: 10px;
             }
 
             p {
                 font-size: var.$desktop-body3;
                 color: var.$grayDarkText;
+                padding-right: 10px;
             }
         }
 
         .haiku {
             justify-self: center;
+            margin-bottom: 0px;
         }
 
         .haiku:nth-child(3) {
@@ -81,8 +99,8 @@
         }
 
         .cta {
-            
-        
+            margin-bottom: 30px;
+
             &:hover {
                 background-color: var.$primary;
             }
@@ -90,16 +108,14 @@
     } 
 
     .user_likes {
-        background-color: var.$secondaryDark;
-        border-radius: 3px;
-        margin-bottom: 20px;
-        padding: 20px;
+        margin-bottom: 50px;
 
         .title {
             font-family: var.$dm-regular;
 
             h2 {
                 font-size: var.$desktop-h3;
+                padding-left: 10px;
             }
         }
     }

@@ -29,7 +29,7 @@ export default class Slider {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
             initialSlide: 0,
-            spaceBetween: 20,
+            spaceBetween: 5,
             loop: false,
             watchOverflow: true,
 
@@ -50,13 +50,18 @@ export default class Slider {
                 // When window width is >= 768px
                 768: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 5,
                 },
                 // When window width is >= 1024px
                 1024: {
-                    slidesPerView: this.maxSlides,
-                    spaceBetween: 20,
-                }
+                    slidesPerView: 3,
+                    spaceBetween: 5,
+                },
+                // When window width is >= 1024px
+                // 1024: {
+                //     slidesPerView: 3,
+                //     spaceBetween: -200,
+                // }
             },
 
             // Events

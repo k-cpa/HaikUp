@@ -63,7 +63,9 @@ section {
     }
 
     .swiper-parent {
-        width: 100vw;
+        width: 100%;
+        max-width: 1440px;
+        @include mixin.flex($direction: column);
 
         .swiper-container {
             width: 100%;
@@ -148,7 +150,6 @@ section {
     @include mixin.flex(column, center, center);
     background-color: var.$secondaryLight;
     width: 100%;
-    margin-top: 50px;
 }
 .haiku_details {
 
@@ -172,6 +173,12 @@ section {
     gap: 22px; 
     margin-bottom: 4em;
 
+    .title_description {
+        align-self: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
+
     span {
         font-family: var.$tiempos-regular;
     }
@@ -180,7 +187,6 @@ section {
 
 .haiku_description {
     @include mixin.flex(column, center,center);
-    margin-top: 20px;
 
     .subtitle {
         align-self: flex-start;

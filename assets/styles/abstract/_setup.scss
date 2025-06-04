@@ -26,10 +26,6 @@ body {
         color: var.$grayDarkText;
     }
 }
-.no_scroll {
-    overflow: hidden;
-    height: 100vh;
-}
 
 .max-w-site {
     max-width: 1440px;
@@ -42,6 +38,7 @@ body {
     height: 30px;
     background-color: var.$secondaryLight;
     border-radius: 3px;
+    margin-bottom: 60px;
     box-shadow: -0.5px 1px 5px rgba(0, 0, 0, 0.20);
     border: 1px solid var.$grayText;
     transition: .3s ease;

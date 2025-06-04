@@ -1,5 +1,5 @@
 import './styles/app.scss';
-import './js/comment_modal.js'
+import './js/comment_modal.js';
 import Slider from './js/slider';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,6 +53,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // GESTION AJAX DE L'ABONNEMENT 
+    const subscribeButtons = document.querySelectorAll('.subscribe-button');
+    subscribeButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.preventDefault();
+            
+            const btn = event.currentTarget;  // Toujours utiliser currentTarget pour éviter les erreurs
+            const userId = btn.dataset.userId;
+
+            fetch(`/profil/${userId}/subscription`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({ id: userId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    console.log('Erreur avec l\'appel AJAX');
+                    return;
+                }
+                const isSubscribed = data.subscribed; // true = abonné, false = désabonné
+                if (isSubscribed) {
+                    btn.textContent = 'Se désabonner';
+                    btn.classList.add('subscribed');
+                    btn.setAttribute('data-subscribed', 'true');
+                } else {
+                    btn.textContent = 'S’abonner';
+                    btn.classList.remove('subscribed');
+                    btn.setAttribute('data-subscribed', 'false');
+                }
+                console.log(data)
+            })
+            .catch(error => {
+                console.error('Erreur AJAX:', error);
+            });
+        });
+    });
+
     // SLIDER
     const sliders = document.querySelectorAll('.swiper-parent')
 
@@ -68,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hamMenu.addEventListener('click', () => {
         hamMenu.classList.toggle('active');
         offScreeMenu.classList.toggle('active');
-        document.body.classList.toggle('no_scroll');
     })
 });
 

@@ -54,10 +54,21 @@ class HaikusRepository extends ServiceEntityRepository
     public function numberOfUserHaiku($user)
     {
         return $this->createQueryBuilder('h')
-        ->select('COUNT(h.id)')
-        ->where('h.creator = :user')
-        ->setParameter('user', $user)
-        ->getQuery()
-        ->getSingleScalarResult();
+            ->select('COUNT(h.id)')
+            ->where('h.creator = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findAllHaikusLikedByUser($user)
+    {
+        return $this->createQueryBuilder('h')
+            ->join('h.likes', 'l') // 'likes' = nom de la propriété dans Haikus (ManyToOne inverse)
+            ->where('l.sender = :user')
+            ->andWhere('h.creator != :user') // facultatif si tu veux exclure ses propres haikus
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 }

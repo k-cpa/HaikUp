@@ -1,78 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserProfileController!{% endblock %}
+{% block title %}Profil de{% endblock %}
 
 {% block body %}
-<div class="haiku">
-    {% for haiku in haikus %}
-        <div class="haiku">
-            <div class="name">
-                {{haiku.content}}
-            </div>
-            <div class="like-comments_container">
-                <div class="like">
-                {# Bouton d'envoi du like en BDD + display #}
-                    <form action="{{ path('feed_haiku_like', {'id': haiku.id}) }}" method="post">
-                        <button type="submit" class="like-button">
-                            <i class="material-icons like-icon 
-                                {{ haiku.id in likedHaikus ? 'liked' : '' }}" 
-                                data-haiku-id="{{ haiku.id }}" 
-                                data-liked="{{ haiku.id in likedHaikus ? 'true' : 'false' }}">
-                                    {{ haiku.id in likedHaikus ? 'favorite' : 'favorite_border' }}
-                            </i>
-                        </button>
-                    </form>
-                </div>
-                {# Affichage du nombre de likes #}
-                <div class="nbr_likes">
-                    <p> {{ haiku.getLikesCount() }} J'aime</p>
-                </div>
-                {# Bouton affichage des commentaires #}
-                <div class="comments" data-haiku-id="{{ haiku.id }}"">
-                    <button class="comment-button" data-modal-id="modal-{{haiku.id}}">
-                        <i class="material-icons comment-icon"">chat</i>
+<section class="user_profile">
+    <div class="background_size max-w-site">
+        <div class="profile_hero">
+            <div class="follow">
+                <p>{{followersCount}} abonné.es | {{followsCount}} abonnements</p>
+                <div class="follow_btn">
+                    <button class="subscribe-button" data-user-id="{{ user.id }}" data-subscribed="{{ isSubscribed ? 'true' : 'false' }}">
+                        {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
                     </button>
                 </div>
             </div>
-            <div class="creator">
-                <p>{{haiku.creator}}</p>
+            <div class="title">
+                <h2>{{user.username}}</h2>        
+                <p>Description de sa page à faire (gérer controller)</p>
             </div>
         </div>
-          {# Modale affichage haiku + commentaires #}
-    <div id="modal-{{haiku.id}}" class="comment-modal" style="display: none">
-        <div class="modal-content">
-            <span class="close_btn" data-modal-id="modal-{{haiku.id}}">&times;</span>
-            <div class="modal_content">
-                <p> Haiku : {{haiku.content}} </p>
+        {# {% for collection in collections %}
+            <a href="">
+                <div class="collection_container">
+                    <p>{{ collection.name }}</p>
+                </div>
+            </a>
+        {% endfor %} #}
+        <div class="user_haiku">
+            <div class="title">
+                <h2>Mes Haïkus</h2>
+                <p>{{haikus|length}} haïkus</p>
             </div>
-            <div class="comments_container">
-                {% if haiku.comments|length > 0 %}
-                    {% for comments in haiku.comments %}
-                        <div class="comment">
-                            <p>{{comments.sender}}</p>
-                            <p>{{comments.content}}</p>
-                            {# Form caché pour suppression #}
-                        <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
-                            <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
-                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
-                            <input id="delete" type="submit" value="Supprimer">
-                        </form>
+            {% if haikus is not empty %}            
+                {% for haiku in haikus %}
+                    <div class="haiku">
+                        <div class="content">
+                            <p>{{haiku.content}}</p>
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <p>Aucun commentaire</p>
-                {% endif %}
-            </div>
-            <div class="add_comments">
-            {# Form lié à l'id de chaque haiku pour en avoir 1 pour chaque  #}
-                <form action="{{ path('app_comment_add', {id: haiku.id}) }}" method="post">
-                    {{ form_start(commentForms[haiku.id]) }}
-                        {{ form_row(commentForms[haiku.id].content) }}
-                    {{ form_end(commentForms[haiku.id]) }}
-                </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Pas encore de haïku publié par cet utilisateur</p>
+            {% endif %}
+                
+            <div class="cta">
+                <a href="">Lire mon recueil</a>
             </div>
         </div>
     </div>
-    {% endfor %}
+</section>    
     
 {% endblock %}

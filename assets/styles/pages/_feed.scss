@@ -4,7 +4,8 @@
 @use "../abstract/variables" as var;
 
 .feed {
-    @include mixin.flex;
+    @include mixin.flex($align: flex-start);
+    min-height: 90vh;
 
     .background_size {
         @include mixin.flex(column, center, center);
@@ -15,6 +16,7 @@
     .feed_title {
         @include mixin.flex(column, center, flex-start);
         align-self: flex-start;
+        margin-top: 10em;
         margin-bottom: 60px;
     }
 }

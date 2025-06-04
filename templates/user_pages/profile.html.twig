@@ -10,9 +10,15 @@
                 <p>{{followersCount}} abonné.es | {{followsCount}} abonnements</p>
             </div>
             <div class="title">
-                <h2>{{app.user.username}}</h2>        
-                <p>Description de sa page à faire (gérer controller)</p>
+                <h2>{{app.user.username}}</h2>   
+                <div class="description">     
+                    <p>{{app.user.description|nl2br}}</p>
+                    <a href="{{path('app_add_description')}}">
+                        <span class="material-icons">edit</span>
+                    </a>
+                </div
             </div>
+
         </div>
         {# {% for collection in collections %}
             <a href="">
@@ -36,12 +42,28 @@
             <div class="cta">
                 <a href="">Lire mon recueil</a>
             </div>
-        </div>
-        <div class="user_likes">
-            <div class="title">
-                <h2>Mes likes</h2>
+        </div>        
+        {% if haikuLikedByUser is not empty %}
+            <div class="user_likes">
+                <div class="title">
+                    <h2>Les haïkus qui m'ont marqué</h2>
+                </div>
+                {% for haikuLikedByUser in haikuLikedByUser %}
+                    <div class="haiku">
+                        {# ABSOLUTE #}
+                        <span class="material-icons">more_horiz</span>
+                        <div class="control_panel">
+                        </div>
+                        <div class="creator">
+                            <p>{{haikuLikedByUser.creator}}</p>
+                        </div>
+                        <div class="content">
+                            <p>{{haikuLikedByUser.content}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
+        {% endif %}
     </div>
 </section>    
 {% endblock %}

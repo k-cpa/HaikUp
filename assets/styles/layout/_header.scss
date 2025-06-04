@@ -4,8 +4,9 @@
 // pour la landing header légèrement différent que pour le reste du site
 header {
     @include mixin.flex($justify: space-between);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 9999;
     padding-top: 20px;
@@ -80,6 +81,7 @@ header {
 
     .off_screen_menu {
         @include mixin.flex(column, center, center);
+        position: fixed;
         background-color: var.$secondaryDark;
         height: 100%;
         width: 50%;

@@ -6,18 +6,22 @@ use App\Entity\Comments;
 use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\HaikusRepository;
+use App\Repository\LikesRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class HaikuViewService {
 
     private HaikusRepository $haikusRepository;
+    private LikesRepository $likesRepository;
     private LikeService $likeService;
     private FormFactoryInterface $formFactory;
     private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(HaikusRepository $haikusRepository, LikeService $likeService, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator) {
+    public function __construct(LikesRepository $likesRepository, HaikusRepository $haikusRepository, LikeService $likeService, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator) {
 
+        
+        $this->likesRepository = $likesRepository;
         $this->haikusRepository = $haikusRepository;
         $this->likeService = $likeService;
 

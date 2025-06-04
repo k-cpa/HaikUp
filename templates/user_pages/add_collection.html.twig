@@ -4,6 +4,9 @@
 
 {% block body %}
 <section class="collection_creation_container">
+	<div class="close_btn">
+		<a href="{{ path('app_user_profile') }}" class="material-icons">arrow_back</a>
+	</div>
     <div class="collection_form">
         {{form_start(collectionForm)}}
             {{form_row(collectionForm.name)}}
