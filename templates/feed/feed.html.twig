@@ -60,7 +60,9 @@
                 <div class="modal-content">
                     <span class="close_btn" data-modal-id="modal-{{haiku.id}}">&times;</span>
                     <div class="modal_content">
-                        <p> Haiku : {{haiku.content}} </p>
+                        <p> Haiku : {{haiku.line1}} </p>
+                        <p> Haiku : {{haiku.line2}} </p>
+                        <p> Haiku : {{haiku.line3}} </p>
                     </div>
                     <div class="comments_container">
                         {% if haiku.comments|length > 0 %}

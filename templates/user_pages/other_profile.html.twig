@@ -12,11 +12,13 @@
                     {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
                 </button>
             </div>
-            <div class="title">
-                <h2>{{user.username}}</h2>       
-                {% if user.description is not empty %}
-                    <p>{{user.description|nl2br}}</p>
-                {% endif %}                 
+            <div class="title_profile">
+                <h2>{{user.username}}</h2>   
+                <div class="description">                
+                    {% if user.description is not empty %}
+                        <p>{{user.description|nl2br}}</p>
+                    {% endif %}                 
+                </div>    
             </div>
         </div>
         {# {% for collection in collections %}
