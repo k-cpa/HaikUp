@@ -208,7 +208,7 @@
             .not_registered {
                 @include mixin.flex;
                 width: 100%;
-                gap: 30px;
+                gap: 20px;
 
                 a {
                     color: var.$grayDarkText;
