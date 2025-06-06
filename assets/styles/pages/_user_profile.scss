@@ -29,7 +29,8 @@
         }
 
     .background_size {
-        @include mixin.flex(column, center, center);
+        @include mixin.flex(column, flex-start, center);
+        min-height: 95vh;
     }
 
     .profile_hero {
@@ -37,7 +38,7 @@
         // align-self: flex-start;
         margin-bottom: 30px;
         width: 100%;
-        padding-top: 80px;
+        padding-top: 90px;
 
         .follow {
             @include mixin.flex(column, center, flex-end);

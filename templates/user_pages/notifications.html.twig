@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de{% endblock %}
+
+{% block body %}
+    <h1>Mes notifications</h1>
+
+{% if notifications is empty %}
+    <p>Aucune notification pour le moment.</p>
+{% else %}
+    <ul class="notifications">
+        {% for notif in notifications %}
+            <li class="notification_card">
+                <a href="{{ path('notification_go', {id: notif.id}) }}">
+                    <p>{{ notif.message }}</p>
+                    {% if not notif.status %}
+                        <strong>(Non lue)</strong>
+                    {% endif %}
+                    <br>
+                    <p>{{ notif.createdAt|date('d/m/Y H:i') }}</p>
+                    <br>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

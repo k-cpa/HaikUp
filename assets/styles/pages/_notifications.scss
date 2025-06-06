@@ -1,0 +1,11 @@
+@use "../abstract/mixin";
+@use "../abstract/font";
+@use "../abstract/variables" as var;
+
+.notifications {
+    @include mixin.flex(column, center, center);
+    
+    .notification_card {
+        border: 1px solid var.$grayDarkText;
+    }
+}

@@ -16,7 +16,7 @@
 
     </head>
         {% block header %}
-            <header>
+            <header class="header_mobile">
                 <div class="logo_wrapper">
                     <a href="{{ path(is_granted('ROLE_USER') ? 'app_feed' : 'app_landing') }}">
                         <img src="{{asset('img/logo.svg')}}" alt="Logo de Haikup">            
@@ -30,7 +30,9 @@
                                     <li><a href="{{path('app_user_profile')}}" class="material-icons">account_box</a></li>    
                                     <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
                                     <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
-                                    <li><a href="{{ path('app_create_haiku') }}" class="material-icons">notifications</a></li>
+                                    <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
+                                    <li><a href="{{ path('app_notifications') }}" class="material-icons">notifications</a>
+                                    </li>
                                 {% else %}
                                     <li><a href="{{path('app_landing')}}">Accueil</a></li>    
                                 {% endif %}
@@ -54,8 +56,54 @@
                     </div>
                 </div>
             </header>
+            <header class="header_desktop">
+                <div class="logo_wrapper">
+                    <a href="{{ path(is_granted('ROLE_USER') ? 'app_feed' : 'app_landing') }}">
+                        <img src="{{asset('img/logo-big.svg')}}" alt="Logo de Haikup">            
+                    </a>
+                </div>
+                <div class="second_line">
+                    <nav>
+                        <ul>
+                            <div class="nav_links">
+                                {% if is_granted('ROLE_USER') %}
+                                    <li><a href="{{path('app_user_profile')}}" class="material-icons">account_box</a></li>    
+                                    <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
+                                    <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
+                                    <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
+                                    <li class="notification-wrapper">
+                                        <a href="#" id="notification-toggle" class="material-icons">notifications</a>
+                                        <div class="notification-dropdown hidden">
+                                            {# <p>Chargement...</p> #}
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{{path('app_landing')}}">Accueil</a></li>    
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="off_screen_desktop">
+                    <div class="log_links">
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{path('app_logout')}}" class="logout">Déconnexion</a></li>
+                        {% else %}
+                            <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
+                            <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="ham_wrapper_desktop">
+                    <div class="ham_burger_desktop">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </header>
         {% endblock %}
-    <body>
+    <body class="content_wrapper"> 
         {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

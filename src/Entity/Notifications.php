@@ -33,6 +33,9 @@ class Notifications
     #[ORM\JoinColumn(nullable: false)]
     private ?EntityType $entity_type = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $message = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +116,17 @@ class Notifications
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): static
+    {
+        $this->message = $message;
+
+        return $this;
     }
 }

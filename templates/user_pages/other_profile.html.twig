@@ -8,9 +8,11 @@
         <div class="profile_hero">
             <div class="follow">
                 <p>{{followersCount}} abonné.es | {{followsCount}} abonnements</p>
-                <button class="subscribe-button" data-user-id="{{ user.id }}" data-subscribed="{{ isSubscribed ? 'true' : 'false' }}">
-                    {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
-                </button>
+                {% if app.user is not same as user %}
+                    <button class="subscribe-button" data-user-id="{{ user.id }}" data-subscribed="{{ isSubscribed ? 'true' : 'false' }}">
+                        {{ isSubscribed ? 'Se désabonner' : 'S’abonner' }}
+                    </button>
+                {% endif %}
             </div>
             <div class="title_profile">
                 <h2>{{user.username}}</h2>   

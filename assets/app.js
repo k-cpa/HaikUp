@@ -2,6 +2,8 @@ import './styles/app.scss';
 import Slider from './js/slider';
 import './js/comment_modal.js';
 import './js/ajax_subscription.js';
+import './js/notifications.js';
+import './js/adjustPaddingHeader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const likeIcons = document.querySelectorAll('.like-button');
@@ -62,14 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Gestion burger menu header
+    // Gestion burger menu header pour mobile et pour desktop
     const hamMenu = document.querySelector('.ham_burger');
-    const offScreeMenu = document.querySelector('.off_screen_menu');
+    const hamDesktop = document.querySelector('.ham_burger_desktop');
+    const offScreenMenu = document.querySelector('.off_screen_menu');
+    const offScreenDesktop = document.querySelector('.off_screen_desktop');
 
-    hamMenu.addEventListener('click', () => {
-        hamMenu.classList.toggle('active');
-        offScreeMenu.classList.toggle('active');
-    })
+    if(hamMenu) {
+        hamMenu.addEventListener('click', () => {
+            hamMenu.classList.toggle('active');
+            offScreenMenu.classList.toggle('active');
+        })
+    }
+    if(hamDesktop) {
+        hamDesktop.addEventListener('click', () => {
+            hamDesktop.classList.toggle('active');
+            offScreenDesktop.classList.toggle('active');
+        })
+    }
+
 });
 
 

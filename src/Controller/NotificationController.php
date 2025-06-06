@@ -2,25 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\Notifications;
 use App\Entity\User;
+use App\Repository\NotificationsRepository;
 use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Routing\Annotation\Route;
 
 class NotificationController extends AbstractController
 {
 
     private $notificationService;
+    private $notificationsRepository;
     private $entityManager;
 
     // Injection du service custom 
-    public function __construct(NotificationService $notificationService, EntityManagerInterface $entityManager) 
+    public function __construct(NotificationService $notificationService, EntityManagerInterface $entityManager, NotificationsRepository $notificationsRepository) 
     {
         $this->notificationService = $notificationService;
+        $this->notificationsRepository = $notificationsRepository;
         $this->entityManager = $entityManager; // On injecte ici l'EntityManager
     }
 
@@ -55,8 +60,20 @@ class NotificationController extends AbstractController
                 return $this->redirectToRoute('haiku_show', ['id' => $entityId]);
 
             // Follow va rediriger vers la page de l'utilisateur où il peut accéder à sa liste de followers. 
+            // On récupère d'abord l'entité follows associée à l'ID
             case 'follow':
-                return $this->redirectToRoute('user_profile', ['id' => $entityId]);
+                $follow = $this->entityManager->getRepository(\App\Entity\Follows::class)->find($entityId);
+
+                if(!$follow) {
+                    throw $this->createNotFoundException('Notification introuvable');
+                };
+
+                return $this->redirectToRoute('app_user_show', [
+                    'id' => $follow->getSender()->getId(),
+                ]);
+
+            case 'like':
+                return $this->redirectToRoute('app_user_profile', ['id' => $entityId]);
 
             default:
                 return $this->redirectToRoute('homepage');
@@ -85,4 +102,50 @@ class NotificationController extends AbstractController
     //     $this->notificationService->createNotification($sender, $receiver, 'like', 3);
     //     return $this->json(['message' => 'Ton systeme de notif fonctionne gros BG']);
     // }
+
+    #[Route('/notifications/unread', name:'app_notifications_unread')] 
+    public function unreadNotifications(): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json([], 401);
+        }
+
+        $notifications = $this->notificationsRepository->findBy(
+            ['Receiver' => $user, 'status' => false], 
+            ['created_at' => 'DESC']
+        );
+
+        $data = [];
+        foreach ($notifications as $notification) {
+            $sender = $notification->getSender();
+            
+            $data[] = [
+                'id' => $notification->getID(),
+                'sender' => $sender->getUsername(),
+                'message' => $notification->getMessage(),
+                'createdAt' => $notification->getCreatedAt(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
+    #[Route('/profil/notifications', name:'app_notifications')] 
+    public function notificationsPages(): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $notifications = $this->notificationsRepository->findBy(
+            ['Receiver' => $user],
+            ['created_at' => 'DESC'],
+        );
+
+        return $this->render('user_pages/notifications.html.twig', [
+            'notifications' => $notifications,
+        ]);
+    }
 }

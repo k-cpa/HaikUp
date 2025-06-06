@@ -52,12 +52,37 @@ class NotificationService
             throw new InvalidArgumentException("Entity ID inexistant");
         }
 
+//         Gestion du message de la notification
+// sprintf -> fonction PHP pour formater une chaine de caractères en y insérant des valeurs dynamiques. 
+// -> premier argument = chaine contenant placeholders et ensuite autant d'arguments que de placeholders pour remplacement dynamique.
+        $message= '';
+        // On récup le nom de l'entité
+        $entityTypeName = $entityTypeEntity->getName(); 
+        switch ($entityTypeName) {
+            case 'like':
+                $message = sprintf("%s a liké votre haïku.", $sender->getUsername());
+                break;
+
+            case 'follow':
+                $message = sprintf("%s vous suit.", $sender->getUsername());
+                break;
+
+            case 'comment':
+                $message = sprintf("%s a commenté votre haïku.", $sender->getUsername());
+                break;
+
+            default:
+                $message = sprintf("Découvrez votre nouvelle notification");
+
+        }
+
         // Créer une nouvelle notification on set tous les paramètres 
         $notification = new Notifications;
         $notification->setSender($sender); 
         $notification->setReceiver($receiver);
         $notification->setEntityType($entityTypeEntity);
         $notification->setEntityId($entityId);
+        $notification->setMessage($message);
         $notification->setStatus(false); // Notification marquée comme non lue par défault
 
         $this->entityManager->persist($notification);
