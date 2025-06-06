@@ -84,11 +84,11 @@
         position: fixed;
         background-color: var.$secondaryDark;
         height: 100%;
-        width: 50%;
+        width: 100%;
         position: fixed;
         z-index: 9998;
         top: 0;
-        right: -50%;
+        right: -100%;
         text-align: center;
         font-size: 2rem;
         transition: .3s ease;
@@ -245,4 +245,14 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 768px) {
+  .header_mobile {
+    @include mixin.flex($justify: space-between);
+  }
+
+  .header_desktop {
+    display: none;
+  }
 }
