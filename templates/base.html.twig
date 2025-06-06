@@ -27,14 +27,14 @@
                         <ul>
                             <div class="nav_links">
                                 {% if is_granted('ROLE_USER') %}
-                                    <li><a href="{{path('app_user_profile')}}" class="material-icons">account_box</a></li>    
+                                    <li><a href="{{path('app_user_profile')}}" class="material-icons {% if app.request.attributes.get('_route') == 'app_user_profile' %}active{% endif %}">account_box</a></li>    
                                     <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
                                     <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
                                     <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
                                     <li><a href="{{ path('app_notifications') }}" class="material-icons">notifications</a>
                                     </li>
                                 {% else %}
-                                    <li><a href="{{path('app_landing')}}">Accueil</a></li>    
+                                    <li class="{% if app.request.attributes.get('_route') == 'app_landing' %}active{% endif %}"><a href="{{path('app_landing')}}">Accueil</a></li>    
                                 {% endif %}
                             </div>
                             <div class="log_links">
@@ -64,42 +64,30 @@
                 </div>
                 <div class="second_line">
                     <nav>
-                        <ul>
-                            <div class="nav_links">
-                                {% if is_granted('ROLE_USER') %}
-                                    <li><a href="{{path('app_user_profile')}}" class="material-icons">account_box</a></li>    
-                                    <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
-                                    <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
-                                    <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
-                                    <li class="notification-wrapper">
-                                        <a href="#" id="notification-toggle" class="material-icons">notifications</a>
-                                        <div class="notification-dropdown hidden">
-                                            {# <p>Chargement...</p> #}
-                                        </div>
-                                    </li>
-                                {% else %}
-                                    <li><a href="{{path('app_landing')}}">Accueil</a></li>    
-                                {% endif %}
-                            </div>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="off_screen_desktop">
-                    <div class="log_links">
                         {% if is_granted('ROLE_USER') %}
-                            <li><a href="{{path('app_logout')}}" class="logout">Déconnexion</a></li>
+                            <ul class="nav_links">
+                                <li><a href="{{path('app_user_profile')}}" class="material-icons {% if app.request.attributes.get('_route') == 'app_user_profile' %}active{% endif %}">account_box</a></li>    
+                                <li><a href="{{ path('app_feed') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_feed' %}active{% endif %}">auto_stories</a></li>
+                                <li><a href="{{ path('app_word_sent') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_word_sent' %}active{% endif %}">send</a></li>
+                                <li><a href="{{ path('app_create_haiku') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_create_haiku' %}active{% endif %}">edit_note</a></li>
+                                <li class="notification-wrapper">
+                                    <a href="#" id="notification-toggle" class="material-icons">notifications</a>
+                                    <div class="notification-dropdown hidden">
+                                        {# <p>Chargement...</p> #}
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="log_links">
+                                <li><a href="{{path('app_logout')}}" class="material-icons">logout</a></li>
+                            </ul>
                         {% else %}
-                            <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
-                            <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
+                            <ul class="not_registered">                            
+                                <li><a href="{{path('app_landing')}}">Accueil</a></li>    
+                                <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
+                                <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
+                            </ul>
                         {% endif %}
-                    </div>
-                </div>
-                <div class="ham_wrapper_desktop">
-                    <div class="ham_burger_desktop">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    </nav>
                 </div>
             </header>
         {% endblock %}

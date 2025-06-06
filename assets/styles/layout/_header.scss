@@ -183,129 +183,65 @@
         nav {
             @include mixin.flex;
             width: 100%;
+            background-color: var.$secondaryDark;
+            font-family: var.$dm-regular;
+            font-size: var.$desktop-h3;            
+            width: 100%;
 
-            ul {
-                @include mixin.flex;                
-                background-color: var.$secondaryDark;
-                font-family: var.$dm-regular;
-                font-size: var.$desktop-h3;
-                width: 100%;
+            .nav_links {
+                @include mixin.flex;
+                flex: 1;
 
                 li {
-                    @include mixin.flex;
+                @include mixin.flex;
 
                     &:not(:first-of-type) {
                         padding-left: 60px;
                     }
                 }
-
-                .nav_links {
-                    @include mixin.flex;
-                    
-                    .material-icons {
-                        background-color: var.$secondaryDark;
-                        color: var.$grayDarkText;
-                        font-size: 35px;
-                    }
-                }
             }
-        }
-    }
-    .ham_wrapper_desktop {
-        position: absolute;
-        right: 30px;
-        top: 65%;
-
-        .ham_burger_desktop {
-            height: 50px;
-            cursor: pointer;
-            background-color: transparent;
-            width: 50px;
-            margin-left: auto;
-            position: relative;
-
-            span {
-                height: 2px;
-                z-index: 9999;
-                width: 70%;
-                background-color: var.$grayDarkText;
-                border-radius: 25px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+            .log_links {
+                @include mixin.flex(row, flex-end, center);
+                padding-right: 30px;
             }
 
-            // transition sauf pour le 2eme qui disparait directement au clic
-            span:not(:nth-child(2)) {
-                transition: .3s ease;
-            }
+            .not_registered {
+                @include mixin.flex;
+                width: 100%;
+                gap: 30px;
 
-            span:nth-child(1) {
-                top: 25%;
-            }
-
-            span:nth-child(3) {
-                top: 75%;
-            }
-
-            &.active {
-                span:nth-child(1) {
-                    top: 50%;
-                    transform: translate(-50%, -50%) rotate(45deg);
+                a {
+                    color: var.$grayDarkText;
+                    padding: 5px 20px;
+                    border-radius: 3px;
+                    border: 1px solid var.$grayText;
                 }
 
-                span:nth-child(2) {
-                    opacity: 0;
+                a.logout {
+                    background-color: var.$logoutBtn;
                 }
 
-                span:nth-child(3) {
-                    top: 50%;
-                    transform: translate(-50%, -50%) rotate(-45deg);
+                a.signup {
+                    background-color: var.$complementary;
+
+                    // &:hover {
+                    //     background-color: var.$;
+                    // }
                 }
-            } 
-        }
-     }
-    .off_screen_desktop {
-        @include mixin.flex(column, center, center);
-        position: fixed;
-        background-color: var.$secondaryDark;
-        z-index: 9998;
-        height: 100%;
-        width: 15%;        
-        top: 0;
-        right: -15%;
-        text-align: center;
-        font-size: 2rem;
-        transition: .3s ease;
 
-        &.active {
-            right: 0;
-        }
+                a.login {
+                    background-color: var.$primary;
+                }
+            }
 
-        .log_links {
-            @include mixin.flex;
-            gap: 1.5rem;
-            
-            a {
+            .material-icons {
+                background-color: var.$secondaryDark;
                 color: var.$grayDarkText;
-                padding: 5px 20px;
-                border-radius: 3px;
-                border: 1px solid var.$grayText;
-            }
-            
-            a.logout {
-                background-color: var.$logoutBtn;
-            }
-            
-            a.signup {
-                background-color: var.$complementary;
-                // &:hover {
-                //     background-color: var.$;
-                // }
-            }
-            a.login {
-                background-color: var.$primary;
+                font-size: 35px;
+                &.active {
+                    color: var.$complementary;
+                    border-bottom: 2px solid var.$complementary;
+                }
             }
         }
     }
