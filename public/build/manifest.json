@@ -1,8 +1,9 @@
 {
-  "build/app.css": "/build/app.1180cb39.css",
-  "build/app.js": "/build/app.6bc0aa53.js",
-  "build/runtime.js": "/build/runtime.0b03f9b2.js",
-  "build/883.e0746242.js": "/build/883.e0746242.js",
+  "build/app.css": "/build/app.css",
+  "build/app.js": "/build/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_swiper_modules_pagination_css-node_modules_swiper_swiper_css-node_module-c01949.css": "/build/vendors-node_modules_swiper_modules_pagination_css-node_modules_swiper_swiper_css-node_module-c01949.css",
+  "build/vendors-node_modules_swiper_modules_pagination_css-node_modules_swiper_swiper_css-node_module-c01949.js": "/build/vendors-node_modules_swiper_modules_pagination_css-node_modules_swiper_swiper_css-node_module-c01949.js",
   "build/fonts/DMSans-VariableFont_opsz,wght.ttf": "/build/fonts/DMSans-VariableFont_opsz,wght.b230ddb7.ttf",
   "build/fonts/TiemposFine-Medium.woff2": "/build/fonts/TiemposFine-Medium.5179bcd9.woff2",
   "build/fonts/TiemposFine-Regular.woff2": "/build/fonts/TiemposFine-Regular.f5f04066.woff2"
