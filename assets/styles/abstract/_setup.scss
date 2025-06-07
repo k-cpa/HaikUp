@@ -171,3 +171,22 @@ body {
 .comments_container {
     background-color: red;
 }
+
+@media screen and (max-width: 768px) {
+    body {
+
+        h1 {
+            font-size: var.$mobile-h1;
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    
+    body {
+    
+        h1 {
+        font-size: 3rem;
+        }
+    }
+}

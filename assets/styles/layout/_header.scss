@@ -190,7 +190,8 @@
 
             .nav_links {
                 @include mixin.flex;
-                flex: 1;
+                position: relative;
+                width: 100%;
 
                 li {
                 @include mixin.flex;
@@ -201,8 +202,9 @@
                 }
             }
             .log_links {
-                @include mixin.flex(row, flex-end, center);
-                padding-right: 30px;
+                position: absolute;
+                top: 35%;
+                right: 30px;
             }
 
             .not_registered {
@@ -238,9 +240,14 @@
                 background-color: var.$secondaryDark;
                 color: var.$grayDarkText;
                 font-size: 35px;
+                transition: .3s ease;
+
                 &.active {
                     color: var.$complementary;
                     border-bottom: 2px solid var.$complementary;
+                }
+                &:hover {
+                    color: var.$complementary;
                 }
             }
         }

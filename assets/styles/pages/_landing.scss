@@ -40,12 +40,19 @@ section {
 
     .title {
         // pour iso maquette: padding du titre - padding sur la section
-        padding-top: 30px;
+        padding-top: 60px;
         align-self: flex-start;
         width: 100%;
         margin-bottom: 22px;
         font-family: var.$dm-regular;
     }
+
+    .title_concept {
+        font-family: var.$dm-regular;
+        align-self: flex-start;
+        padding-left: 30px;
+    }
+
 
     .text_concept {
         font-family: var.$dm-regular;
@@ -88,9 +95,10 @@ section {
         @include mixin.flex(column, center, center);
         text-align: justify;
         padding: 20px;
-        margin-left: 10px;
-        height: 500px;
         max-width: 400px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 550px;
         background-color: var.$secondaryDark;
         border-radius: 5px;
         box-sizing: border-box;
@@ -327,5 +335,78 @@ section {
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    section {
+        .swiper-slide-content {
+            height: 600px;
+        }
+    }
+    .haiku_description {
+
+        .description {
+            @include mixin.flex(column-reverse, center, center);
+        }
+
+        .text {
+            @include mixin.flex(column, center, center);
+            align-self: center;
+            text-align: center;
+        }
+
+        .img_wrapper {
+            width: 90%;
+            height: 250px;
+        }
+    }
+
+    .history {
+
+        .description {
+            @include mixin.flex(column, center, center);
+
+            .text {
+                @include mixin.flex(column, center, center);
+                align-self: center;
+                gap: 10px;
+                text-align: center;
+
+                .text_haiku {
+                    @include mixin.flex(column, center, center);
+                    gap: 15px;
+                }
+            }
+        }
+    }
+
+    .wordwide {
+
+        .description {
+            @include mixin.flex(column, center, center);
+
+            .text {
+                @include mixin.flex(column, center, center);
+                align-self: center;
+                text-align: center;
+                gap: 5px;
+
+                .text_haiku {
+                    @include mixin.flex(column, center, flex-start);
+                    gap: 15px;
+                }
+            }
+
+            .img_wrapper {
+                width: 90%;
+                height: 250px;
+            }
+        }
+    }
+
+    .haikup {
+        text-align: center;
     }
 }

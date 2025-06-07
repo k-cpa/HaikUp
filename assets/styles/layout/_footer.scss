@@ -41,5 +41,26 @@ footer {
             }
         }
     }
+}
 
+@media screen and (max-width: 768px) {
+    footer {
+        justify-content: center;
+
+        .container {
+            @include mixin.flex(column, center, center);
+            gap: 60px;
+        }
+
+        .logo_wrapper {
+            padding-left: 0px;
+        }
+
+        .footer_nav {
+
+            nav {
+                align-items: center;
+            }
+        }
+    }
 }
