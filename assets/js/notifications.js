@@ -6,7 +6,7 @@ function fetchNotifications() {
     .then(data => {
       data.forEach(notif => {
         const link = document.createElement('a');
-        linkHref = `/notifications/${notif.id}/go`;
+        linkHref = `{{ path('notification_go', {id: notif.id}) }}git `;
         if (!lastSeenIds.includes(notif.id)) {
           showToast(`${notif.message}`, linkHref);
           lastSeenIds.push(notif.id);
