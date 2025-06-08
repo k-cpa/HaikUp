@@ -42,9 +42,15 @@ class NotificationService
 
         // Recherche BDD un type d'entité par le nom
         $entityTypeEntity = $this->entityManager->getRepository(EntityType::class)->findOneBy(['name' => $entityType]);
-        // Vérification entity Type existe
-        if(!$entityTypeEntity) {
-            throw new \Exception("Type d'entité non reconnu");
+        
+        // Si le type n'existe pas encore, on le crée -> pour la première création 
+        if (!$entityTypeEntity) {
+            // Créer un nouvel EntityType
+            $entityTypeEntity = new EntityType();
+            $entityTypeEntity->setName($entityType);
+            $this->entityManager->persist($entityTypeEntity);
+            $this->entityManager->flush(); 
+            
         }
 
         // Vérification entity ID
@@ -86,7 +92,7 @@ class NotificationService
         $notification->setStatus(false); // Notification marquée comme non lue par défault
 
         $this->entityManager->persist($notification);
-        $this->entityManager->flush();
+        // $this->entityManager->flush(); on va plutôt flush dans les controller
     }
 }
 
