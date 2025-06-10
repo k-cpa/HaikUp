@@ -53,7 +53,7 @@
             </div>        
         {% else %}
             <div class="cta_description">
-                <a href="">Ecrivez votre premier Haïku</a>
+                <a href="{{path('app_create_haiku')}}">Ecrivez votre premier Haïku</a>
             </div>
         {% endif %}
         {% if haikuLikedByUser is not empty %}
