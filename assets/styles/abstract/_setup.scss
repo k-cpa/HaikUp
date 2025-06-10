@@ -57,7 +57,9 @@ body {
 }
 
 .haiku {
-    width: 783px;
+    @include mixin.flex(column, center, center);
+    max-width: 850px;
+    width: 850px;
     background-color: var.$secondaryDark;
     border-radius: 3px;
     margin-bottom: 30px;
@@ -73,6 +75,7 @@ body {
     }
 
     .creator {
+        align-self: flex-start;
         padding-bottom: 12px;
         font-family: var.$dm-regular;
 
@@ -94,6 +97,7 @@ body {
         @include mixin.flex(column, center, flex-start);
         background-color: var.$primary;
         height: 100px;
+        width: 95%;
         padding: 15px 0px 15px 20px;
         font-family: var.$tiempos-regular;
         border-radius: 3px;
@@ -106,6 +110,7 @@ body {
 
     .like-comments_container {
         @include mixin.flex($justify: flex-end);
+        align-self: flex-end;
         margin-top: 20px;
 
         .comments {
@@ -188,5 +193,37 @@ body {
         h1 {
         font-size: 3rem;
         }
+    }
+}
+
+@media screen and (max-width: 850px) {
+
+    .haiku {
+        width: 650px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .haiku {
+        width: 550px;
+    }
+}
+@media screen and (max-width: 550px) {
+
+    .haiku {
+        width: 450px;
+    }
+}
+@media screen and (max-width: 450px) {
+
+    .haiku {
+        width: 350px;
+    }
+}
+@media screen and (max-width: 350px) {
+
+    .haiku {
+        width: 300px;
     }
 }

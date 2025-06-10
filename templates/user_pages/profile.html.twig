@@ -17,14 +17,11 @@
                         <a href="{{path('app_add_description')}}">
                             <span class="material-icons">edit</span>
                         </a>
-                        <a href="/notifications/112/go">Voir</a>
-
                     {% else %}
                     <div class="cta_description">
                         <a href="{{path('app_add_description')}}">Ajouter une description</a>                    
                     </div>
                     {% endif %}                       
-
                 </div>
             </div>
         </div>
@@ -35,30 +32,30 @@
                 </div>
             </a>
         {% endfor %} #}
-        <div class="user_haiku">
-            <div class="title">
-                <h2>Mes Haïkus</h2>
-                <p>{{totalHaikus}} haïkus</p>
-            </div>
         {% if haikus is not empty %}        
-            {% for haiku in haikus %}
-                <div class="haiku">
-                    <div class="content">
-                        <p>{{haiku.line1}}</p>
-                        <p>{{haiku.line2}}</p>
-                        <p>{{haiku.line3}}</p>
-                    </div>
+            <div class="user_haiku">
+                <div class="title">
+                    <h2>Mes Haïkus</h2>
+                    <p>{{totalHaikus}} haïkus</p>
                 </div>
-            {% endfor %}
-            <div class="cta">
-                <a href="">Lire mon recueil</a>
-            </div>
+                {% for haiku in haikus %}
+                    <div class="haiku">
+                        <div class="content">
+                            <p>{{haiku.line1}}</p>
+                            <p>{{haiku.line2}}</p>
+                            <p>{{haiku.line3}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="cta">
+                    <a href="">Lire mon recueil</a>
+                </div>
+            </div>        
         {% else %}
             <div class="cta_description">
                 <a href="">Ecrivez votre premier Haïku</a>
             </div>
         {% endif %}
-        </div>        
         {% if haikuLikedByUser is not empty %}
             <div class="user_likes">
                 <div class="title">

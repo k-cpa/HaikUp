@@ -9,8 +9,6 @@
 
     .background_size {
         @include mixin.flex(column, center, center);
-        padding-left: 10%;
-        padding-right: 10%;
     }
 
     .feed_title {

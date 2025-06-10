@@ -10,6 +10,8 @@
         }
 
         .cta_description {
+            @include mixin.flex;
+            align-self: center;
             padding-left: 10px;
             padding-right: 10px;
             line-height: 30px;
@@ -100,7 +102,8 @@
     .user_haiku {
         @include mixin.flex(column, center, center);
         background-color: var.$secondaryDark;
-        min-width: 850px;
+        max-width: 850px;
+        width: 90%;
         position: relative;
         border-radius: 3px;
         margin-bottom: 50px;
@@ -158,7 +161,7 @@
 
         }
 
-        .cta {
+        .cta { 
             margin-bottom: 30px;
 
             &:hover {
@@ -176,6 +179,51 @@
             h2 {
                 font-size: var.$desktop-h3;
                 padding-left: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+     
+    .user_profile {
+    
+
+        .profile_hero {
+
+            .title_profile {
+                padding: 0px;
+                margin-top: 30px;
+
+                h2 {
+                    padding-left: 10px;
+                }
+            }
+
+            .description {
+                @include mixin.flex(column-reverse, center, center);
+                gap: 0px;
+                margin-top: 30px;
+                margin-bottom: 10px;
+                padding-left: 10px;
+                width: 95%;
+                font-family: var.$dm-regular;
+
+                a {
+                   margin-top: 0px;
+                   align-self: flex-end;
+                }
+            }
+        }
+
+        .user_likes {
+
+            .title {
+                @include mixin.flex;
+                h2 {
+                    font-size: var.$mobile-h3;
+                    padding-left: 0px;
+                }
             }
         }
     }
