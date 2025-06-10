@@ -352,6 +352,10 @@ section {
 
 @media screen and (max-width: 768px) {
 
+    .details_child {
+        gap: 0px;
+    }
+
     .hero_container {
         .hero {
             .title {
@@ -368,6 +372,8 @@ section {
         }
     }
     .haiku_description {
+        align-items: center;
+
 
         .description {
             @include mixin.flex(column-reverse, center, center);
@@ -377,6 +383,7 @@ section {
             @include mixin.flex(column, center, center);
             align-self: center;
             text-align: center;
+            gap: 10px;
         }
 
         .img_wrapper {
@@ -387,17 +394,20 @@ section {
 
     .history {
 
+        .subtitle {
+            padding-bottom: 20px;
+        }
+
         .description {
             @include mixin.flex(column, center, center);
 
             .text {
                 @include mixin.flex(column, center, center);
-                align-self: center;
                 gap: 10px;
                 text-align: center;
 
                 .text_haiku {
-                    @include mixin.flex(column, center, center);
+                    @include mixin.flex(column, center, flex-start);
                     gap: 15px;
                 }
             }
@@ -406,14 +416,18 @@ section {
 
     .wordwide {
 
+        .subtitle {
+            padding-bottom: 20px;
+            align-self: flex-start;
+        }
+
         .description {
             @include mixin.flex(column, center, center);
 
             .text {
                 @include mixin.flex(column, center, center);
-                align-self: center;
                 text-align: center;
-                gap: 5px;
+                gap: 10px;
 
                 .text_haiku {
                     @include mixin.flex(column, center, flex-start);
