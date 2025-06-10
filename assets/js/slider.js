@@ -57,11 +57,6 @@ export default class Slider {
                     slidesPerView: 3,
                     spaceBetween: 5,
                 },
-                // When window width is >= 1024px
-                // 1024: {
-                //     slidesPerView: 3,
-                //     spaceBetween: -200,
-                // }
             },
 
             // Events

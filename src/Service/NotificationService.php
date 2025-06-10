@@ -43,7 +43,7 @@ class NotificationService
         // Recherche BDD un type d'entité par le nom
         $entityTypeEntity = $this->entityManager->getRepository(EntityType::class)->findOneBy(['name' => $entityType]);
         
-        // Si le type n'existe pas encore, on le crée -> pour la première création 
+        // Si le type n'existe pas encore, on le crée -> pour la première création sinon ça bloque -> opti ? 
         if (!$entityTypeEntity) {
             // Créer un nouvel EntityType
             $entityTypeEntity = new EntityType();

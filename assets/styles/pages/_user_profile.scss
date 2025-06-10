@@ -5,10 +5,16 @@
 .user_profile {
     @include mixin.flex(column, center, center);
 
+        .no_haikus {
+            margin-bottom: 30px;
+        }
+
         .cta_description {
             padding-left: 10px;
             padding-right: 10px;
             line-height: 30px;
+            margin-top: 50px;
+            margin-bottom: 30px;
             height: 30px;
             background-color: var.$secondaryLight;
             border-radius: 3px;
@@ -54,6 +60,12 @@
                 border-radius: 3px;
                 padding: 5px 10px;
                 color: var.$grayDarkText;
+                cursor: pointer;
+                transition: .3s ease;
+
+                &:hover {
+                    background-color: var.$secondaryLight;
+                }
             }
 
             p {

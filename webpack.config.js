@@ -5,7 +5,7 @@ const Encore = require('@symfony/webpack-encore');
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
-
+// webpack.config.js
 Encore
     // activation de SASS
     .enableSassLoader()

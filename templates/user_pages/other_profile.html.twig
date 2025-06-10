@@ -46,12 +46,15 @@
                     </div>
                 {% endfor %}
             {% else %}
-                <p>Pas encore de haïku publié par cet utilisateur</p>
+                <div class="no_haikus">
+                    <p>Pas encore de haïku publié par cet utilisateur</p>
+                </div>
             {% endif %}
-                
-            <div class="cta">
-                <a href="">Lire le recueil</a>
-            </div>
+            {% if haikus is not empty %}
+                <div class="cta">
+                    <a href="">Lire le recueil</a>
+                </div>
+            {% endif %}            
         </div>
     </div>
 </section>    
