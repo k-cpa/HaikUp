@@ -110,6 +110,10 @@
             // Affichage des liens de la navigation
             .nav_links {
                 @include mixin.flex(column, center,center);
+                
+                a {
+                    color: var.$grayDarkText;
+                }
 
                 .material-icons {
                     background-color: var.$secondaryDark;
@@ -194,7 +198,7 @@
                 width: 100%;
 
                 li {
-                @include mixin.flex;
+                    @include mixin.flex;
 
                     &:not(:first-of-type) {
                         padding-left: 60px;
