@@ -37,13 +37,11 @@
             </div>
             {% if haikus is not empty %}            
                 {% for haiku in haikus %}
-                    <div class="haiku">
-                        <div class="content">
-                            <p>{{haiku.line1}}</p>
-                            <p>{{haiku.line2}}</p>
-                            <p>{{haiku.line3}}</p>
-                        </div>
-                    </div>
+                    <div class="content">
+                        <p>{{haiku.line1}}</p>
+                        <p>{{haiku.line2}}</p>
+                        <p>{{haiku.line3}}</p>
+                    </div>                    
                 {% endfor %}
             {% else %}
                 <div class="no_haikus">
