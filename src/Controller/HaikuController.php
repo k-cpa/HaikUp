@@ -105,11 +105,11 @@ final class HaikuController extends AbstractController
     //    On setup pour récupérer l'URL d'avant connexion à la page no words dans laquelle il a demandé un thème à GPT -> cf route no words juste au dessus
         $session = $request->getSession();
         $originUrl = $session->get('last_origin_url');
-        $theme = $request->request->get('theme');
+        $theme = $request->request->get('theme', '');
         $generatedWords = $chatGptService->generateWords($theme);
 
         $haiku = new Haikus();
-        $formHaiku = $this->createForm(WriteHaikuType::class);
+        $formHaiku = $this->createForm(WriteHaikuType::class, $haiku);
         $formHaiku->handleRequest($request);
         
         if ($formHaiku->isSubmitted() && $formHaiku->isValid()) {

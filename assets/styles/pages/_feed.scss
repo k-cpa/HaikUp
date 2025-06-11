@@ -14,7 +14,7 @@
     .feed_title {
         @include mixin.flex(column, center, flex-start);
         align-self: flex-start;
-        margin-top: 10em;
+        margin-top: 5em;
         margin-bottom: 60px;
     }
 }
