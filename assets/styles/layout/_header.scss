@@ -177,7 +177,7 @@
     nav {
         @include mixin.flex;
         font-family: var.$dm-regular;
-        font-size: var.$desktop-h3;          
+        font-size: var.$desktop-h4;          
         padding-right: 20px;
         .nav_links {
             @include mixin.flex;
