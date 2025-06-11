@@ -3,26 +3,29 @@
 {% block title %}Profil de{% endblock %}
 
 {% block body %}
-    <h1>Mes notifications</h1>
-
-{% if notifications is empty %}
-    <p>Aucune notification pour le moment.</p>
-{% else %}
-    <ul class="notifications">
-        {% for notif in notifications %}
-            <li class="notification_card">
-                <a href="{{ path('notification_go', {id: notif.id}) }}">
-                    <p>{{ notif.message }}</p>
-                    {% if not notif.status %}
-                        <strong>(Non lue)</strong>
-                    {% endif %}
-                    <br>
-                    <p>{{ notif.createdAt|date('d/m/Y H:i') }}</p>
-                    <br>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
+<section class="notification_page">
+    <article class="notifications_article max-w-site">
+        <div class="notif_title">
+            <h2>Mes notifications</h2>
+        </div>
+        {% if notifications is empty %}
+            <p>Aucune notification pour le moment.</p>
+        {% else %}
+            <ul class="notification_container">
+                {% for notif in notifications %}
+                    <div class="notification_card {{notif.status ? '' : 'unread'}}">
+                        <li>
+                            <a href="{{ path('notification_go', {id: notif.id}) }}">
+                                <p>{{ notif.message }}</p>
+                                <br>
+                                <p>{{ notif.createdAt|date('d/m/Y H:i') }}</p>
+                                <br>
+                            </a>
+                        </li>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </article>
+</section>
 {% endblock %}

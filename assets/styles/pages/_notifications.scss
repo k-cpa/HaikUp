@@ -2,10 +2,84 @@
 @use "../abstract/font";
 @use "../abstract/variables" as var;
 
-.notifications {
+.notification_page {
+    @include mixin.flex($align: flex-start);
+    min-height: 95vh;
+}
+.notifications_article {
     @include mixin.flex(column, center, center);
-    
-    .notification_card {
-        border: 1px solid var.$grayDarkText;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    gap: 30px;
+
+    .notif_title {
+        @include mixin.flex;
+        font-family: var.$tiempos-regular;
+    }
+
+    .notification_container {
+        @include mixin.flex(column, center, center);
+        gap: 30px;
+        
+        .notification_card {
+            @include mixin.flex(column, center, flex-start);
+            border: 1px solid var.$grayDarkText;
+            padding: 20px;
+            width: 450px;
+            border-radius: 3px;
+
+            &.unread {
+                background-color: var.$complementary;
+            }
+
+            li {
+                @include mixin.flex(column, center, flex-start);
+                font-family: var.$dm-regular;
+                font-size: var.$desktop-body2;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .notifications_article {
+
+        .notification_container {
+
+            .notification_card {
+                    width: 350px;
+
+                    li {
+                        font-size: var.$mobile-body2;
+                    }
+                }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .notifications_article {
+
+        .notification_container {
+
+            .notification_card {
+                    width: 250px;
+                }
+        }
+    }
+}
+
+@media screen and (max-width: 350px) {
+
+    .notifications_article {
+
+        .notification_container {
+
+            .notification_card {
+                    width: 200px;
+                }
+        }
     }
 }
