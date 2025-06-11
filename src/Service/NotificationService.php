@@ -77,6 +77,10 @@ class NotificationService
                 $message = sprintf("%s a commenté votre haïku.", $sender->getUsername());
                 break;
 
+            case 'haiku':
+                $message = sprintf("%s a composé un haïku à partir de vos mots.", $sender->getUsername());
+                break;
+
             default:
                 $message = sprintf("Découvrez votre nouvelle notification");
 

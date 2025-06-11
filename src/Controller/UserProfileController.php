@@ -8,6 +8,7 @@ use App\Form\AddProfilDescriptionType;
 use App\Repository\CollectionsRepository;
 use App\Repository\FollowsRepository;
 use App\Repository\HaikusRepository;
+use App\Repository\UserRepository;
 use App\Service\HaikuViewService;
 use App\Service\SubscriptionService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -89,10 +90,18 @@ final class UserProfileController extends AbstractController
 
 
     // Page où l'utilisateur peut voir tous ses haikus et les ranger dans des collections
-    #[Route('/profile/haikus', name: 'app_user_haikus')]
-    public function userHaikus(HaikuViewService $haikuViewService): Response
+    #[Route('/profile/{userId}/haikus', name: 'app_user_haikus')]
+    public function userHaikus(?int $userId, HaikuViewService $haikuViewService, UserRepository $userRepository): Response
     {
-        $user = $this->getUser();
+        if ($userId) {
+            $user = $userRepository->find($userId);
+            if (!$user) {
+                throw $this->createNotFoundException('Utilisateur inconnu');
+            }
+        } else {
+            $user = $this->getUser();     
+        }
+
         $data = $haikuViewService->getHaikusFor('user', $user);
         $collections = $this->collections->findOneByUser($user);
 
@@ -118,12 +127,13 @@ final class UserProfileController extends AbstractController
         // Chaque commentForm est indexé par l'ID du haïku
         // addCollection -> comme commentForm on indexe via l'ID du haïku
 
-        return $this->render('user_pages/profile.html.twig', [
+        return $this->render('user_pages/all_user_haiku.html.twig', [
             'haikus' => $data['haikus'],
             'likedHaikus'=>$data['likedHaikus'],
             'commentForms' => $data['commentForms'],
             'collections' => $collections,
-            'addCollectionToHaikuForms' => $addHaikuToCollectionForms
+            'addCollectionToHaikuForms' => $addHaikuToCollectionForms,
+            'profileUser' => $user,
         ]);
     }
 
@@ -161,7 +171,6 @@ final class UserProfileController extends AbstractController
         }
 
         return $this->render('user_pages/other_profile.html.twig', [
-            // Unpacking de tableau associatif -> Ca permet de décomposer le tableau et fusionner les paires clé/valeur direct 
             'user' => $user,
             'haikus' => $haikus,
             'totalHaikus' => $totalHaikus,

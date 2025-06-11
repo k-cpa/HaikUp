@@ -56,6 +56,12 @@ body {
     }
 }
 
+// Permet de cibler direct un élément dont l'id correpsond à l'URL
+// -> pour pouvoir styliser différement à la redirection notif 
+.haiku:target {
+    background-color: var.$complementary;
+}
+
 .haiku {
     @include mixin.flex(column, center, center);
     max-width: 850px;

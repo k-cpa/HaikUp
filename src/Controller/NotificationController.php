@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Haikus;
 use App\Entity\Notifications;
 use App\Entity\User;
+use App\Repository\FollowsRepository;
+use App\Repository\HaikusRepository;
 use App\Repository\NotificationsRepository;
 use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,7 +34,7 @@ class NotificationController extends AbstractController
 
     // Redirection au click sur la modale de notification turbo stream
     #[Route('/notifications/{id}/go', name: 'notification_go')]
-    public function goToTarget(int $id, Security $security): Response
+    public function goToTarget(int $id, Security $security, HaikusRepository $haiku, FollowsRepository $follow): Response
     {
         $user = $security->getUser();
         if (!$user) {
@@ -57,23 +60,34 @@ class NotificationController extends AbstractController
             // like et commentaire vont rediriger vers la page du haiku 
             case 'haiku':
             case 'comment':
-                return $this->redirectToRoute('haiku_show', ['id' => $entityId]);
+            case 'like':
+                $haikuEntity = $haiku->find($entityId);
+
+                if(!$haikuEntity) {
+                    throw $this->createNotFoundException('Haïku introuvable');
+                };
+
+                $haikuId = $haikuEntity->getId();
+                $userId = $haikuEntity->getCreator()->getId();
+
+                $url = $this->generateUrl('app_user_haikus', ['userId' => $userId]) . '#haiku-' . $haikuId;
+                return $this->redirect($url);
 
             // Follow va rediriger vers la page de l'utilisateur où il peut accéder à sa liste de followers. 
             // On récupère d'abord l'entité follows associée à l'ID
             case 'follow':
-                $follow = $this->entityManager->getRepository(\App\Entity\Follows::class)->find($entityId);
+                $followEntity = $follow->find($entityId);
 
-                if(!$follow) {
+                if(!$followEntity) {
                     throw $this->createNotFoundException('Notification introuvable');
                 };
 
-                return $this->redirectToRoute('app_user_show', [
-                    'id' => $follow->getSender()->getId(),
-                ]);
+                $followId = $followEntity->getSender()->getId();
 
-            case 'like':
-                return $this->redirectToRoute('app_user_profile', ['id' => $entityId]);
+
+                return $this->redirectToRoute('app_user_show', ['id' => $followId,]);
+
+            
 
             default:
                 return $this->redirectToRoute('homepage');

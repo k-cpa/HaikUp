@@ -6,8 +6,8 @@
 <section class="feed">
     <div class="background_size max-w-site">
         <div class="feed_title">
-            <h2>Fil d'actualités</h2>
-            <p>A toi d'écouter. Bonne lecture.</p>
+            <h2>La collection de {{profileUser.username}}</h2>
+            {# <p>A toi d'écouter. Bonne lecture.</p> #}
         </div>
         <div class="haiku_container">
             {% for haiku in haikus %}
@@ -17,13 +17,15 @@
                     <div class="control_panel">
 
                     </div>
-                    <div class="creator">
-                        <p>
-                            <a href="{{ path('app_user_show', {id: haiku.creator.id}) }}">
-                                {{haiku.creator}}
-                            </a>
-                        </p>
-                    </div>
+                    {# On affiche uniquement si on est sur la page haiku d'un autre utilisateur #}
+                        <div class="creator">
+                            <p>
+                                <a href="{{ path('app_user_show', {id: haiku.creator.id}) }}">
+                                    {{haiku.creator}}
+                                </a>
+                            </p>
+                        </div>
+                 
                     <div class="content">
                         <p>{{haiku.line1}}</p>
                         <p>{{haiku.line2}}</p>

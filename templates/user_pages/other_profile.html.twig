@@ -37,7 +37,7 @@
             </div>
             {% if haikus is not empty %}            
                 {% for haiku in haikus %}
-                    <div class="content">
+                    <div class="content" id="haiku-{{haiku.id}}">
                         <p>{{haiku.line1}}</p>
                         <p>{{haiku.line2}}</p>
                         <p>{{haiku.line3}}</p>
