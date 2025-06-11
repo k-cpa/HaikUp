@@ -16,11 +16,21 @@
         <div class="words_title">
             <p>Votre inspiration</p>
         </div>
-        {% for userWord in userWordsList %}
-            <div class="word">
-                <p>{{userWord.words.word}}</p>
-            </div>
-        {% endfor %}
+        {% if userWordsList is defined and userWordsList is not empty %}
+            {% for userWord in userWordsList %}
+                <div class="word">
+                    <p>{{ userWord.words.word }}</p>
+                </div>
+            {% endfor %}
+        {% elseif generatedWords is defined and generatedWords is not empty %}
+            {% for word in generatedWords %}
+                <div class="word">
+                    <p>{{ word }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun mot à afficher.</p>
+        {% endif %}
     </div>
     <div class="haiku_form">
         {{form_start(formHaiku)}}

@@ -7,6 +7,7 @@ use App\Form\WriteHaikuType;
 use App\Repository\EntityTypeRepository;
 use App\Repository\NotificationsRepository;
 use App\Repository\UserWordsRepository;
+use App\Service\ChatGptService;
 use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,8 +20,9 @@ final class HaikuController extends AbstractController
     #[Route('/haiku/new', name: 'app_create_haiku')]
     public function write(Request $request, EntityManagerInterface $entityManager, UserWordsRepository $userWords, NotificationService $notificationService): Response
     {
-        $packs = $userWords->findPendingPacksForUser();
-        // DIFFERENT USER MOTHERFUCKER
+        // On récupère le user pour le passer en paramètre et vérifier que le User ne peut pas créer un Haiku avec ses propres mots. 
+        $user = $this->getUser();
+        $packs = $userWords->findPendingPacksForUser($user);
 
         if (!empty($packs)) {
             $pack = $packs[array_rand($packs)];
@@ -85,10 +87,50 @@ final class HaikuController extends AbstractController
     }
 
     #[Route('/haiku/no-words', name: 'app_no_words')]
-    public function index()
+    public function index(Request $request): Response
     {
+// dd($_ENV['OPENAI_API_KEY'] ?? null, $_SERVER['OPENAI_API_KEY'] ?? null, getenv('OPENAI_API_KEY'));
+        $referer = $request->headers->get('referer');
+        if ($referer) {
+            $request->getSession()->set('last_origin_url', $referer);
+        }
+
         return $this->render('feed/no_words.html.twig');
     }
+
+    #[Route('/haiku/ai-generation', name: 'app_haiku_generate_ia')]
+    public function haikuWithGpt(Request $request, ChatGptService $chatGptService, EntityManagerInterface $entityManager,): Response
+    {
+        $user = $this->getUser();
+    //    On setup pour récupérer l'URL d'avant connexion à la page no words dans laquelle il a demandé un thème à GPT -> cf route no words juste au dessus
+        $session = $request->getSession();
+        $originUrl = $session->get('last_origin_url');
+        $theme = $request->request->get('theme');
+        $generatedWords = $chatGptService->generateWords($theme);
+
+        $haiku = new Haikus();
+        $formHaiku = $this->createForm(WriteHaikuType::class);
+        $formHaiku->handleRequest($request);
+        
+        if ($formHaiku->isSubmitted() && $formHaiku->isValid()) {
+            $haiku->setCreator($user);
+            $entityManager->persist($haiku);
+            $entityManager->flush();
+
+            if ($originUrl) {
+                return $this->redirect($originUrl);
+            } 
+            return $this->redirectToRoute('app_feed');
+        }
+        return $this->render('feed/create_haiku.html.twig', [
+            'formHaiku' => $formHaiku,
+            'generatedWords' => $generatedWords,
+            'usingAIwords' => true,
+            'theme' => $theme,
+        ]);
+    }
+
+
     
 
     #[Route('/haiku/{id}/delete', name: 'delete_haiku', methods: ['POST'])]

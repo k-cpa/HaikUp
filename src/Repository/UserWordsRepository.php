@@ -19,14 +19,16 @@ class UserWordsRepository extends ServiceEntityRepository
     //    /**
     //     * @return UserWords[] Returns an array of UserWords objects
     //     */
-       public function findPendingPacksForUser(): array
+       public function findPendingPacksForUser($user): array
        {
            return $this->createQueryBuilder('u')
                 ->select('IDENTITY (u.sender) AS sender_id, u.created_at')
                 ->join('u.Words', 'w')
                ->andWhere('u.Receiver IS NULL')
                ->andWhere('u.status = :status')
+               ->andWhere('u.sender != :user')
                ->setParameter('status', 'pending')
+               ->setParameter('user', $user)
                ->groupBy('u.sender', 'u.created_at')
                ->having('COUNT(u.id) = 3')
                ->getQuery()

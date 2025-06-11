@@ -3,5 +3,25 @@
 {% block title %}Créer le haïku{% endblock %}
 
 {% block body %}
-Il n'y a plus de mots pour aujourd'hui ! Voulez vous en créer de nouveaux ? 
+<section class="no_words">
+    <div class="max-w-site ia_bg">
+        <div class="ia_title">
+            <h2>Aucun mots disponible pour le moment</h2>
+        </div>
+        <div class="form_container">
+            <h3>Voulez-vous générer des mots par IA pour écrire un haïku ?</h3>
+            <p>Choisissez un thème :</p>
+            <form action="{{ path('app_haiku_generate_ia') }}" method="post">
+            <div class="themes-buttons">
+                <button type="submit" name="theme" value="nature">Nature</button>
+                <button type="submit" name="theme" value="amour">Amour</button>
+                <button type="submit" name="theme" value="lumiere_ombre">Lumière et ombre</button>
+                <button type="submit" name="theme" value="ville">La ville</button>
+                <button type="submit" name="theme" value="enfance">L'enfance</button>
+                <button type="submit" name="theme" value="voyage">Voyage</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock %}
