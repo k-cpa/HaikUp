@@ -196,6 +196,7 @@
             gap: 3rem;
             a {
                 color: var.$grayDarkText;
+                transition: .3s ease;
 
                 &:hover {
                     color: var.$secondaryDark;
