@@ -80,7 +80,7 @@
      }
 
     .off_screen_menu {
-        @include mixin.flex(column, center, center);
+        @include mixin.flex(column, flex-start, center);
         position: fixed;
         background-color: var.$secondaryDark;
         height: 100%;
@@ -97,8 +97,19 @@
             right: 0;
         }
 
+        .logo_wrapper {
+            width: 100%;
+            padding-left: 0px;
+            padding-top: 20%;
+
+            img {
+                width: 150px;
+            }
+        }
+
         nav {
             background-color: var.$secondaryDark;
+            width: 100%;
 
             ul {
                 @include mixin.flex(column, space-between, center);
@@ -109,7 +120,9 @@
 
             // Affichage des liens de la navigation
             .nav_links {
-                @include mixin.flex(column, center,center);
+                @include mixin.flex(row, space-evenly,center);
+                width: 100%;
+                margin-top: 50px;
                 
                 a {
                     color: var.$grayDarkText;
@@ -131,24 +144,6 @@
                 a {
                     color: var.$grayDarkText;
                     padding: 5px 20px;
-                    border-radius: 3px;
-                    border: 1px solid var.$grayText;
-                }
-
-                a.logout {
-                    background-color: var.$logoutBtn;
-                }
-
-                a.signup {
-                    background-color: var.$complementary;
-
-                    // &:hover {
-                    //     background-color: var.$;
-                    // }
-                }
-
-                a.login {
-                    background-color: var.$primary;
                 }
             }
         }
@@ -156,10 +151,10 @@
 }
 
 .header_desktop {
-    @include mixin.flex(column, center, center);
+    @include mixin.flex($justify: space-between);
     background-color: var.$secondaryDark;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     position: fixed;
     overflow: hidden;
     top: 0;
@@ -169,91 +164,51 @@
 
     .logo_wrapper {
         @include mixin.flex;
+        padding-left: 20px;
 
         img {
-            width: 150px;
+            width: 170px;
+            padding-top: 5px;
             object-fit: cover;
         }
     }
 
-    .second_line {
+    nav {
         @include mixin.flex;
-        border-top: 1px solid var.$grayDarkText;
-        padding-top: 20px;
-        margin-top: 20px;
-        position: relative;
-        width: 100%;
-        gap: 2rem;
-
-        nav {
+        background-color: var.$secondaryDark;
+        font-family: var.$dm-regular;
+        font-size: var.$desktop-h3;          
+        padding-right: 20px;
+        .nav_links {
             @include mixin.flex;
+            position: relative;
             width: 100%;
-            background-color: var.$secondaryDark;
-            font-family: var.$dm-regular;
-            font-size: var.$desktop-h3;            
-            width: 100%;
-
-            .nav_links {
+            li {
                 @include mixin.flex;
-                position: relative;
-                width: 100%;
-
-                li {
-                    @include mixin.flex;
-
-                    &:not(:first-of-type) {
-                        padding-left: 60px;
-                    }
+                &:not(:first-of-type) {
+                    padding-left: 60px;
                 }
             }
-            .log_links {
-                position: absolute;
-                top: 35%;
-                right: 30px;
-            }
+        }
 
-            .not_registered {
-                @include mixin.flex;
-                width: 100%;
-                gap: 20px;
-
-                a {
-                    color: var.$grayDarkText;
-                    padding: 5px 20px;
-                    border-radius: 3px;
-                    border: 1px solid var.$grayText;
-                }
-
-                a.logout {
-                    background-color: var.$logoutBtn;
-                }
-
-                a.signup {
-                    background-color: var.$complementary;
-
-                    // &:hover {
-                    //     background-color: var.$;
-                    // }
-                }
-
-                a.login {
-                    background-color: var.$primary;
-                }
-            }
-
-            .material-icons {
-                background-color: var.$secondaryDark;
+        .not_registered {
+            @include mixin.flex;
+            gap: 3rem;
+            a {
                 color: var.$grayDarkText;
-                font-size: 35px;
-                transition: .3s ease;
-
-                &.active {
-                    color: var.$complementary;
-                    border-bottom: 2px solid var.$complementary;
-                }
-                &:hover {
-                    color: var.$complementary;
-                }
+            }
+        }
+        .material-icons {
+            background-color: var.$secondaryDark;
+            color: var.$grayDarkText;
+            font-size: 35px;
+            transition: .3s ease;
+            &.active {
+                color: var.$complementary;
+                border-bottom: 2px solid var.$complementary;
+            }
+            &:hover {
+                color: var.$complementary;
             }
         }
     }

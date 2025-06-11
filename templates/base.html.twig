@@ -23,6 +23,11 @@
                     </a>
                 </div>
                 <div class="off_screen_menu">
+                    <div class="logo_wrapper">
+                        <a href="{{ path(is_granted('ROLE_USER') ? 'app_feed' : 'app_landing') }}">
+                            <img src="{{asset('img/logo.svg')}}" alt="Logo de l'application Haikup">            
+                        </a>
+                    </div>
                     <nav>
                         <ul>
                             <div class="nav_links">
@@ -31,15 +36,14 @@
                                     <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
                                     <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
                                     <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
-                                    <li><a href="{{ path('app_notifications') }}" class="material-icons">notifications</a>
-                                    </li>
+                                    <li><a href="{{ path('app_notifications') }}" class="material-icons">notifications</a></li>
+                                    <li><a href="{{path('app_logout')}}" class="material-icons">logout</a></li>
                                 {% else %}
                                     <li class="{% if app.request.attributes.get('_route') == 'app_landing' %}active{% endif %}"><a href="{{path('app_landing')}}">Accueil</a></li>    
                                 {% endif %}
                             </div>
                             <div class="log_links">
                                 {% if is_granted('ROLE_USER') %}
-                                    <li><a href="{{path('app_logout')}}" class="logout">Déconnexion</a></li>
                                 {% else %}
                                     <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
                                     <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
@@ -62,33 +66,31 @@
                         <img src="{{asset('img/logo-big.svg')}}" alt="Logo de Haikup">            
                     </a>
                 </div>
-                <div class="second_line">
-                    <nav>
-                        {% if is_granted('ROLE_USER') %}
-                            <ul class="nav_links">
-                                <li><a href="{{path('app_user_profile')}}" class="material-icons {% if app.request.attributes.get('_route') == 'app_user_profile' %}active{% endif %}">account_box</a></li>    
-                                <li><a href="{{ path('app_feed') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_feed' %}active{% endif %}">auto_stories</a></li>
-                                <li><a href="{{ path('app_word_sent') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_word_sent' %}active{% endif %}">send</a></li>
-                                <li><a href="{{ path('app_create_haiku') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_create_haiku' %}active{% endif %}">edit_note</a></li>
-                                <li class="notification-wrapper">
-                                    <a href="{{ path('app_notifications') }}" id="notification-toggle" class="material-icons {% if app.request.attributes.get('_route') == 'app_notifications' %}active{% endif %}">notifications</a>
-                                    <div class="notification-dropdown hidden">
-                                        {# <p>Chargement...</p> #}
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="log_links">
-                                <li><a href="{{path('app_logout')}}" class="material-icons">logout</a></li>
-                            </ul>
-                        {% else %}
-                            <ul class="not_registered">                            
-                                <li><a href="{{path('app_landing')}}">Accueil</a></li>    
-                                <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
-                                <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
-                            </ul>
-                        {% endif %}
-                    </nav>
-                </div>
+                <nav>
+                    {% if is_granted('ROLE_USER') %}
+                        <ul class="nav_links">
+                            <li><a href="{{path('app_user_profile')}}" class="material-icons {% if app.request.attributes.get('_route') == 'app_user_profile' %}active{% endif %}">account_box</a></li>    
+                            <li><a href="{{ path('app_feed') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_feed' %}active{% endif %}">auto_stories</a></li>
+                            <li><a href="{{ path('app_word_sent') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_word_sent' %}active{% endif %}">send</a></li>
+                            <li><a href="{{ path('app_create_haiku') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_create_haiku' %}active{% endif %}">edit_note</a></li>
+                            <li class="notification-wrapper">
+                                <a href="{{ path('app_notifications') }}" id="notification-toggle" class="material-icons {% if app.request.attributes.get('_route') == 'app_notifications' %}active{% endif %}">notifications</a>
+                                <div class="notification-dropdown hidden">
+                                    {# <p>Chargement...</p> #}
+                                </div>
+                            </li>
+                            <li><a href="{{path('app_logout')}}" class="material-icons">logout</a></li>
+                        </ul>
+                        <ul class="log_links">
+                        </ul>
+                    {% else %}
+                        <ul class="not_registered">                            
+                            <li><a href="{{path('app_landing')}}">Accueil</a></li>    
+                            <li><a href="{{path('app_signup')}}" class="signup">Inscription</a></li>
+                            <li><a href="{{path('app_login')}}" class="login">Connexion</a></li>
+                        </ul>
+                    {% endif %}
+                </nav>
             </header>
         {% endblock %}
     <body class="content_wrapper"> 
