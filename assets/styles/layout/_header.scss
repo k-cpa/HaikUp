@@ -176,7 +176,6 @@
 
     nav {
         @include mixin.flex;
-        // background-color: var.$secondaryDark;
         font-family: var.$dm-regular;
         font-size: var.$desktop-h3;          
         padding-right: 20px;
@@ -199,6 +198,7 @@
                 color: var.$grayDarkText;
             }
         }
+
         .material-icons {
             color: var.$grayDarkText;
             font-size: 35px;
