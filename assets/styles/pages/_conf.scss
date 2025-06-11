@@ -1,0 +1,26 @@
+@use "../abstract/mixin";
+@use "../abstract/font";
+@use "../abstract/variables" as var;
+
+.conf {
+    @include mixin.flex(column, center, center);
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .conf_title {
+        @include mixin.flex;
+        text-align: center;
+    }
+
+    .articles {
+        @include mixin.flex(column, center, flex-start);
+        margin-top: 30px;
+        width: 50%;
+        gap: 30px;
+    }
+
+    article {
+        @include mixin.flex(column, center, flex-start);
+        gap: 10px;
+    }
+}

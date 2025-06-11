@@ -46,7 +46,7 @@
                     </div>
                 {% endfor %}
                 <div class="cta">
-                    <a href="">Lire mon recueil</a>
+                    <a href="{{path('app_user_haikus', {'userId': app.user.id})}}">Lire mon recueil</a>
                 </div>
             </div>        
         {% else %}

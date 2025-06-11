@@ -50,7 +50,7 @@
             {% endif %}
             {% if haikus is not empty %}
                 <div class="cta">
-                    <a href="">Lire le recueil</a>
+                    <a href="{{path('app_user_haikus', {'userId' : user.id})}}">Lire le recueil</a>
                 </div>
             {% endif %}            
         </div>

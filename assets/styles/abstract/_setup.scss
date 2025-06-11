@@ -60,6 +60,7 @@ body {
 // -> pour pouvoir styliser différement à la redirection notif 
 .haiku:target {
     background-color: var.$complementary;
+    scroll-margin-top: 100px; /* décale le scroll si tu as un header fixe */
 }
 
 .haiku {
