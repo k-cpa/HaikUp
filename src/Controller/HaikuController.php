@@ -80,7 +80,7 @@ final class HaikuController extends AbstractController
         }
 
 
-        return $this->render('feed/create_haiku.html.twig', [
+        return $this->render('user_pages/create_haiku.html.twig', [
             'formHaiku' => $formHaiku->createView(),
             'userWordsList' => $userWordsList,
         ]);
