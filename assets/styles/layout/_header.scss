@@ -196,6 +196,10 @@
             gap: 3rem;
             a {
                 color: var.$grayDarkText;
+
+                &:hover {
+                    color: var.$secondaryDark;
+                }
             }
         }
 
