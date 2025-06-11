@@ -95,7 +95,7 @@ final class HaikuController extends AbstractController
             $request->getSession()->set('last_origin_url', $referer);
         }
 
-        return $this->render('feed/no_words.html.twig');
+        return $this->render('user_pages/no_words.html.twig');
     }
 
     #[Route('/haiku/ai-generation', name: 'app_haiku_generate_ia')]
@@ -122,7 +122,7 @@ final class HaikuController extends AbstractController
             } 
             return $this->redirectToRoute('app_feed');
         }
-        return $this->render('feed/create_haiku.html.twig', [
+        return $this->render('user_pages/create_haiku.html.twig', [
             'formHaiku' => $formHaiku,
             'generatedWords' => $generatedWords,
             'usingAIwords' => true,

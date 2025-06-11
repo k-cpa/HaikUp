@@ -43,7 +43,7 @@ final class WordSentController extends AbstractController
             return $this->redirectToRoute('app_feed');
         }
 
-        return $this->render('feed/create_words.html.twig', [
+        return $this->render('user_pages/create_words.html.twig', [
             'formWords' => $formWords->createView(),
         ]);
     }
