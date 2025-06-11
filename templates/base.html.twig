@@ -71,7 +71,7 @@
                                 <li><a href="{{ path('app_word_sent') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_word_sent' %}active{% endif %}">send</a></li>
                                 <li><a href="{{ path('app_create_haiku') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_create_haiku' %}active{% endif %}">edit_note</a></li>
                                 <li class="notification-wrapper">
-                                    <a href="#" id="notification-toggle" class="material-icons">notifications</a>
+                                    <a href="{{ path('app_notifications') }}" id="notification-toggle" class="material-icons {% if app.request.attributes.get('_route') == 'app_notifications' %}active{% endif %}">notifications</a>
                                     <div class="notification-dropdown hidden">
                                         {# <p>Chargement...</p> #}
                                     </div>

@@ -47,7 +47,6 @@ class NotificationController extends AbstractController
             throw $this->createNotFoundException('Notification introuvable ou accès refusé');
         }
 
-        // Marquer les notifications en "lu" + redirection vers la page avec gestion Turbo Stream 
         $notification->setStatus(true);
         $this->entityManager->flush();
 
