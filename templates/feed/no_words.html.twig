@@ -9,10 +9,10 @@
             <h2>Aucun mots disponible pour le moment</h2>
         </div>
         <div class="form_container">
-            <h3>Voulez-vous générer des mots par IA pour écrire un haïku ?</h3>
+            <h3>Générez des mots avec IA !</h3>
             <p>Choisissez un thème :</p>
             <form action="{{ path('app_haiku_generate_ia') }}" method="post">
-            <div class="themes-buttons">
+            <div class="themes_buttons">
                 <button type="submit" name="theme" value="nature">Nature</button>
                 <button type="submit" name="theme" value="amour">Amour</button>
                 <button type="submit" name="theme" value="lumiere_ombre">Lumière et ombre</button>
@@ -25,3 +25,4 @@
     </div>
 </section>
 {% endblock %}
+{% block footer%}{% endblock %}

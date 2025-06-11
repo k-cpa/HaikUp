@@ -1,0 +1,115 @@
+@use "../abstract/mixin";
+@use "../abstract/font";
+@use "../abstract/variables" as var;
+
+.ia_bg {
+    @include mixin.flex(column, flex-start, center);
+    width: 100%;
+    padding-top: 50px;
+    height: 100%;
+
+    .ia_title {
+        margin-bottom: 30px;
+        text-align: center;
+        font-family: var.$tiempos-regular;
+    }
+
+    .form_container {
+        @include mixin.flex(column, center, center);
+        font-family: var.$dm-regular;
+        width: 100%;
+        gap: 20px;
+
+        form {
+            @include mixin.flex;
+            width: 100%;
+
+            .themes_buttons {
+                width: 100%;
+                @include mixin.flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            button {
+                all: unset;
+                padding: 5px 15px;
+                cursor: pointer;
+                border-radius: 3px;
+                transition: .3s ease;
+
+                &[value="nature"] {
+                    background-color: #a3d9a5;
+                    color: #3b4a28;
+
+                    &:hover {
+                    background-color: #8bc18c;
+                    color: #2a3b1f;
+                    }
+                }
+
+                &[value="amour"] {
+                    background-color: #f4a6a6;
+                    color: #6b2222;
+
+                    &:hover {
+                    background-color: #e68a8a;
+                    color: #541616;
+                    }
+                }
+
+                &[value="lumiere_ombre"] {
+                    background-color: #f7e8a4;
+                    color: #6b6500;
+
+                    &:hover {
+                    background-color: #e4d672;
+                    color: #534f00;
+                    }
+                }
+
+                &[value="ville"] {
+                    background-color: #c1c4c8;
+                    color: #33383f;
+
+                    &:hover {
+                    background-color: #a9adb3;
+                    color: #212529;
+                    }
+                }
+
+                &[value="enfance"] {
+                    background-color: #f9d3e3;
+                    color: #7a3f53;
+
+                    &:hover {
+                    background-color: #e8b9cd;
+                    color: #592f3f;
+                    }
+                }
+
+                &[value="voyage"] {
+                    background-color: #b7dfe5;
+                    color: #2a4f5c;
+
+                    &:hover {
+                    background-color: #9ccad6;
+                    color: #1e3946;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ia_bg {
+
+        .ia_title {
+
+            h2 {
+                font-size: var.$mobile-h3;
+            }
+        }
+    }
+}
