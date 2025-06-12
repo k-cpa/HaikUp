@@ -199,6 +199,7 @@ body {
             }
             // Pour le signalement
             a {
+                transition: .3s ease;
                 color: #F28B82;;
 
                 &:hover {
