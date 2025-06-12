@@ -162,7 +162,7 @@ body {
             z-index: 999;
             padding: 10px;
             min-width: 100px;
-            min-height: 80px;
+            min-height: 30px;
 
             li {
                 padding: 5px 10px;
@@ -191,10 +191,19 @@ body {
                 all: unset;
                 color: #F28B82; // rouge pastel
                 cursor: pointer;
+                transition: .3s ease;
+
+                &:hover {
+                    color: #B71C1C	; // rouge pastel
+                }
             }
             // Pour le signalement
             a {
                 color: #F28B82;;
+
+                &:hover {
+                    color: #B71C1C	; // rouge pastel
+                }
             }
         }
     }

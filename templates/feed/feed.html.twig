@@ -20,18 +20,21 @@
                         <div class="dropToggle">
                             {# Formulaire de suppression du haïku #}
                             <ul>
-                                <li>
-                                    <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_haiku', {'id': haiku.id}) }}">
-                                        <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour e viter les conflits --> creuser pourquoi quand meme #}
-                                        <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ haiku.id) }}"> 
-                                        <input id="delete" type="submit" value="Supprimer">
-                                    </form>
-                                </li>
-                                <li>
-                                    <a href="{{ path('report_haiku', {'id': haiku.id}) }}"onclick="return confirm('Signaler ce haïku ?');">
-                                        Signaler
-                                    </a>
-                                </li>
+                                {% if app.user.id == haiku.creator.id %}
+                                    <li>
+                                        <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_haiku', {'id': haiku.id}) }}">
+                                            <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour e viter les conflits --> creuser pourquoi quand meme #}
+                                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ haiku.id) }}"> 
+                                            <input id="delete" type="submit" value="Supprimer">
+                                        </form>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{{ path('report_haiku', {'id': haiku.id}) }}"onclick="return confirm('Signaler ce haïku ?');">
+                                            Signaler
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
