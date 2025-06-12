@@ -139,24 +139,29 @@ final class HaikuController extends AbstractController
     public function deleteHaiku(Haikus $haiku, Request $request, EntityManagerInterface $entityManager, NotificationsRepository $notificationRepo, EntityTypeRepository $entityTypeRepo): Response
     {
         $user = $this->getUser();
-        $entityType = $entityTypeRepo->findOneBy(['name' => 'haiku']);
-        $userWords = $haiku->getUserWords();
+        // $entityType = $entityTypeRepo->findOneBy(['name' => 'haiku']);
+        // $userWords = $haiku->getUserWords();
 
         // On récupère la personne qui a envoyé les 3 mots -> obligé de récupérer les 3 puis de supprimer le doublon sinon echec
         // Il faudra modifier quand on va envoyer des notifs à la création du haiku pour les gens qui follow !
-        foreach ($userWords as $userWord) {
-            $userSender[] = $userWord->getSender();
-        }
-        // On supprime les doublons donc on garde 
-        $userSender = array_unique($userSender);
+        // foreach ($userWords as $userWord) {
+        //     $userSender[] = $userWord->getSender();
+        // }
+        // // On supprime les doublons donc on garde 
+        // $userSender = array_unique($userSender);
 
         
-        $notification = $notificationRepo->findOneBy([
-            'Sender' => $user,
-            'Receiver' => $userSender,
-            'entity_type' => $entityType,
+        // $notification = $notificationRepo->findOneBy([
+        //     'Sender' => $user,
+        //     'Receiver' => $userSender,
+        //     'entity_type' => $entityType,
+        //     'entity_id' => $haiku->getId(),
+        // ]);
+
+        $allNotifications = $notificationRepo->findBy([
             'entity_id' => $haiku->getId(),
         ]);
+
         // On vérifie que le user est bien celui qui fait le haiku
         if ($haiku->getCreator() !== $user) {
             throw $this->createAccessDeniedException("Vous n'avez pas la permission de supprimer ce post");
@@ -171,9 +176,10 @@ final class HaikuController extends AbstractController
                 $entityManager->persist($userWords);
             }
 
-            if($notification) {
-                $entityManager->remove($notification);
+            foreach ($allNotifications as $notif) {
+                $entityManager->remove($notif);
             }
+
             $entityManager->remove($haiku);
             $entityManager->flush();
             $this->addFlash('success', 'Haiku supprimé');
