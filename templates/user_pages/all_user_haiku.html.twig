@@ -73,11 +73,13 @@
                                     <p>{{comments.sender}}</p>
                                     <p>{{comments.content}}</p>
                                     {# Form caché pour suppression #}
-                                <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
-                                    <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
-                                    <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
-                                    <input id="delete" type="submit" value="Supprimer">
-                                </form>
+                                    {% if app.user and (comments.sender.id == app.user.id or haiku.creator.id == app.user.id) %}
+                                        <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
+                                            <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
+                                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
+                                            <input id="delete" type="submit" class="material-icons" value="close">
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}

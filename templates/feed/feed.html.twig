@@ -58,28 +58,39 @@
                 {# Modale affichage haiku + commentaires #}
             <div id="modal-{{haiku.id}}" class="comment-modal" style="display: none">
                 <div class="modal-content">
-                    <span class="close_btn" data-modal-id="modal-{{haiku.id}}">&times;</span>
-                    <div class="modal_content">
-                        <p> Haiku : {{haiku.line1}} </p>
-                        <p> Haiku : {{haiku.line2}} </p>
-                        <p> Haiku : {{haiku.line3}} </p>
+                    <span class="close-button material-icons" data-modal-id="modal-{{haiku.id}}">close</span>
+                    <div class="modal_haiku">
+                        <p>  {{haiku.line1}} </p>
+                        <p>  {{haiku.line2}} </p>
+                        <p>  {{haiku.line3}} </p>
                     </div>
                     <div class="comments_container">
                         {% if haiku.comments|length > 0 %}
+                                <h4>Commentaires</h4>
                             {% for comments in haiku.comments %}
                                 <div class="comment">
-                                    <p>{{comments.sender}}</p>
-                                    <p>{{comments.content}}</p>
+                                    <div class="sender">
+                                        <a href="{{ path('app_user_show', {id: comments.sender.id}) }}">
+                                            {{comments.sender}}                                        
+                                        </a>
+                                    </div>
+                                    <div class="message">
+                                        <p>{{comments.content}}</p>
+                                    </div>
                                     {# Form caché pour suppression #}
-                                <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
-                                    <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
-                                    <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
-                                    <input id="delete" type="submit" value="Supprimer">
-                                </form>
+                                    {% if app.user and (comments.sender.id == app.user.id or haiku.creator.id == app.user.id) %}
+                                        <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
+                                            <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
+                                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
+                                            <input id="delete" type="submit" class="material-icons" value="close">
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <p>Aucun commentaire</p>
+                            <div class="no_comment">
+                                <p>Aucun commentaire</p>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="add_comments">

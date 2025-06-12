@@ -48,6 +48,25 @@ final class CommentController extends AbstractController
             return new Response ('Formulaire invalide', 400);
         }
 
+    #[Route('/comment/{id}/edit', name: 'edit_comment', methods: ['POST'])]
+    public function editComment(Comments $comment, Request $request, EntityManagerInterface $entityManager): Response
+    {
+         $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Commentaire modifié avec succès');
+            return $this->redirectToRoute('app_feed'); // ou la route qui affiche le haiku, selon UX
+        }
+
+        $this->addFlash('error', 'Erreur lors de la modification du commentaire');
+
+        return $this->redirectToRoute('app_feed'); // idem, ajuster selon besoin
+    }
+
+
     #[Route('/suppr/comment/{id}', name: 'delete_comment', methods: ['POST'])]
     public function deleteComment(Comments $comment, Request $request, EntityManagerInterface $entityManager, NotificationsRepository $notificationRepo, EntityTypeRepository $entityTypeRepo): Response
     {
@@ -62,8 +81,8 @@ final class CommentController extends AbstractController
             'entity_id' => $haiku->getId(),
         ]);
         
-        // On vérifie que le user est bien celui qui fait le commentaire
-        if($comment->getSender() !== $user) {
+        // On vérifie que le user est bien celui qui fait le commentaire ou bien le créateur du haiku (droit de gestion des commentaires sur ses créations)
+        if($comment->getSender() !== $user && $haiku->getCreator() !== $user) {
             throw $this->createAccessDeniedException("Vous n'avez pas la permission de supprimer ce commentaire");
         }
 

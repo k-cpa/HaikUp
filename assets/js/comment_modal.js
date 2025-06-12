@@ -5,7 +5,10 @@ console.log('comment modal OK');
         button.addEventListener('click', () => {
             const modalId = button.getAttribute('data-modal-id');
             const modal = document.getElementById(modalId);
-            if (modal) modal.style.display = 'flex';
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.classList.add('modal-open');
+            }
         });
     });
 
@@ -14,7 +17,10 @@ console.log('comment modal OK');
         button.addEventListener('click', () => {
             const modalId = button.getAttribute('data-modal-id');
             const modal = document.getElementById(modalId);
-            if (modal) modal.style.display = 'none';
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }
         });
     });
 
@@ -22,6 +28,8 @@ console.log('comment modal OK');
     window.addEventListener('click', (event) => {
         if (event.target.classList.contains('comment-modal')) {
             event.target.style.display = 'none';
+            document.body.classList.remove('modal-open');
         }
     });
+
 });
