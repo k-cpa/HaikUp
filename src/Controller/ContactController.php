@@ -27,9 +27,10 @@ final class ContactController extends AbstractController
                 ->to('kevcampana@gmail.com')
                 ->subject('Nouveau message de contact')
                 ->text(
-                    "Informations de contact\n\n".
+                    "Informations de contact :\n\n".
                     "Nom de la personne : {$data['nom']}\n".
-                    "Email de contact : {$data['email']}\n\n".
+                    "Email de contact : {$data['email']}\n".
+                    "----------------------------------------------\n\n".
                     "Message:\n\n{$data['message']}"
                 );
                 $mailer->send($email);
