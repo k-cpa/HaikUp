@@ -23,7 +23,7 @@ final class ContactController extends AbstractController
             $data = $contactForm->getData(); // Récupération des champs du formulaire
 
             $email = (new Email())
-                ->from('07148281344577@mailtrap.io')
+                ->from('contact@kevcampana.com')
                 ->to('kevcampana@gmail.com')
                 ->subject('Nouveau message de contact')
                 ->text(
@@ -32,7 +32,7 @@ final class ContactController extends AbstractController
                     "Message:\n{$data['message']}"
                 );
                 $mailer->send($email);
-                
+
             return $this->redirectToRoute('app_feed');
 
                 
