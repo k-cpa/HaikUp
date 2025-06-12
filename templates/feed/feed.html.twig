@@ -12,10 +12,28 @@
         <div class="haiku_container">
             {% for haiku in haikus %}
                 <div class="haiku" id="haiku-{{haiku.id}}">
-                    {# ABSOLUTE #}
-                    <span class="material-icons">more_horiz</span>
-                    <div class="control_panel">
-
+                    {# drop down menu pour le bouton de suppression du haïku ->rajouter signalement + classement collections #}
+                    <div class="haiku_dropmenu">
+                    <button class="toggleMenuBtn" type="button">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
+                        <div class="dropToggle">
+                            {# Formulaire de suppression du haïku #}
+                            <ul>
+                                <li>
+                                    <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_haiku', {'id': haiku.id}) }}">
+                                        <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour e viter les conflits --> creuser pourquoi quand meme #}
+                                        <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ haiku.id) }}"> 
+                                        <input id="delete" type="submit" value="Supprimer">
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="{{ path('report_haiku', {'id': haiku.id}) }}"onclick="return confirm('Signaler ce haïku ?');">
+                                        Signaler
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="creator">
                         <p>

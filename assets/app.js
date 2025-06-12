@@ -2,7 +2,7 @@ import './styles/app.scss';
 import Slider from './js/slider';
 import './js/comment_modal.js';
 import './js/ajax_subscription.js';
-import './js/notifications.js';
+import './js/dropMenuHaiku.js';
 import './js/adjustPaddingHeader.js';
 
 document.addEventListener('DOMContentLoaded', () => {

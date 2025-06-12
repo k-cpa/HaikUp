@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class HaikuController extends AbstractController
@@ -169,5 +171,41 @@ final class HaikuController extends AbstractController
             $this->addFlash('error', 'Token invalide');
         }
         return $this->redirect($request->headers->get('referer') ?? $this->generateUrl('app_feed'));
+    }
+
+    #[Route('/haiku/{id}/report', name: 'report_haiku')]
+    public function reportHaiku(Haikus $haiku, MailerInterface $mailer): Response
+    {
+
+        $reportingUser = $this->getUser();
+        $haikuAuthor = $haiku->getCreator();
+
+         $emailText = "Signalement automatique de haïku\n\n";
+
+        // Infos utilisateur qui signale
+        $emailText .= "Email du profil à l'origine du signalement : " .  $reportingUser->getUserIdentifier() . "\n";
+
+        // Infos haiku et son auteur
+        $emailText .= "ID du haïku signalé : " . $haiku->getId() . "\n";
+        $emailText .= "Contenu du haïku:\n";
+        $emailText .= $haiku->getLine1() . "\n";
+        $emailText .= $haiku->getLine2() . "\n";
+        $emailText .= $haiku->getLine3() . "\n\n";
+
+        $emailText .= "Informations sur l'auteur du haïku :\n";
+        $emailText .= "Nom : " . $haikuAuthor->getUsername(). "\n";
+        $emailText .= "Email : " . $haikuAuthor->getEmail() . "\n";
+
+        $email = (new Email())
+            ->from('07148281344577@mailtrap.io')
+            ->to('kevcampana@gmail.com')
+            ->subject('Signalement automatique de haïku')
+            ->text($emailText);
+
+        $mailer->send($email);
+
+        $this->addFlash('success', 'Le haïku a été signalé. Merci pour votre retour.');
+
+        return $this->redirectToRoute('app_feed');
     }
 }
