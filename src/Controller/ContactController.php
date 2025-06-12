@@ -29,7 +29,7 @@ final class ContactController extends AbstractController
                 ->text(
                     "Nom de la personne à l'origine du contact: {$data['nom']}\n".
                     "Email de contact sélectionné : {$data['email']}\n\n".
-                    "Message:\n/n{$data['message']}"
+                    "Message:\n\n{$data['message']}"
                 );
                 $mailer->send($email);
 
