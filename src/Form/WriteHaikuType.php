@@ -36,7 +36,7 @@ class WriteHaikuType extends AbstractType
                     new NotBlank(['message' => 'Les 3 champs sont obligatoires'])
                 ],
              ])
-             ->add('submit', SubmitType::class)
+             ->add('submit', SubmitType::class, ['label' => 'Valider']);
         ;
     }
 
