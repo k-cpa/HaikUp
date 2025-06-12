@@ -61,10 +61,6 @@
                 </div>
                 {% for haikuLikedByUser in haikuLikedByUser %}
                     <div class="haiku">
-                        {# ABSOLUTE #}
-                        <span class="material-icons">more_horiz</span>
-                        <div class="control_panel">
-                        </div>
                         <div class="creator">
                             <p>
                                 <a href="{{ path('app_user_show', {id: haikuLikedByUser.creator.id}) }}">
