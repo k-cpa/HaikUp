@@ -33,9 +33,15 @@ final class ContactController extends AbstractController
                 );
                 $mailer->send($email);
 
-            return $this->redirectToRoute('app_feed');
+            $referer = $request->headers->get('referer');
 
-                
+            // Si il y a bien une URL précédente, on redirige vers elle, sinon vers une route par défaut
+            if ($this->getUser()) {
+                return $this->redirectToRoute('app_feed');
+            } else {
+                return $this->redirectToRoute('app_landing');
+            }
+          
         }
         return $this->render('landing/contact.html.twig', [
             'contactForm' => $contactForm->createView(),
