@@ -23,6 +23,7 @@
         form {
             @include mixin.flex;
             width: 100%;
+            font-family: var.$dm-regular;
 
             .themes_buttons {
                 width: 100%;

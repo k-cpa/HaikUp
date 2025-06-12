@@ -42,6 +42,27 @@
             }
         }
 
+        // Juste pour le form de contact
+        .title_form_contact {
+            @include mixin.flex(column, center, center);
+            font-family: var.$dm-regular;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+
+            h2 {
+                font-size: var.$desktop-h3;
+            }
+        }
+        .contact_form {
+            width: 100%;
+
+            div {
+                width: 25%;
+            }
+        }
+        
+
         // Pour l'instant supprimé voir si on y revient
         // .subtitle_form {
         //     @include mixin.flex;
