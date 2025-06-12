@@ -140,9 +140,20 @@ final class HaikuController extends AbstractController
     {
         $user = $this->getUser();
         $entityType = $entityTypeRepo->findOneBy(['name' => 'haiku']);
+        $userWords = $haiku->getUserWords();
+
+        // On récupère la personne qui a envoyé les 3 mots -> obligé de récupérer les 3 puis de supprimer le doublon sinon echec
+        // Il faudra modifier quand on va envoyer des notifs à la création du haiku pour les gens qui follow !
+        foreach ($userWords as $userWord) {
+            $userSender[] = $userWord->getSender();
+        }
+        // On supprime les doublons donc on garde 
+        $userSender = array_unique($userSender);
+
+        
         $notification = $notificationRepo->findOneBy([
             'Sender' => $user,
-            'Receiver' => $haiku->getCreator(),
+            'Receiver' => $userSender,
             'entity_type' => $entityType,
             'entity_id' => $haiku->getId(),
         ]);
@@ -152,7 +163,6 @@ final class HaikuController extends AbstractController
         }
         // On vérifie si le token est valide et on suppr
         if($this->isCsrfTokenValid('SUP' . $haiku->getId(), $request->get('_token'))) {
-
             // userWords = delete on cascade mais pour supprimer les mots on va le faire manuellement ici. Si on supprime le haiku on boucle sur chaque mot pour remove
             foreach ($haiku->getUserWords() as $userWords) {
                 $userWords->setHaiku(NULL);
