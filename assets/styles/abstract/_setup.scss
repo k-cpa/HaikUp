@@ -170,8 +170,8 @@ body {
     z-index: 1000;
 
     .modal-content {
+        @include mixin.flex(column, flex-start, flex-start);
         background-color: var.$secondaryLight;
-        position: relative;
         border-radius: 3px;
         padding: 10px;  
         max-width: 500px;
@@ -183,17 +183,17 @@ body {
             font-family: var.$tiempos-regular;
             border-radius: 3px;
             padding: 10px;
+            width: 90%;
         }
 
         .close-button {
-            cursor: pointer;
-            position: absolute;
+            align-self: flex-end;
             display: block;
-            top: 5px;
-            right: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: block;
             font-size: 1.5rem;
             transition: .3s ease;
-            transform-origin: center center;
 
             &:hover {
                 color: var.$grayText;
@@ -299,6 +299,23 @@ body {
                 height: 80px;
                 border-radius: 3px;
                 box-sizing: border-box;
+            }
+            .cta {
+                @include mixin.flex;
+                width: fit-content;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-family: var.$dm-regular;
+                background-color: var.$secondaryDark;
+                font-size: var.$desktop-body3;
+
+                &:hover {
+                    background-color: var.$secondaryLight;
+                }
+
+                #comment_submit {
+                    all: unset;
+                }
             }
         }
     }

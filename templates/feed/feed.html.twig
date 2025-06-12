@@ -98,6 +98,9 @@
                         <form action="{{ path('app_comment_add', {id: haiku.id}) }}" method="post">
                             {{ form_start(commentForms[haiku.id]) }}
                                 {{ form_row(commentForms[haiku.id].content) }}
+                                <div class="cta">
+                                    {{form_row(commentForms[haiku.id].submit)}}
+                                </div>
                             {{ form_end(commentForms[haiku.id]) }}
                         </form>
                     </div>
