@@ -189,7 +189,21 @@
                     padding-left: 60px;
                 }
             }
+
+            .notififcation_wrapper {
+                position: relative;
+            }
+
+            .notif_badge {
+                position: absolute;
+                top: 4px;
+                right: 100px;
+                width: 10px;
+                height: 10px;background-color: red;
+                border-radius: 50%;
+            }
         }
+
 
         .not_registered {
             @include mixin.flex;
@@ -216,6 +230,7 @@
                 color: var.$complementary;
             }
         }
+
     }
 }
 

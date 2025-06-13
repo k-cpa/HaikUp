@@ -139,24 +139,6 @@ final class HaikuController extends AbstractController
     public function deleteHaiku(Haikus $haiku, Request $request, EntityManagerInterface $entityManager, NotificationsRepository $notificationRepo, EntityTypeRepository $entityTypeRepo): Response
     {
         $user = $this->getUser();
-        // $entityType = $entityTypeRepo->findOneBy(['name' => 'haiku']);
-        // $userWords = $haiku->getUserWords();
-
-        // On récupère la personne qui a envoyé les 3 mots -> obligé de récupérer les 3 puis de supprimer le doublon sinon echec
-        // Il faudra modifier quand on va envoyer des notifs à la création du haiku pour les gens qui follow !
-        // foreach ($userWords as $userWord) {
-        //     $userSender[] = $userWord->getSender();
-        // }
-        // // On supprime les doublons donc on garde 
-        // $userSender = array_unique($userSender);
-
-        
-        // $notification = $notificationRepo->findOneBy([
-        //     'Sender' => $user,
-        //     'Receiver' => $userSender,
-        //     'entity_type' => $entityType,
-        //     'entity_id' => $haiku->getId(),
-        // ]);
 
         $allNotifications = $notificationRepo->findBy([
             'entity_id' => $haiku->getId(),

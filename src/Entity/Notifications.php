@@ -14,10 +14,11 @@ class Notifications
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'receivedNotif')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $Receiver = null;
 
     #[ORM\ManyToOne(inversedBy: 'sentNotif')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $Sender = null;
 
     #[ORM\Column]

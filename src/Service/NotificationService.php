@@ -12,16 +12,20 @@ namespace App\Service;
 use App\Entity\EntityType;
 use App\Entity\Notifications;
 use App\Entity\User;
+use App\Repository\NotificationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class NotificationService
 {
     private $entityManager;
+    private $notificationsRepository;
 
     // Injection de la dépendance dans la classe 
-    public function __construct(EntityManagerInterface $entityManager) {
+    public function __construct(EntityManagerInterface $entityManager, NotificationsRepository $notificationsRepository) {
         $this->entityManager = $entityManager; 
+        $this->notificationsRepository = $notificationsRepository; 
     }
 
     // Méthode pour créer une notif
@@ -97,6 +101,14 @@ class NotificationService
 
         $this->entityManager->persist($notification);
         // $this->entityManager->flush(); on va plutôt flush dans les controller
+    }
+
+    public function countUnread(UserInterface $user): int
+    {
+        return $this->notificationsRepository->count([
+            'Receiver' => $user,
+            'status' => false,
+        ]);
     }
 }
 

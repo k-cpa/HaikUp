@@ -116,6 +116,7 @@
             @include mixin.flex($justify: space-between);
             font-family: var.$dm-regular;
             margin-bottom: 20px;
+            padding-top: 30px;
 
             h2 {
                 font-size: var.$desktop-h3;
