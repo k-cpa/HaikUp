@@ -134,7 +134,21 @@
                     color: var.$grayDarkText;
                     font-size: 35px;
                 }
+
+                .notification_wrapper {
+                    position: relative;
+                }
+                .notif_badge {
+                    position: absolute;
+                    top: 3px;
+                    right: 5px;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #F28B82;
+                    border-radius: 50%;
+                }
             }
+
 
             // Affichage des liens de connexion
             .log_links {
@@ -190,16 +204,16 @@
                 }
             }
 
-            .notififcation_wrapper {
+            .notification_wrapper {
                 position: relative;
             }
-
             .notif_badge {
                 position: absolute;
-                top: 4px;
-                right: 100px;
+                top: 3px;
+                right: 5px;
                 width: 10px;
-                height: 10px;background-color: red;
+                height: 10px;
+                background-color: #F28B82;
                 border-radius: 50%;
             }
         }

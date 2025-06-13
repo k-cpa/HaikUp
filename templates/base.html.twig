@@ -36,7 +36,12 @@
                                     <li><a href="{{ path('app_feed') }}" class="material-icons">auto_stories</a></li>
                                     <li><a href="{{ path('app_word_sent') }}" class="material-icons">send</a></li>
                                     <li><a href="{{ path('app_create_haiku') }}" class="material-icons">edit_note</a></li>
-                                    <li><a href="{{ path('app_notifications') }}" class="material-icons">notifications</a></li>
+                                    <li class="notification_wrapper">
+                                        <a href="{{ path('app_notifications') }}" class="material-icons notif_icon">notifications</a>
+                                        {% if unread_notifs() %}
+                                            <span class="notif_badge"></span>
+                                        {% endif %}
+                                    </li>
                                     <li><a href="{{path('app_logout')}}" class="material-icons">logout</a></li>
                                 {% else %}
                                     <li class="{% if app.request.attributes.get('_route') == 'app_landing' %}active{% endif %}"><a href="{{path('app_landing')}}">Accueil</a></li>    
@@ -73,7 +78,7 @@
                             <li><a href="{{ path('app_feed') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_feed' %}active{% endif %}">auto_stories</a></li>
                             <li><a href="{{ path('app_word_sent') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_word_sent' %}active{% endif %}">send</a></li>
                             <li><a href="{{ path('app_create_haiku') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_create_haiku' %}active{% endif %}">edit_note</a></li>
-                            <li class="notification-wrapper">
+                            <li class="notification_wrapper">
                                 <a href="{{ path('app_notifications') }}" class="material-icons {% if app.request.attributes.get('_route') == 'app_notifications' %}active{% endif %} notif_icon">notifications</a>
                                 {% if unread_notifs() %}
                                     <span class="notif_badge"></span>
