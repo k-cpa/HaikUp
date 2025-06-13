@@ -40,7 +40,7 @@ final class PasswordResetController extends AbstractController
                 $resetLink = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
                 // Création du lien intégrant le token
                 $email = (new Email()) // création du mail
-                    ->from('07148281344577@mailtrap.io')
+                    ->from('contact@kevcampana.com')
                     ->to($user->getEmail())
                     ->subject('Réinitialisation de votre mot de passe')
                     ->text("Voici votre lien de réinitialisation : $resetLink");
