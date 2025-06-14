@@ -48,25 +48,6 @@ final class CommentController extends AbstractController
             return new Response ('Formulaire invalide', 400);
         }
 
-    #[Route('/comment/{id}/edit', name: 'edit_comment', methods: ['POST'])]
-    public function editComment(Comments $comment, Request $request, EntityManagerInterface $entityManager): Response
-    {
-         $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Commentaire modifié avec succès');
-            return $this->redirectToRoute('app_feed'); // ou la route qui affiche le haiku, selon UX
-        }
-
-        $this->addFlash('error', 'Erreur lors de la modification du commentaire');
-
-        return $this->redirectToRoute('app_feed'); // idem, ajuster selon besoin
-    }
-
-
     #[Route('/suppr/comment/{id}', name: 'delete_comment', methods: ['POST'])]
     public function deleteComment(Comments $comment, Request $request, EntityManagerInterface $entityManager, NotificationsRepository $notificationRepo, EntityTypeRepository $entityTypeRepo): Response
     {
