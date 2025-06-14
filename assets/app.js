@@ -43,6 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             event.target.classList.remove('liked');
                             event.target.setAttribute('data-liked', 'false');
                         }
+                        // On fait un event target sur le haiku le plus proche pour récup 
+                        const haikuCard = event.target.closest('.haiku');
+                        const likeText = haikuCard.querySelector('.nbr_likes p');
+
+                        if (likeText && typeof data.likesCount !== 'undefined') {
+                            likeText.textContent = `${data.likesCount} J'aime`;
+                        }
                     }
                 })
                 .catch(error => {

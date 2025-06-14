@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Haikus;
 use App\Entity\Likes;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,4 +42,14 @@ class LikesRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+      public function countLikes(Haikus $haiku): int
+        {
+            return $this->createQueryBuilder('l')
+                ->select('COUNT(l.id)')
+                ->where('l.haiku = :haiku')
+                ->setParameter('haiku', $haiku)
+                ->getQuery()
+                ->getSingleScalarResult(); // Utile pour récupérer une valeur scale (ici un nombre)
+        }
 }

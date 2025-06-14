@@ -8,6 +8,7 @@ use App\Form\AddProfilDescriptionType;
 use App\Repository\CollectionsRepository;
 use App\Repository\FollowsRepository;
 use App\Repository\HaikusRepository;
+use App\Repository\LikesRepository;
 use App\Repository\UserRepository;
 use App\Service\HaikuViewService;
 use App\Service\SubscriptionService;
@@ -91,7 +92,7 @@ final class UserProfileController extends AbstractController
 
     // Page où l'utilisateur peut voir tous ses haikus et les ranger dans des collections
     #[Route('/profile/{userId}/haikus', name: 'app_user_haikus')]
-    public function userHaikus(?int $userId, HaikuViewService $haikuViewService, UserRepository $userRepository): Response
+    public function userHaikus(?int $userId, HaikuViewService $haikuViewService, UserRepository $userRepository, LikesRepository $likesRepository): Response
     {
         if ($userId) {
             $user = $userRepository->find($userId);
@@ -111,6 +112,7 @@ final class UserProfileController extends AbstractController
 
             $addHaikuToCollectionForms = [];
             $haikus = $data['haikus'];
+            
             // dump($haikus); die;
 
             foreach($haikus as $haiku) {

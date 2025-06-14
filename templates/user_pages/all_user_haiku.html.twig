@@ -52,7 +52,7 @@
                     </div>
                     <div class="like-comments_container">
                     {# Bouton affichage des commentaires #}
-                        <div class="comments" data-haiku-id="{{ haiku.id }}"">
+                        <div class="comments" data-haiku-id="{{ haiku.id }}">
                             <button class="comment-button" data-modal-id="modal-{{haiku.id}}">
                                 <i class="material-icons comment-icon"">chat</i>
                             </button>
@@ -102,7 +102,7 @@
                                     {% if app.user and (comments.sender.id == app.user.id or haiku.creator.id == app.user.id) %}
                                         <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_comment', {'id': comments.id}) }}">
                                             <input type="hidden" name="_method" value="delete"> {#Cette ligne est pour eviter les conflits --> creuser pourquoi quand meme #}
-                                            <input type="hidden" name="_token" value=" {{ csrf_token('SUP' ~ comments.id) }}"> 
+                                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ comments.id) }}"> 
                                             <input id="delete" type="submit" class="material-icons" value="close">
                                         </form>
                                     {% endif %}
