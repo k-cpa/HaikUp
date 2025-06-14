@@ -116,7 +116,7 @@
                     </div>
                     <div class="add_comments">
                     {# Form lié à l'id de chaque haiku pour en avoir 1 pour chaque  #}
-                        <form action="{{ path('app_comment_add', {id: haiku.id}) }}" method="post">
+                        <form action="{{ path('app_comment_add', {id: haiku.id}) }}" 'attr': {'class': 'comment-form', 'data-haiku-id': haiku.id} method="post">
                             {{ form_start(commentForms[haiku.id]) }}
                                 {{ form_row(commentForms[haiku.id].content) }}
                                 <div class="cta">

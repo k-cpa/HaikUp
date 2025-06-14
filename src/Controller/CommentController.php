@@ -22,9 +22,12 @@ final class CommentController extends AbstractController
         {
             $user= $this->getUser();
 
+            // Pour rejoindre la dernière page où il était sur le return
+            $referer = $request->headers->get('referer');
+
             $comment = new Comments();
             $comment->setHaiku($haiku);
-            $comment->setSender($this->getUser());
+            $comment->setSender($user);
 
             $form = $this->createForm(CommentType::class, $comment);
             $form->handleRequest($request);
@@ -42,7 +45,7 @@ final class CommentController extends AbstractController
                 
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_feed');
+                return $this->redirect($referer);
             }
 
             return new Response ('Formulaire invalide', 400);
