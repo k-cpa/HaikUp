@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     if (!data.success) {
                         // Gérer les erreurs si nécessaire
                         console.log('Erreur avec l\'appel AJAX');

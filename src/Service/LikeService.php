@@ -52,6 +52,7 @@ class LikeService {
                     $this->entityManager->remove($notification);
                     $this->entityManager->flush();
                 }
+                $this->entityManager->flush();
                 // affichage dynamique du like
                 return false;
             } else {
