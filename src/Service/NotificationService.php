@@ -47,7 +47,7 @@ class NotificationService
         // Recherche BDD un type d'entité par le nom
         $entityTypeEntity = $this->entityManager->getRepository(EntityType::class)->findOneBy(['name' => $entityType]);
         
-        // Si le type n'existe pas encore, on le crée -> pour la première création sinon ça bloque -> opti ? 
+        // Si le type n'existe pas encore, on va le créer -> pour la première création sinon ça bloque -> opti ? 
         if (!$entityTypeEntity) {
             // Créer un nouvel EntityType
             $entityTypeEntity = new EntityType();
@@ -64,7 +64,7 @@ class NotificationService
 
 //         Gestion du message de la notification
 // sprintf -> fonction PHP pour formater une chaine de caractères en y insérant des valeurs dynamiques. 
-// -> premier argument = chaine contenant placeholders et ensuite autant d'arguments que de placeholders pour remplacement dynamique.
+// -> premier argument = chaine contenant placeholders et ensuite autant d'arguments que de placeholders pour remplacement dynamique. topitop
         $message= '';
         // On récup le nom de l'entité
         $entityTypeName = $entityTypeEntity->getName(); 

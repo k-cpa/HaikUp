@@ -43,12 +43,13 @@ public function getHaikusFor(string $mode, ?User $currentUser = null): array
                 $haikus = $this->haikusRepository->findAllExceptByUser($currentUser);
                 break;
             
-            // Pour une catégorie les plus likes
+            // Pour une catégorie les plus likes -> pas encore utilisée / voir si pertinent vu le concept
             case 'most_liked':
                 $haikus = $this->haikusRepository->findMostLiked();
                 break;
 
-            // Pour une catégorie sélection de la semaine 
+            // Pour une catégorie sélection de la semaine -> pas encore utilisée / à venir avec randomisation car on ne veut pas mettre en avant 
+            // le contenu le plus partagé ou les plus gros profils systématiquement ... Contraire au principe. 
             case 'week_selection':
                 $haikus = $this->haikusRepository->findWeekSelection();
                 break;
@@ -92,3 +93,5 @@ public function getHaikusFor(string $mode, ?User $currentUser = null): array
         ];
     }
 }
+
+

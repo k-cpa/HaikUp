@@ -39,8 +39,6 @@ final class HaikuController extends AbstractController
             return $this->redirectToRoute('app_no_words');
         }
 
-        $currentUser = $this->getUser();
-
         // on initialise un haiku vide
         $haiku = new Haikus();
 
@@ -49,7 +47,7 @@ final class HaikuController extends AbstractController
 
         if ($formHaiku->isSubmitted() && $formHaiku->isValid()) {
             
-            $haiku->setCreator($currentUser);
+            $haiku->setCreator($user);
             $entityManager->persist($haiku);
 
             // On initialise un tableau vide pour les mots
@@ -58,7 +56,7 @@ final class HaikuController extends AbstractController
             foreach ($userWordsList as $userWord) {
 
                 $words[] = $userWord->getWords()->getWord();
-                $userWord->setReceiver($currentUser);
+                $userWord->setReceiver($user);
                 $userWord->setStatus('used');
                 $userWord->setHaiku($haiku);
                 $entityManager->persist($userWord);
@@ -70,7 +68,7 @@ final class HaikuController extends AbstractController
 
             // Création de la notification
             $notificationService->createNotification(
-                $currentUser,
+                $user,
                 $userWordsList[0]->getSender(),
                 'haiku',
                 $haiku->getId(),

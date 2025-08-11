@@ -26,7 +26,7 @@ class ChatGptService
                 'model' => 'gpt-3.5-turbo',
                 'messages' => [
                     ['role' => 'system', 'content' => 'Tu es un assistant littéraire spécialisé en poésie.'],
-                    ['role' => 'user', 'content' => "Génère 3 mots poétiques autour du thème : \"$theme\". Réponds sans commentaire, un mot par ligne."],
+                    ['role' => 'user', 'content' => "Génère 3 mots poétiques autour du thème : \"$theme\". Réponds sans commentaire, un mot par ligne. Pour être innovant il est impératif que tu ne gardes pas en mémoire les demandes précédentes sinon tu donnes des mots trop proches les uns des autres."],
                 ],
                 'temperature' => 0.8,
             ],

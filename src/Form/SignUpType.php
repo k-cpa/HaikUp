@@ -20,7 +20,12 @@ class SignUpType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => "Adresse mail",
+                'constraints' => [
+                    new NotBlank(['message' => 'Le mail est obligatoire']),
+                ]
+            ])
             ->add('username', TextType::class, [
                 'label' => "Nom d'utilisateur",
                 'constraints' => [
